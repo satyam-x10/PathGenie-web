@@ -1,0 +1,252 @@
+{
+    "topic_name": "web development",
+    "points": 150,
+    "isLastNode": false,
+    "subTopics": [
+        {
+            "topic_name": "html",
+            "points": 15,
+            "isLastNode": false,
+            "subTopics": [
+                {
+                    "topic_name": "html basics",
+                    "points": 5,
+                    "isLastNode": true,
+                    "subTopics": []
+                },
+                {
+                    "topic_name": "semantic html",
+                    "points": 5,
+                    "isLastNode": true,
+                    "subTopics": []
+                },
+                {
+                    "topic_name": "forms and validation",
+                    "points": 5,
+                    "isLastNode": true,
+                    "subTopics": []
+                }
+            ]
+        },
+        {
+            "topic_name": "css",
+            "points": 25,
+            "isLastNode": false,
+            "subTopics": [
+                {
+                    "topic_name": "css basics",
+                    "points": 5,
+                    "isLastNode": true,
+                    "subTopics": []
+                },
+                {
+                    "topic_name": "box model",
+                    "points": 5,
+                    "isLastNode": true,
+                    "subTopics": []
+                },
+                {
+                    "topic_name": "css flexbox",
+                    "points": 5,
+                    "isLastNode": true,
+                    "subTopics": []
+                },
+                {
+                    "topic_name": "css grid",
+                    "points": 5,
+                    "isLastNode": true,
+                    "subTopics": []
+                },
+                {
+                    "topic_name": "responsive design",
+                    "points": 5,
+                    "isLastNode": true,
+                    "subTopics": []
+                },
+                {
+                    "topic_name": "css animations and transitions",
+                    "points": 5,
+                    "isLastNode": true,
+                    "subTopics": []
+                }
+            ]
+        },
+        {
+            "topic_name": "javascript",
+            "points": 40,
+            "isLastNode": false,
+            "subTopics": [
+                {
+                    "topic_name": "javascript basics",
+                    "points": 10,
+                    "isLastNode": true,
+                    "subTopics": []
+                },
+                {
+                    "topic_name": "dom manipulation",
+                    "points": 10,
+                    "isLastNode": true,
+                    "subTopics": []
+                },
+                {
+                    "topic_name": "es6 features",
+                    "points": 10,
+                    "isLastNode": true,
+                    "subTopics": []
+                },
+                {
+                    "topic_name": "async programming (promises, async/await)",
+                    "points": 5,
+                    "isLastNode": true,
+                    "subTopics": []
+                },
+                {
+                    "topic_name": "react",
+                    "points": 20,
+                    "isLastNode": false,
+                    "subTopics": [
+                        {
+                            "topic_name": "react fundamentals",
+                            "points": 10,
+                            "isLastNode": true,
+                            "subTopics": []
+                        },
+                        {
+                            "topic_name": "react hooks",
+                            "points": 10,
+                            "isLastNode": true,
+                            "subTopics": []
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "topic_name": "version control",
+            "points": 5,
+            "isLastNode": false,
+            "subTopics": [
+                {
+                    "topic_name": "git basics",
+                    "points": 5,
+                    "isLastNode": true,
+                    "subTopics": []
+                }
+            ]
+        },
+        {
+            "topic_name": "deployment",
+            "points": 10,
+            "isLastNode": false,
+            "subTopics": [
+                {
+                    "topic_name": "static site hosting",
+                    "points": 5,
+                    "isLastNode": true,
+                    "subTopics": []
+                },
+                {
+                    "topic_name": "dynamic site deployment (Heroku, Vercel, etc.)",
+                    "points": 5,
+                    "isLastNode": true,
+                    "subTopics": []
+                }
+            ]
+        },
+        {
+            "topic_name": "backend development",
+            "points": 25,
+            "isLastNode": false,
+            "subTopics": [
+                {
+                    "topic_name": "node.js basics",
+                    "points": 5,
+                    "isLastNode": true,
+                    "subTopics": []
+                },
+                {
+                    "topic_name": "express.js",
+                    "points": 5,
+                    "isLastNode": true,
+                    "subTopics": []
+                },
+                {
+                    "topic_name": "RESTful API design",
+                    "points": 5,
+                    "isLastNode": true,
+                    "subTopics": []
+                },
+                {
+                    "topic_name": "authentication and authorization",
+                    "points": 5,
+                    "isLastNode": true,
+                    "subTopics": []
+                },
+                {
+                    "topic_name": "database integration (SQL and NoSQL)",
+                    "points": 5,
+                    "isLastNode": true,
+                    "subTopics": []
+                }
+            ]
+        },
+        {
+            "topic_name": "databases",
+            "points": 10,
+            "isLastNode": false,
+            "subTopics": [
+                {
+                    "topic_name": "sql basics (PostgreSQL, MySQL)",
+                    "points": 5,
+                    "isLastNode": true,
+                    "subTopics": []
+                },
+                {
+                    "topic_name": "nosql basics (MongoDB)",
+                    "points": 5,
+                    "isLastNode": true,
+                    "subTopics": []
+                }
+            ]
+        },
+        {
+            "topic_name": "web security",
+            "points": 5,
+            "isLastNode": false,
+            "subTopics": [
+                {
+                    "topic_name": "common web vulnerabilities (XSS, CSRF, etc.)",
+                    "points": 5,
+                    "isLastNode": true,
+                    "subTopics": []
+                }
+            ]
+        },
+        {
+            "topic_name": "testing",
+            "points": 5,
+            "isLastNode": false,
+            "subTopics": [
+                {
+                    "topic_name": "unit testing (Jest, Mocha)",
+                    "points": 5,
+                    "isLastNode": true,
+                    "subTopics": []
+                }
+            ]
+        },
+        {
+            "topic_name": "performance optimization",
+            "points": 5,
+            "isLastNode": false,
+            "subTopics": [
+                {
+                    "topic_name": "frontend optimization techniques",
+                    "points": 5,
+                    "isLastNode": true,
+                    "subTopics": []
+                }
+            ]
+        }
+    ]
+}
