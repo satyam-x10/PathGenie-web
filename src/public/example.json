@@ -1,252 +1,157 @@
-{
-    "topic_name": "web development",
-    "points": 150,
-    "isLastNode": false,
-    "subTopics": [
-        {
-            "topic_name": "html",
-            "points": 15,
-            "isLastNode": false,
-            "subTopics": [
-                {
-                    "topic_name": "html basics",
-                    "points": 5,
-                    "isLastNode": true,
-                    "subTopics": []
-                },
-                {
-                    "topic_name": "semantic html",
-                    "points": 5,
-                    "isLastNode": true,
-                    "subTopics": []
-                },
-                {
-                    "topic_name": "forms and validation",
-                    "points": 5,
-                    "isLastNode": true,
-                    "subTopics": []
-                }
+[
+    {
+        "id": 1,
+        "topic_name": "Introduction to Singing",
+        "parent_id": null,
+        "description": "Explore the basics of singing, including vocal anatomy and the importance of proper technique.",
+        "subTopics": [2, 3],
+        "resources": {
+            "images": [
+                "https://example.com/images/introduction-to-singing.png"
+            ],
+            "videos": [
+                "https://www.youtube.com/watch?v=example1"
+            ],
+            "articles": [
+                "https://www.example.com/articles/introduction-to-singing"
+            ],
+            "books": [
+                "https://www.example.com/books/singing-basics"
+            ],
+            "tutorials": [
+                "https://www.masterclass.com/classes/adam-lambert-teaches-singing"
             ]
         },
-        {
-            "topic_name": "css",
-            "points": 25,
-            "isLastNode": false,
-            "subTopics": [
-                {
-                    "topic_name": "css basics",
-                    "points": 5,
-                    "isLastNode": true,
-                    "subTopics": []
-                },
-                {
-                    "topic_name": "box model",
-                    "points": 5,
-                    "isLastNode": true,
-                    "subTopics": []
-                },
-                {
-                    "topic_name": "css flexbox",
-                    "points": 5,
-                    "isLastNode": true,
-                    "subTopics": []
-                },
-                {
-                    "topic_name": "css grid",
-                    "points": 5,
-                    "isLastNode": true,
-                    "subTopics": []
-                },
-                {
-                    "topic_name": "responsive design",
-                    "points": 5,
-                    "isLastNode": true,
-                    "subTopics": []
-                },
-                {
-                    "topic_name": "css animations and transitions",
-                    "points": 5,
-                    "isLastNode": true,
-                    "subTopics": []
-                }
+        "tags": ["Singing", "Vocal Technique", "Music"],
+        "priority": "high",
+        "categories": ["Music", "Vocal Training"],
+        "references": [
+            "https://www.singinglessons.com/",
+            "https://www.bbc.co.uk/learning/singing"
+        ]
+    },
+    {
+        "id": 2,
+        "topic_name": "Breath Control",
+        "parent_id": 1,
+        "description": "Learn techniques for controlling breath to enhance vocal performance and stamina.",
+        "subTopics": [4, 5],
+        "resources": {
+            "images": [
+                "https://example.com/images/breath-control.png"
+            ],
+            "videos": [
+                "https://www.youtube.com/watch?v=example2"
+            ],
+            "articles": [
+                "https://www.example.com/articles/breath-control-for-singers"
+            ],
+            "books": [
+                "https://www.example.com/books/breathing-for-singers"
+            ],
+            "tutorials": [
+                "https://www.vocalcoach.com/breathing-techniques/"
             ]
         },
-        {
-            "topic_name": "javascript",
-            "points": 40,
-            "isLastNode": false,
-            "subTopics": [
-                {
-                    "topic_name": "javascript basics",
-                    "points": 10,
-                    "isLastNode": true,
-                    "subTopics": []
-                },
-                {
-                    "topic_name": "dom manipulation",
-                    "points": 10,
-                    "isLastNode": true,
-                    "subTopics": []
-                },
-                {
-                    "topic_name": "es6 features",
-                    "points": 10,
-                    "isLastNode": true,
-                    "subTopics": []
-                },
-                {
-                    "topic_name": "async programming (promises, async/await)",
-                    "points": 5,
-                    "isLastNode": true,
-                    "subTopics": []
-                },
-                {
-                    "topic_name": "react",
-                    "points": 20,
-                    "isLastNode": false,
-                    "subTopics": [
-                        {
-                            "topic_name": "react fundamentals",
-                            "points": 10,
-                            "isLastNode": true,
-                            "subTopics": []
-                        },
-                        {
-                            "topic_name": "react hooks",
-                            "points": 10,
-                            "isLastNode": true,
-                            "subTopics": []
-                        }
-                    ]
-                }
+        "tags": ["Breath Control", "Vocal Technique"],
+        "priority": "high",
+        "categories": ["Music", "Vocal Training"],
+        "references": [
+            "https://www.singwise.com/techniques/breath-control",
+            "https://www.vocaltips.com/breathing-tips"
+        ]
+    },
+    {
+        "id": 3,
+        "topic_name": "Vocal Techniques",
+        "parent_id": 1,
+        "description": "Discover various vocal techniques, including pitch control, resonance, and dynamics.",
+        "subTopics": [6, 7],
+        "resources": {
+            "images": [
+                "https://example.com/images/vocal-techniques.png"
+            ],
+            "videos": [
+                "https://www.youtube.com/watch?v=example3"
+            ],
+            "articles": [
+                "https://www.example.com/articles/vocal-techniques"
+            ],
+            "books": [
+                "https://www.example.com/books/vocal-technique"
+            ],
+            "tutorials": [
+                "https://www.singingapps.com/vocal-techniques/"
             ]
         },
-        {
-            "topic_name": "version control",
-            "points": 5,
-            "isLastNode": false,
-            "subTopics": [
-                {
-                    "topic_name": "git basics",
-                    "points": 5,
-                    "isLastNode": true,
-                    "subTopics": []
-                }
+        "tags": ["Vocal Techniques", "Singing"],
+        "priority": "high",
+        "categories": ["Music", "Vocal Training"],
+        "references": [
+            "https://www.vocalcoach.com/vocal-techniques",
+            "https://www.thebalancecareers.com/how-to-improve-your-singing-2460481"
+        ]
+    },
+    {
+        "id": 4,
+        "topic_name": "Performance Skills",
+        "parent_id": 1,
+        "description": "Learn how to perform confidently in front of an audience, including stage presence and emotional expression.",
+        "subTopics": [],
+        "resources": {
+            "images": [
+                "https://example.com/images/performance-skills.png"
+            ],
+            "videos": [
+                "https://www.youtube.com/watch?v=example4"
+            ],
+            "articles": [
+                "https://www.example.com/articles/performance-skills-for-singers"
+            ],
+            "books": [
+                "https://www.example.com/books/performance-skills"
+            ],
+            "tutorials": [
+                "https://www.performancecoach.com/singing-performance-skills/"
             ]
         },
-        {
-            "topic_name": "deployment",
-            "points": 10,
-            "isLastNode": false,
-            "subTopics": [
-                {
-                    "topic_name": "static site hosting",
-                    "points": 5,
-                    "isLastNode": true,
-                    "subTopics": []
-                },
-                {
-                    "topic_name": "dynamic site deployment (Heroku, Vercel, etc.)",
-                    "points": 5,
-                    "isLastNode": true,
-                    "subTopics": []
-                }
+        "tags": ["Performance", "Singing"],
+        "priority": "medium",
+        "categories": ["Music", "Vocal Training"],
+        "references": [
+            "https://www.musicindustrynews.com/performance-skills",
+            "https://www.broadwayworld.com/article/The-Importance-of-Stage-Presence-20191220"
+        ]
+    },
+    {
+        "id": 5,
+        "topic_name": "Song Interpretation",
+        "parent_id": 1,
+        "description": "Understand how to interpret songs emotionally and tell a story through your singing.",
+        "subTopics": [],
+        "resources": {
+            "images": [
+                "https://example.com/images/song-interpretation.png"
+            ],
+            "videos": [
+                "https://www.youtube.com/watch?v=example5"
+            ],
+            "articles": [
+                "https://www.example.com/articles/song-interpretation-techniques"
+            ],
+            "books": [
+                "https://www.example.com/books/song-interpretation"
+            ],
+            "tutorials": [
+                "https://www.singbetter.com/song-interpretation-tips/"
             ]
         },
-        {
-            "topic_name": "backend development",
-            "points": 25,
-            "isLastNode": false,
-            "subTopics": [
-                {
-                    "topic_name": "node.js basics",
-                    "points": 5,
-                    "isLastNode": true,
-                    "subTopics": []
-                },
-                {
-                    "topic_name": "express.js",
-                    "points": 5,
-                    "isLastNode": true,
-                    "subTopics": []
-                },
-                {
-                    "topic_name": "RESTful API design",
-                    "points": 5,
-                    "isLastNode": true,
-                    "subTopics": []
-                },
-                {
-                    "topic_name": "authentication and authorization",
-                    "points": 5,
-                    "isLastNode": true,
-                    "subTopics": []
-                },
-                {
-                    "topic_name": "database integration (SQL and NoSQL)",
-                    "points": 5,
-                    "isLastNode": true,
-                    "subTopics": []
-                }
-            ]
-        },
-        {
-            "topic_name": "databases",
-            "points": 10,
-            "isLastNode": false,
-            "subTopics": [
-                {
-                    "topic_name": "sql basics (PostgreSQL, MySQL)",
-                    "points": 5,
-                    "isLastNode": true,
-                    "subTopics": []
-                },
-                {
-                    "topic_name": "nosql basics (MongoDB)",
-                    "points": 5,
-                    "isLastNode": true,
-                    "subTopics": []
-                }
-            ]
-        },
-        {
-            "topic_name": "web security",
-            "points": 5,
-            "isLastNode": false,
-            "subTopics": [
-                {
-                    "topic_name": "common web vulnerabilities (XSS, CSRF, etc.)",
-                    "points": 5,
-                    "isLastNode": true,
-                    "subTopics": []
-                }
-            ]
-        },
-        {
-            "topic_name": "testing",
-            "points": 5,
-            "isLastNode": false,
-            "subTopics": [
-                {
-                    "topic_name": "unit testing (Jest, Mocha)",
-                    "points": 5,
-                    "isLastNode": true,
-                    "subTopics": []
-                }
-            ]
-        },
-        {
-            "topic_name": "performance optimization",
-            "points": 5,
-            "isLastNode": false,
-            "subTopics": [
-                {
-                    "topic_name": "frontend optimization techniques",
-                    "points": 5,
-                    "isLastNode": true,
-                    "subTopics": []
-                }
-            ]
-        }
-    ]
-}
+        "tags": ["Song Interpretation", "Singing"],
+        "priority": "medium",
+        "categories": ["Music", "Vocal Training"],
+        "references": [
+            "https://www.singingworld.com/song-interpretation",
+            "https://www.vocalcoach.com/song-interpretation-skills"
+        ]
+    }
+]
