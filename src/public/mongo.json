@@ -1144,7 +1144,7 @@
     },
     "taskId": "16",
     "taskTitle": "Seventh Chords",
-    "subTask": [],
+    "subTask": ["96","97"],
     "taskDescription": "Explore seventh chords and their use in jazz, blues, and popular music.",
     "resources": {
       "Guitar Fundamentals": [
@@ -1216,7 +1216,7 @@
     },
     "taskId": "17",
     "taskTitle": "Picking and Strumming",
-    "subTask": [],
+    "subTask": ["99","98"],
     "taskDescription": "Develop proper picking and strumming techniques for rhythm and lead guitar playing.",
     "resources": {
       "Guitar Fundamentals": [
@@ -2073,6 +2073,70 @@
     "tags": [
       "travis picking",
       "fingerstyle"
+    ]
+  },{
+    "_id": {
+      "$oid": "6709095b5f60d408052a0530"
+    },
+    "taskId": "97",
+    "taskTitle": "Basic Songs",
+    "subTask": [],
+    "taskDescription": "Learn how to play basic songs, focusing on rhythm, lead guitar parts, and chord progressions.",
+    "resources":[],
+    "similarTasks": [],
+    "tags": [
+      "basic songs",
+      "rhythm guitar",
+      "lead guitar",
+      "chord progressions"
+    ]
+  },{
+    "_id": {
+      "$oid": "6709095b5f60d408052a0530"
+    },
+    "taskId": "98",
+    "taskTitle": "Basic Songs",
+    "subTask": [],
+    "taskDescription": "Learn how to play basic songs, focusing on rhythm, lead guitar parts, and chord progressions.",
+    "resources":[],
+    "similarTasks": [],
+    "tags": [
+      "basic songs",
+      "rhythm guitar",
+      "lead guitar",
+      "chord progressions"
+    ]
+  },{
+    "_id": {
+      "$oid": "6709095b5f60d408052a0530"
+    },
+    "taskId": "96",
+    "taskTitle": "Basic Songs",
+    "subTask": [],
+    "taskDescription": "Learn how to play basic songs, focusing on rhythm, lead guitar parts, and chord progressions.",
+    "resources":[],
+    "similarTasks": [],
+    "tags": [
+      "basic songs",
+      "rhythm guitar",
+      "lead guitar",
+      "chord progressions"
+    ]
+  },{
+    "_id": {
+      "$oid": "6709095b5f60d408052a0530"
+    },
+    "taskId": "99",
+    "taskTitle": "Basic Songs",
+    "subTask": [],
+    "taskDescription": "Learn how to play basic songs, focusing on rhythm, lead guitar parts, and chord progressions.",
+    "resources":[],
+    "similarTasks": [],
+    "tags": [
+      "basic songs",
+      "rhythm guitar",
+      "lead guitar",
+      "chord progressions"
     ]
   }
 ]
