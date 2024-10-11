@@ -1,13 +1,14 @@
-[{
+[
+  {
     "_id": {
       "$oid": "6709095b5f60d408052a0528"
     },
     "taskId": "1",
     "taskTitle": "Guitar Fundamentals",
     "subTask": [
-      2,
-      3,
-      4
+      "2",
+      "3",
+      "4"
     ],
     "taskDescription": "Learn the basics of music theory and guitar technique to build a solid foundation for your guitar playing.",
     "resources": {
@@ -83,8 +84,8 @@
     "taskId": "2",
     "taskTitle": "Music Theory",
     "subTask": [
-      5,
-      6
+      "5",
+      "6"
     ],
     "taskDescription": "Understand the essential concepts of music theory including notes, intervals, scales, and chords.",
     "resources": {
@@ -160,8 +161,8 @@
     "taskId": "3",
     "taskTitle": "Guitar Technique",
     "subTask": [
-      7,
-      8
+      "7",
+      "8"
     ],
     "taskDescription": "Develop your right-hand and left-hand techniques to enhance your guitar playing skills.",
     "resources": {
@@ -236,8 +237,7 @@
     "taskId": "4",
     "taskTitle": "Practical Application",
     "subTask": [
-      9,
-      10
+      "9"
     ],
     "taskDescription": "Apply your guitar skills by learning basic songs and fingerstyle arrangements.",
     "resources": {
@@ -311,9 +311,9 @@
     "taskId": "5",
     "taskTitle": "Notes and Intervals",
     "subTask": [
-      11,
-      12,
-      13
+      "11",
+      "12",
+      "13"
     ],
     "taskDescription": "Learn the musical alphabet, sharps and flats, and understand the difference between major and minor intervals.",
     "resources": {
@@ -390,9 +390,9 @@
     "taskId": "6",
     "taskTitle": "Scales and Chords",
     "subTask": [
-      14,
-      15,
-      16
+      "14",
+      "15",
+      "16"
     ],
     "taskDescription": "Master major and minor scales, triads, inversions, and seventh chords.",
     "resources": {
@@ -468,9 +468,9 @@
     "taskId": "7",
     "taskTitle": "Right-Hand Technique",
     "subTask": [
-      17,
-      18,
-      19
+      "17",
+      "18",
+      "19"
     ],
     "taskDescription": "Improve your picking, strumming, fingerstyle, and hybrid picking techniques.",
     "resources": {
@@ -547,9 +547,9 @@
     "taskId": "8",
     "taskTitle": "Left-Hand Technique",
     "subTask": [
-      20,
-      21,
-      22
+      "20",
+      "21",
+      "22"
     ],
     "taskDescription": "Enhance your left-hand technique with fingering, barre chords, and vibrato.",
     "resources": {
@@ -625,9 +625,9 @@
     "taskId": "9",
     "taskTitle": "Basic Songs",
     "subTask": [
-      23,
-      24,
-      25
+      "23",
+      "24",
+      "25"
     ],
     "taskDescription": "Learn how to play basic songs, focusing on rhythm, lead guitar parts, and chord progressions.",
     "resources": {
@@ -703,9 +703,9 @@
     "taskId": "10",
     "taskTitle": "Fingerstyle Arrangements",
     "subTask": [
-      26,
-      27,
-      28
+      "26",
+      "27",
+      "28"
     ],
     "taskDescription": "Master fingerstyle guitar playing with open tunings, acoustic fingerpicking patterns, and Travis picking.",
     "resources": {
@@ -2074,4 +2074,5 @@
       "travis picking",
       "fingerstyle"
     ]
-  }]
+  }
+]
