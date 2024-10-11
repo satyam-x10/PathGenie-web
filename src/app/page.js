@@ -1,8 +1,8 @@
 import Image from "next/image";
-import TaskComponent from "./roadmap";
+import Roadmap from "./roadmap";
 
 export default function Home() {
   return (
-      <TaskComponent />
+      <Roadmap />
  );
 }
