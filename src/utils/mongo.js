@@ -39,9 +39,9 @@ const resourceSchema = new mongoose.Schema({
 });
 
 // Models
-const User = mongoose.model('User', userSchema);
-const Topic = mongoose.model('Topic', topicSchema);
-const Resource = mongoose.model('Resource', resourceSchema);
+const User = mongoose.models.User || mongoose.model('User', userSchema);
+const Topic = mongoose.models.Topic || mongoose.model('Topic', topicSchema);
+const Resource = mongoose.models.Resource || mongoose.model('Resource', resourceSchema);
 
 // CRUD Operations for Users
 const createUser = async (email, rootTopics) => {
