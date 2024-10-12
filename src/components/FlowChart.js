@@ -6,7 +6,7 @@ const ReactFlow = dynamic(() => import('reactflow'), { ssr: false });
 import { MiniMap, Controls, Background } from 'reactflow';
 import 'reactflow/dist/style.css';
 
-import mockTaskData from '../../public/mongo.json';
+import taskDataList from '../public/mongo.json';
 
 const generateFlowchartData = (taskId) => {
   const nodes = [];
@@ -17,7 +17,7 @@ const generateFlowchartData = (taskId) => {
   const NODE_HEIGHT = 100;
 
   const calculateTreeDimensions = (currentTaskId) => {
-    const task = mockTaskData.find(task => task.taskId === currentTaskId);
+    const task = taskDataList.find(task => task.taskId === currentTaskId);
     if (!task) return { width: 0, height: 0, count: 0 };
 
     if (task.subTask.length === 0) {
@@ -34,7 +34,7 @@ const generateFlowchartData = (taskId) => {
   };
 
   const positionNodes = (currentTaskId, x, y, availableWidth) => {
-    const task = mockTaskData.find(task => task.taskId === currentTaskId);
+    const task = taskDataList.find(task => task.taskId === currentTaskId);
     if (!task) return;
 
     const { width, count } = calculateTreeDimensions(currentTaskId);
@@ -84,7 +84,7 @@ const generateFlowchartData = (taskId) => {
   return { nodes, edges };
 };
 
-const MiniFlowChart = () => {
+const FlowchartViewer = () => {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -119,4 +119,4 @@ const MiniFlowChart = () => {
   );
 };
 
-export default MiniFlowChart;
+export default FlowchartViewer;
