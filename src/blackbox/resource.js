@@ -1,19 +1,5 @@
 import { askFromGemini } from "./gemini.js";
-import readline from "readline";
 
-async function getUserInput(question) {
-  return new Promise((resolve) => {
-    const line = readline.createInterface({
-      input: process.stdin,
-      output: process.stdout,
-    });
-
-    line.question(question, (answer) => {
-      line.close();
-      resolve(answer);
-    });
-  });
-}
 
 async function gatherLearningPreferences() {
   const experience = await getUserInput(
@@ -23,8 +9,7 @@ async function gatherLearningPreferences() {
   return { experience };
 }
 
-async function createMasterPrompt(basePrompt) {
-  const { experience } = await gatherLearningPreferences();
+async function generateHierarchicalTasks(basePrompt) {
 
   const masterPrompt = `
   ${basePrompt}.
@@ -106,7 +91,7 @@ export async function getNestedTopics(basePrompt) {
   // const basePrompt = await getUserInput("Please enter the topic you want to learn about: ");
 
   try {
-    const masterPrompt = await createMasterPrompt(basePrompt);
+    const masterPrompt = await generateHierarchicalTasks(basePrompt);
     // console.log("\nGenerated Master Prompt:");
 
     const response = await askFromGemini(masterPrompt);
@@ -117,4 +102,74 @@ export async function getNestedTopics(basePrompt) {
   } catch (error) {
     console.error("An error occurred:", error);
   }
+}
+
+// make a mock function to generaet the hierarchical tasks
+
+export async function generateHierarchicalTasksMock() {
+  const  mockData = {
+    "Machine Learning": [
+      {
+        "Supervised Learning": [
+          {
+            "Algorithms": [
+              {
+                "Regression": [
+                  "Linear Regression",
+                  "Logistic Regression"
+                ]
+              },
+              {
+                "Classification": [
+                  "Decision Trees",
+                  "Random Forest",
+                  "Support Vector Machine"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "Unsupervised Learning": [
+          {
+            "Algorithms": [
+              {
+                "Clustering": [
+                  "K-Means",
+                  "Hierarchical Clustering"
+                ]
+              },
+              {
+                "Dimensionality Reduction": [
+                  "PCA (Principal Component Analysis)",
+                  "t-SNE"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "Reinforcement Learning": [
+          {
+            "Concepts": [
+              "Agent",
+              "Environment",
+              "Rewards",
+              "Policy"
+            ]
+          },
+          {
+            "Algorithms": [
+              "Q-Learning",
+              "Deep Q-Network (DQN)"
+            ]
+          }
+        ]
+      }
+    ]
+  };
+  await new Promise((resolve) => setTimeout(resolve, 1000));
+  return mockData;
 }

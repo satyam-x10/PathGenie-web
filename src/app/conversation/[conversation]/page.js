@@ -1,6 +1,7 @@
 'use client';
 import React, { useState, useEffect, useRef } from "react";
 import { generatePrompt } from "@/blackbox/prompt";
+import { generateHierarchicalTasksMock } from "@/blackbox/resource";
 
 const ConversationPage = ({ params }) => {
     const conversation = params?.conversation;
@@ -41,6 +42,11 @@ const ConversationPage = ({ params }) => {
                 ...prevMessages,
                 { text: aiResponse, isUser: false },
             ]);
+
+            // Generate the hierarchical tasks
+            const hierarchicalTasks = await generateHierarchicalTasksMock();
+            console.log("Hierarchical tasks:", hierarchicalTasks);
+            setPlanGenerated(true);
         } catch (error) {
             console.error("Error fetching AI response:", error);
             setMessages((prevMessages) => [
@@ -93,7 +99,7 @@ const ConversationPage = ({ params }) => {
                         <div className="flex-1 py-3 px-4 rounded-full bg-gradient-to-r from-pink-500 to-purple-600 text-white text-lg text-center">
                         {planGenerated ? (
                             <>
-                                <p className="text-lg">Here's a plan ready for you</p>
+                                <p className="text-lg">The plans ready for you.</p>
                             </>
                         ) : (
                             <>
@@ -131,7 +137,13 @@ const ConversationPage = ({ params }) => {
       />
     </svg>
   ) : planGenerated ? (
-    <span className="text-white text-lg">Wollah</span>
+    <div onClick={()=>{
+        setPlanGenerated(false);
+        // wait 1 second before redirecting
+        setTimeout(() => {
+          window.location.href = '/minimap/670a209f0a1f';
+        }, 1000);
+       }}>Lets Dive In</div>
   ) : (
     <div className="animate-spin w-6 h-6 border-4 border-t-4 border-t-white border-gray-600 rounded-full"></div>
   )}

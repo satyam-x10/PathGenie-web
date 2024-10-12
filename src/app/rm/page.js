@@ -84,7 +84,7 @@ const generateFlowchartData = (taskId) => {
   return { nodes, edges };
 };
 
-const Home = () => {
+const MiniFlowChart = () => {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -119,4 +119,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default MiniFlowChart;
