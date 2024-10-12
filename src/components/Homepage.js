@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation"; // Correct import for Next.js routing
 
@@ -106,7 +106,13 @@ const HomePage = () => {
 
         {/* Topic buttons */}
         <div className="flex space-x-4 justify-center mt-4">
-          {["AI in Healthcare", "Machine Learning", "Blockchain", "Cybersecurity", "Natural Language Processing"].map((topic, index) => (
+          {[
+            "AI in Healthcare",
+            "Machine Learning",
+            "Blockchain",
+            "Cybersecurity",
+            "Natural Language Processing",
+          ].map((topic, index) => (
             <button
               key={index}
               onClick={() => handleTopicClick(topic)} // Navigate with pre-selected topic

@@ -27,7 +27,6 @@ async function generateLearningPrompt(inputString) {
     // But since we are passing a string, we skip that here
   }
 
-
   // Generate the learning prompt
   const promptGenerationString = `
     Generate a clear and concise prompt for learning: "${initialInput}"

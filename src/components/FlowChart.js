@@ -1,12 +1,12 @@
-'use client'
-import React, { useEffect, useState } from 'react';
-import dynamic from 'next/dynamic';
+"use client";
+import React, { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
 
-const ReactFlow = dynamic(() => import('reactflow'), { ssr: false });
-import { MiniMap, Controls, Background } from 'reactflow';
-import 'reactflow/dist/style.css';
+const ReactFlow = dynamic(() => import("reactflow"), { ssr: false });
+import { MiniMap, Controls, Background } from "reactflow";
+import "reactflow/dist/style.css";
 
-import taskDataList from '../public/mongo.json';
+import taskDataList from "../public/mongo.json";
 
 const generateFlowchartData = (taskId) => {
   const nodes = [];
@@ -17,7 +17,7 @@ const generateFlowchartData = (taskId) => {
   const NODE_HEIGHT = 100;
 
   const calculateTreeDimensions = (currentTaskId) => {
-    const task = taskDataList.find(task => task.taskId === currentTaskId);
+    const task = taskDataList.find((task) => task.taskId === currentTaskId);
     if (!task) return { width: 0, height: 0, count: 0 };
 
     if (task.subTask.length === 0) {
@@ -25,16 +25,23 @@ const generateFlowchartData = (taskId) => {
     }
 
     const childDimensions = task.subTask.map(calculateTreeDimensions);
-    const totalWidth = Math.max(NODE_WIDTH, childDimensions.reduce((sum, dim) => sum + dim.width, 0) + (HORIZONTAL_SPACING * (childDimensions.length - 1)));
-    const maxChildHeight = Math.max(...childDimensions.map(dim => dim.height));
+    const totalWidth = Math.max(
+      NODE_WIDTH,
+      childDimensions.reduce((sum, dim) => sum + dim.width, 0) +
+        HORIZONTAL_SPACING * (childDimensions.length - 1),
+    );
+    const maxChildHeight = Math.max(
+      ...childDimensions.map((dim) => dim.height),
+    );
     const totalHeight = NODE_HEIGHT + VERTICAL_SPACING + maxChildHeight;
-    const totalCount = childDimensions.reduce((sum, dim) => sum + dim.count, 0) + 1;
+    const totalCount =
+      childDimensions.reduce((sum, dim) => sum + dim.count, 0) + 1;
 
     return { width: totalWidth, height: totalHeight, count: totalCount };
   };
 
   const positionNodes = (currentTaskId, x, y, availableWidth) => {
-    const task = taskDataList.find(task => task.taskId === currentTaskId);
+    const task = taskDataList.find((task) => task.taskId === currentTaskId);
     if (!task) return;
 
     const { width, count } = calculateTreeDimensions(currentTaskId);
@@ -42,20 +49,20 @@ const generateFlowchartData = (taskId) => {
 
     nodes.push({
       id: task.taskId,
-      type: 'default',
+      type: "default",
       data: { label: task.taskTitle },
       position: { x: nodeX, y },
       style: {
-        background: 'linear-gradient(135deg, #05070b, #101726)',
-        border: '1px solid #444',
-        borderRadius: '8px',
-        padding: '5px',
+        background: "linear-gradient(135deg, #05070b, #101726)",
+        border: "1px solid #444",
+        borderRadius: "8px",
+        padding: "5px",
         width: NODE_WIDTH,
         height: NODE_HEIGHT,
-        boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.5)',
-        color: 'white',
-        fontWeight: 'bold',
-        fontSize: '24px',
+        boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.5)",
+        color: "white",
+        fontWeight: "bold",
+        fontSize: "24px",
       },
     });
 
@@ -63,16 +70,26 @@ const generateFlowchartData = (taskId) => {
       let childX = x;
       task.subTask.forEach((subTaskId) => {
         const childDim = calculateTreeDimensions(subTaskId);
-        positionNodes(subTaskId, childX, y + NODE_HEIGHT + VERTICAL_SPACING, childDim.width);
+        positionNodes(
+          subTaskId,
+          childX,
+          y + NODE_HEIGHT + VERTICAL_SPACING,
+          childDim.width,
+        );
         childX += childDim.width + HORIZONTAL_SPACING;
 
         edges.push({
           id: `${task.taskId}-${subTaskId}`,
           source: task.taskId,
           target: subTaskId,
-          type: 'smoothstep',
-          style: { stroke: '#777', strokeWidth: 2 },
-          markerEnd: { type: 'arrowclosed', width: 20, height: 20, color: '#777' },
+          type: "smoothstep",
+          style: { stroke: "#777", strokeWidth: 2 },
+          markerEnd: {
+            type: "arrowclosed",
+            width: 20,
+            height: 20,
+            color: "#777",
+          },
         });
       });
     }
@@ -98,13 +115,13 @@ const FlowchartViewer = () => {
   const { nodes, edges } = generateFlowchartData("1");
 
   return (
-    <div style={{ height: '100vh', width: '100%' }}>
+    <div style={{ height: "100vh", width: "100%" }}>
       <ReactFlow
         nodes={nodes}
         edges={edges}
         fitView
         fitViewOptions={{ padding: 0.2, minZoom: 0.1, maxZoom: 1.5 }}
-        defaultEdgeOptions={{ type: 'smoothstep', animated: true }}
+        defaultEdgeOptions={{ type: "smoothstep", animated: true }}
         nodesDraggable={false}
         nodesConnectable={false}
         elementsSelectable={false}

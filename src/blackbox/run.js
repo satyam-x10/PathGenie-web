@@ -11,4 +11,3 @@ export default async function collectResource(learningTopic) {
   // const serpResults = await getSerpResults(prompt);
   return `${learningTopic} collected`;
 }
-

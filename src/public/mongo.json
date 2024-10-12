@@ -5,11 +5,7 @@
     },
     "taskId": "1",
     "taskTitle": "Guitar Fundamentals",
-    "subTask": [
-      "2",
-      "3",
-      "4"
-    ],
+    "subTask": ["2", "3", "4"],
     "taskDescription": "Learn the basics of music theory and guitar technique to build a solid foundation for your guitar playing.",
     "resources": {
       "Guitar Fundamentals": [
@@ -41,11 +37,7 @@
               ]
             },
             {
-              "Left-Hand Technique": [
-                "Fingering",
-                "Barre Chords",
-                "Vibrato"
-              ]
+              "Left-Hand Technique": ["Fingering", "Barre Chords", "Vibrato"]
             }
           ]
         },
@@ -83,10 +75,7 @@
     },
     "taskId": "2",
     "taskTitle": "Music Theory",
-    "subTask": [
-      "5",
-      "6"
-    ],
+    "subTask": ["5", "6"],
     "taskDescription": "Understand the essential concepts of music theory including notes, intervals, scales, and chords.",
     "resources": {
       "Guitar Fundamentals": [
@@ -118,11 +107,7 @@
               ]
             },
             {
-              "Left-Hand Technique": [
-                "Fingering",
-                "Barre Chords",
-                "Vibrato"
-              ]
+              "Left-Hand Technique": ["Fingering", "Barre Chords", "Vibrato"]
             }
           ]
         },
@@ -147,12 +132,7 @@
       ]
     },
     "similarTasks": [],
-    "tags": [
-      "music theory",
-      "scales",
-      "chords",
-      "intervals"
-    ]
+    "tags": ["music theory", "scales", "chords", "intervals"]
   },
   {
     "_id": {
@@ -160,10 +140,7 @@
     },
     "taskId": "3",
     "taskTitle": "Guitar Technique",
-    "subTask": [
-      "7",
-      "8"
-    ],
+    "subTask": ["7", "8"],
     "taskDescription": "Develop your right-hand and left-hand techniques to enhance your guitar playing skills.",
     "resources": {
       "Guitar Fundamentals": [
@@ -195,11 +172,7 @@
               ]
             },
             {
-              "Left-Hand Technique": [
-                "Fingering",
-                "Barre Chords",
-                "Vibrato"
-              ]
+              "Left-Hand Technique": ["Fingering", "Barre Chords", "Vibrato"]
             }
           ]
         },
@@ -224,11 +197,7 @@
       ]
     },
     "similarTasks": [],
-    "tags": [
-      "guitar technique",
-      "right-hand",
-      "left-hand"
-    ]
+    "tags": ["guitar technique", "right-hand", "left-hand"]
   },
   {
     "_id": {
@@ -236,9 +205,7 @@
     },
     "taskId": "4",
     "taskTitle": "Practical Application",
-    "subTask": [
-      "9"
-    ],
+    "subTask": ["9"],
     "taskDescription": "Apply your guitar skills by learning basic songs and fingerstyle arrangements.",
     "resources": {
       "Guitar Fundamentals": [
@@ -270,11 +237,7 @@
               ]
             },
             {
-              "Left-Hand Technique": [
-                "Fingering",
-                "Barre Chords",
-                "Vibrato"
-              ]
+              "Left-Hand Technique": ["Fingering", "Barre Chords", "Vibrato"]
             }
           ]
         },
@@ -299,10 +262,7 @@
       ]
     },
     "similarTasks": [],
-    "tags": [
-      "basic songs",
-      "fingerstyle arrangements"
-    ]
+    "tags": ["basic songs", "fingerstyle arrangements"]
   },
   {
     "_id": {
@@ -310,11 +270,7 @@
     },
     "taskId": "5",
     "taskTitle": "Notes and Intervals",
-    "subTask": [
-      "11",
-      "12",
-      "13"
-    ],
+    "subTask": ["11", "12", "13"],
     "taskDescription": "Learn the musical alphabet, sharps and flats, and understand the difference between major and minor intervals.",
     "resources": {
       "Guitar Fundamentals": [
@@ -346,11 +302,7 @@
               ]
             },
             {
-              "Left-Hand Technique": [
-                "Fingering",
-                "Barre Chords",
-                "Vibrato"
-              ]
+              "Left-Hand Technique": ["Fingering", "Barre Chords", "Vibrato"]
             }
           ]
         },
@@ -375,13 +327,7 @@
       ]
     },
     "similarTasks": [],
-    "tags": [
-      "notes",
-      "intervals",
-      "musical alphabet",
-      "sharps",
-      "flats"
-    ]
+    "tags": ["notes", "intervals", "musical alphabet", "sharps", "flats"]
   },
   {
     "_id": {
@@ -389,11 +335,7 @@
     },
     "taskId": "6",
     "taskTitle": "Scales and Chords",
-    "subTask": [
-      "14",
-      "15",
-      "16"
-    ],
+    "subTask": ["14", "15", "16"],
     "taskDescription": "Master major and minor scales, triads, inversions, and seventh chords.",
     "resources": {
       "Guitar Fundamentals": [
@@ -425,11 +367,7 @@
               ]
             },
             {
-              "Left-Hand Technique": [
-                "Fingering",
-                "Barre Chords",
-                "Vibrato"
-              ]
+              "Left-Hand Technique": ["Fingering", "Barre Chords", "Vibrato"]
             }
           ]
         },
@@ -454,12 +392,7 @@
       ]
     },
     "similarTasks": [],
-    "tags": [
-      "scales",
-      "chords",
-      "triads",
-      "seventh chords"
-    ]
+    "tags": ["scales", "chords", "triads", "seventh chords"]
   },
   {
     "_id": {
@@ -467,11 +400,7 @@
     },
     "taskId": "7",
     "taskTitle": "Right-Hand Technique",
-    "subTask": [
-      "17",
-      "18",
-      "19"
-    ],
+    "subTask": ["17", "18", "19"],
     "taskDescription": "Improve your picking, strumming, fingerstyle, and hybrid picking techniques.",
     "resources": {
       "Guitar Fundamentals": [
@@ -503,11 +432,7 @@
               ]
             },
             {
-              "Left-Hand Technique": [
-                "Fingering",
-                "Barre Chords",
-                "Vibrato"
-              ]
+              "Left-Hand Technique": ["Fingering", "Barre Chords", "Vibrato"]
             }
           ]
         },
@@ -546,11 +471,7 @@
     },
     "taskId": "8",
     "taskTitle": "Left-Hand Technique",
-    "subTask": [
-      "20",
-      "21",
-      "22"
-    ],
+    "subTask": ["20", "21", "22"],
     "taskDescription": "Enhance your left-hand technique with fingering, barre chords, and vibrato.",
     "resources": {
       "Guitar Fundamentals": [
@@ -582,11 +503,7 @@
               ]
             },
             {
-              "Left-Hand Technique": [
-                "Fingering",
-                "Barre Chords",
-                "Vibrato"
-              ]
+              "Left-Hand Technique": ["Fingering", "Barre Chords", "Vibrato"]
             }
           ]
         },
@@ -611,12 +528,7 @@
       ]
     },
     "similarTasks": [],
-    "tags": [
-      "left-hand technique",
-      "fingering",
-      "barre chords",
-      "vibrato"
-    ]
+    "tags": ["left-hand technique", "fingering", "barre chords", "vibrato"]
   },
   {
     "_id": {
@@ -624,11 +536,7 @@
     },
     "taskId": "9",
     "taskTitle": "Basic Songs",
-    "subTask": [
-      "23",
-      "24",
-      "25"
-    ],
+    "subTask": ["23", "24", "25"],
     "taskDescription": "Learn how to play basic songs, focusing on rhythm, lead guitar parts, and chord progressions.",
     "resources": {
       "Guitar Fundamentals": [
@@ -660,11 +568,7 @@
               ]
             },
             {
-              "Left-Hand Technique": [
-                "Fingering",
-                "Barre Chords",
-                "Vibrato"
-              ]
+              "Left-Hand Technique": ["Fingering", "Barre Chords", "Vibrato"]
             }
           ]
         },
@@ -702,11 +606,7 @@
     },
     "taskId": "10",
     "taskTitle": "Fingerstyle Arrangements",
-    "subTask": [
-      "26",
-      "27",
-      "28"
-    ],
+    "subTask": ["26", "27", "28"],
     "taskDescription": "Master fingerstyle guitar playing with open tunings, acoustic fingerpicking patterns, and Travis picking.",
     "resources": {
       "Guitar Fundamentals": [
@@ -738,11 +638,7 @@
               ]
             },
             {
-              "Left-Hand Technique": [
-                "Fingering",
-                "Barre Chords",
-                "Vibrato"
-              ]
+              "Left-Hand Technique": ["Fingering", "Barre Chords", "Vibrato"]
             }
           ]
         },
@@ -767,12 +663,7 @@
       ]
     },
     "similarTasks": [],
-    "tags": [
-      "fingerstyle",
-      "open tunings",
-      "fingerpicking",
-      "travis picking"
-    ]
+    "tags": ["fingerstyle", "open tunings", "fingerpicking", "travis picking"]
   },
   {
     "_id": {
@@ -812,11 +703,7 @@
               ]
             },
             {
-              "Left-Hand Technique": [
-                "Fingering",
-                "Barre Chords",
-                "Vibrato"
-              ]
+              "Left-Hand Technique": ["Fingering", "Barre Chords", "Vibrato"]
             }
           ]
         },
@@ -841,10 +728,7 @@
       ]
     },
     "similarTasks": [],
-    "tags": [
-      "musical alphabet",
-      "notes"
-    ]
+    "tags": ["musical alphabet", "notes"]
   },
   {
     "_id": {
@@ -884,11 +768,7 @@
               ]
             },
             {
-              "Left-Hand Technique": [
-                "Fingering",
-                "Barre Chords",
-                "Vibrato"
-              ]
+              "Left-Hand Technique": ["Fingering", "Barre Chords", "Vibrato"]
             }
           ]
         },
@@ -913,11 +793,7 @@
       ]
     },
     "similarTasks": [],
-    "tags": [
-      "sharps",
-      "flats",
-      "notes"
-    ]
+    "tags": ["sharps", "flats", "notes"]
   },
   {
     "_id": {
@@ -957,11 +833,7 @@
               ]
             },
             {
-              "Left-Hand Technique": [
-                "Fingering",
-                "Barre Chords",
-                "Vibrato"
-              ]
+              "Left-Hand Technique": ["Fingering", "Barre Chords", "Vibrato"]
             }
           ]
         },
@@ -986,11 +858,7 @@
       ]
     },
     "similarTasks": [],
-    "tags": [
-      "intervals",
-      "major",
-      "minor"
-    ]
+    "tags": ["intervals", "major", "minor"]
   },
   {
     "_id": {
@@ -1030,11 +898,7 @@
               ]
             },
             {
-              "Left-Hand Technique": [
-                "Fingering",
-                "Barre Chords",
-                "Vibrato"
-              ]
+              "Left-Hand Technique": ["Fingering", "Barre Chords", "Vibrato"]
             }
           ]
         },
@@ -1059,11 +923,7 @@
       ]
     },
     "similarTasks": [],
-    "tags": [
-      "scales",
-      "major",
-      "minor"
-    ]
+    "tags": ["scales", "major", "minor"]
   },
   {
     "_id": {
@@ -1103,11 +963,7 @@
               ]
             },
             {
-              "Left-Hand Technique": [
-                "Fingering",
-                "Barre Chords",
-                "Vibrato"
-              ]
+              "Left-Hand Technique": ["Fingering", "Barre Chords", "Vibrato"]
             }
           ]
         },
@@ -1132,11 +988,7 @@
       ]
     },
     "similarTasks": [],
-    "tags": [
-      "triads",
-      "inversions",
-      "chords"
-    ]
+    "tags": ["triads", "inversions", "chords"]
   },
   {
     "_id": {
@@ -1144,7 +996,7 @@
     },
     "taskId": "16",
     "taskTitle": "Seventh Chords",
-    "subTask": ["96","97"],
+    "subTask": ["96", "97"],
     "taskDescription": "Explore seventh chords and their use in jazz, blues, and popular music.",
     "resources": {
       "Guitar Fundamentals": [
@@ -1176,11 +1028,7 @@
               ]
             },
             {
-              "Left-Hand Technique": [
-                "Fingering",
-                "Barre Chords",
-                "Vibrato"
-              ]
+              "Left-Hand Technique": ["Fingering", "Barre Chords", "Vibrato"]
             }
           ]
         },
@@ -1205,10 +1053,7 @@
       ]
     },
     "similarTasks": [],
-    "tags": [
-      "seventh chords",
-      "chords"
-    ]
+    "tags": ["seventh chords", "chords"]
   },
   {
     "_id": {
@@ -1216,7 +1061,7 @@
     },
     "taskId": "17",
     "taskTitle": "Picking and Strumming",
-    "subTask": ["99","98"],
+    "subTask": ["99", "98"],
     "taskDescription": "Develop proper picking and strumming techniques for rhythm and lead guitar playing.",
     "resources": {
       "Guitar Fundamentals": [
@@ -1248,11 +1093,7 @@
               ]
             },
             {
-              "Left-Hand Technique": [
-                "Fingering",
-                "Barre Chords",
-                "Vibrato"
-              ]
+              "Left-Hand Technique": ["Fingering", "Barre Chords", "Vibrato"]
             }
           ]
         },
@@ -1277,11 +1118,7 @@
       ]
     },
     "similarTasks": [],
-    "tags": [
-      "picking",
-      "strumming",
-      "right-hand"
-    ]
+    "tags": ["picking", "strumming", "right-hand"]
   },
   {
     "_id": {
@@ -1321,11 +1158,7 @@
               ]
             },
             {
-              "Left-Hand Technique": [
-                "Fingering",
-                "Barre Chords",
-                "Vibrato"
-              ]
+              "Left-Hand Technique": ["Fingering", "Barre Chords", "Vibrato"]
             }
           ]
         },
@@ -1350,10 +1183,7 @@
       ]
     },
     "similarTasks": [],
-    "tags": [
-      "fingerstyle",
-      "right-hand"
-    ]
+    "tags": ["fingerstyle", "right-hand"]
   },
   {
     "_id": {
@@ -1393,11 +1223,7 @@
               ]
             },
             {
-              "Left-Hand Technique": [
-                "Fingering",
-                "Barre Chords",
-                "Vibrato"
-              ]
+              "Left-Hand Technique": ["Fingering", "Barre Chords", "Vibrato"]
             }
           ]
         },
@@ -1422,10 +1248,7 @@
       ]
     },
     "similarTasks": [],
-    "tags": [
-      "hybrid picking",
-      "right-hand"
-    ]
+    "tags": ["hybrid picking", "right-hand"]
   },
   {
     "_id": {
@@ -1465,11 +1288,7 @@
               ]
             },
             {
-              "Left-Hand Technique": [
-                "Fingering",
-                "Barre Chords",
-                "Vibrato"
-              ]
+              "Left-Hand Technique": ["Fingering", "Barre Chords", "Vibrato"]
             }
           ]
         },
@@ -1494,10 +1313,7 @@
       ]
     },
     "similarTasks": [],
-    "tags": [
-      "fingering",
-      "left-hand"
-    ]
+    "tags": ["fingering", "left-hand"]
   },
   {
     "_id": {
@@ -1537,11 +1353,7 @@
               ]
             },
             {
-              "Left-Hand Technique": [
-                "Fingering",
-                "Barre Chords",
-                "Vibrato"
-              ]
+              "Left-Hand Technique": ["Fingering", "Barre Chords", "Vibrato"]
             }
           ]
         },
@@ -1566,10 +1378,7 @@
       ]
     },
     "similarTasks": [],
-    "tags": [
-      "barre chords",
-      "left-hand"
-    ]
+    "tags": ["barre chords", "left-hand"]
   },
   {
     "_id": {
@@ -1609,11 +1418,7 @@
               ]
             },
             {
-              "Left-Hand Technique": [
-                "Fingering",
-                "Barre Chords",
-                "Vibrato"
-              ]
+              "Left-Hand Technique": ["Fingering", "Barre Chords", "Vibrato"]
             }
           ]
         },
@@ -1638,10 +1443,7 @@
       ]
     },
     "similarTasks": [],
-    "tags": [
-      "vibrato",
-      "left-hand"
-    ]
+    "tags": ["vibrato", "left-hand"]
   },
   {
     "_id": {
@@ -1681,11 +1483,7 @@
               ]
             },
             {
-              "Left-Hand Technique": [
-                "Fingering",
-                "Barre Chords",
-                "Vibrato"
-              ]
+              "Left-Hand Technique": ["Fingering", "Barre Chords", "Vibrato"]
             }
           ]
         },
@@ -1710,10 +1508,7 @@
       ]
     },
     "similarTasks": [],
-    "tags": [
-      "rhythm guitar",
-      "lead guitar"
-    ]
+    "tags": ["rhythm guitar", "lead guitar"]
   },
   {
     "_id": {
@@ -1753,11 +1548,7 @@
               ]
             },
             {
-              "Left-Hand Technique": [
-                "Fingering",
-                "Barre Chords",
-                "Vibrato"
-              ]
+              "Left-Hand Technique": ["Fingering", "Barre Chords", "Vibrato"]
             }
           ]
         },
@@ -1782,10 +1573,7 @@
       ]
     },
     "similarTasks": [],
-    "tags": [
-      "chord progressions",
-      "guitar"
-    ]
+    "tags": ["chord progressions", "guitar"]
   },
   {
     "_id": {
@@ -1825,11 +1613,7 @@
               ]
             },
             {
-              "Left-Hand Technique": [
-                "Fingering",
-                "Barre Chords",
-                "Vibrato"
-              ]
+              "Left-Hand Technique": ["Fingering", "Barre Chords", "Vibrato"]
             }
           ]
         },
@@ -1854,10 +1638,7 @@
       ]
     },
     "similarTasks": [],
-    "tags": [
-      "song structures",
-      "guitar"
-    ]
+    "tags": ["song structures", "guitar"]
   },
   {
     "_id": {
@@ -1897,11 +1678,7 @@
               ]
             },
             {
-              "Left-Hand Technique": [
-                "Fingering",
-                "Barre Chords",
-                "Vibrato"
-              ]
+              "Left-Hand Technique": ["Fingering", "Barre Chords", "Vibrato"]
             }
           ]
         },
@@ -1926,10 +1703,7 @@
       ]
     },
     "similarTasks": [],
-    "tags": [
-      "open tunings",
-      "fingerstyle"
-    ]
+    "tags": ["open tunings", "fingerstyle"]
   },
   {
     "_id": {
@@ -1969,11 +1743,7 @@
               ]
             },
             {
-              "Left-Hand Technique": [
-                "Fingering",
-                "Barre Chords",
-                "Vibrato"
-              ]
+              "Left-Hand Technique": ["Fingering", "Barre Chords", "Vibrato"]
             }
           ]
         },
@@ -1998,10 +1768,7 @@
       ]
     },
     "similarTasks": [],
-    "tags": [
-      "fingerpicking",
-      "acoustic guitar"
-    ]
+    "tags": ["fingerpicking", "acoustic guitar"]
   },
   {
     "_id": {
@@ -2041,11 +1808,7 @@
               ]
             },
             {
-              "Left-Hand Technique": [
-                "Fingering",
-                "Barre Chords",
-                "Vibrato"
-              ]
+              "Left-Hand Technique": ["Fingering", "Barre Chords", "Vibrato"]
             }
           ]
         },
@@ -2070,9 +1833,6 @@
       ]
     },
     "similarTasks": [],
-    "tags": [
-      "travis picking",
-      "fingerstyle"
-    ]
+    "tags": ["travis picking", "fingerstyle"]
   }
 ]

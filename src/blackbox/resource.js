@@ -1,6 +1,5 @@
 import { askFromGemini } from "./gemini.js";
 
-
 async function gatherLearningPreferences() {
   const experience = await getUserInput(
     "How much experience do you have in this? (none, beginner, intermediate, expert): ",
@@ -10,7 +9,6 @@ async function gatherLearningPreferences() {
 }
 
 async function generateHierarchicalTasks(basePrompt) {
-
   const masterPrompt = `
   ${basePrompt}.
   Based on the provided prompt, return a detailed hierarchical breakdown of all topics and subtopics in a strictly nested JSON format. Ensure that the structure is clear and follows this format precisely.
@@ -107,68 +105,54 @@ export async function getNestedTopics(basePrompt) {
 // make a mock function to generaet the hierarchical tasks
 
 export async function generateHierarchicalTasksMock() {
-  const  mockData = {
+  const mockData = {
     "Machine Learning": [
       {
         "Supervised Learning": [
           {
-            "Algorithms": [
+            Algorithms: [
               {
-                "Regression": [
-                  "Linear Regression",
-                  "Logistic Regression"
-                ]
+                Regression: ["Linear Regression", "Logistic Regression"],
               },
               {
-                "Classification": [
+                Classification: [
                   "Decision Trees",
                   "Random Forest",
-                  "Support Vector Machine"
-                ]
-              }
-            ]
-          }
-        ]
+                  "Support Vector Machine",
+                ],
+              },
+            ],
+          },
+        ],
       },
       {
         "Unsupervised Learning": [
           {
-            "Algorithms": [
+            Algorithms: [
               {
-                "Clustering": [
-                  "K-Means",
-                  "Hierarchical Clustering"
-                ]
+                Clustering: ["K-Means", "Hierarchical Clustering"],
               },
               {
                 "Dimensionality Reduction": [
                   "PCA (Principal Component Analysis)",
-                  "t-SNE"
-                ]
-              }
-            ]
-          }
-        ]
+                  "t-SNE",
+                ],
+              },
+            ],
+          },
+        ],
       },
       {
         "Reinforcement Learning": [
           {
-            "Concepts": [
-              "Agent",
-              "Environment",
-              "Rewards",
-              "Policy"
-            ]
+            Concepts: ["Agent", "Environment", "Rewards", "Policy"],
           },
           {
-            "Algorithms": [
-              "Q-Learning",
-              "Deep Q-Network (DQN)"
-            ]
-          }
-        ]
-      }
-    ]
+            Algorithms: ["Q-Learning", "Deep Q-Network (DQN)"],
+          },
+        ],
+      },
+    ],
   };
   await new Promise((resolve) => setTimeout(resolve, 1000));
   return mockData;
