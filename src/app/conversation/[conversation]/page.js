@@ -1,14 +1,16 @@
 'use client';
 import React, { useState, useEffect, useRef } from "react";
-import { askFromGemini } from "@/blackbox/gemini";  // Make sure this is properly imported
+import { generatePrompt } from "@/blackbox/prompt";
 
 const ConversationPage = ({ params }) => {
     const conversation = params?.conversation;
-
+    const [masterPrompt, setMasterPrompt] = useState("");
+    const [planGenerated, setPlanGenerated] = useState(false);
     const [messages, setMessages] = useState([
         { text: "Hello! How can you elaborate what you want to learn, so that we have a good idea?", isUser: false },
     ]);
     const [userInput, setUserInput] = useState("");
+    const [inputDisabled, setInputDisabled] = useState(false); // Track input disabled state
     const messageEndRef = useRef(null);
 
     // Scroll to the bottom of the chat whenever a new message is added
@@ -19,24 +21,28 @@ const ConversationPage = ({ params }) => {
     // Function to handle user input submission
     const handleSendMessage = async () => {
         if (userInput.trim() === "") return;
-
+        
         // Add user's message to chat
         const newMessages = [...messages, { text: userInput, isUser: true }];
         setMessages(newMessages);
         setUserInput(""); // Reset input field
-
+    
         try {
-            // Call the Gemini API for AI response
-            const aiResponse = await askFromGemini(userInput); // Make sure askFromGemini returns a response
-            console.log("AI response:", aiResponse);
+            // Call the Gemini API for AI response and await the result
+            console.log("User input:", userInput); // Log the user input
             
+            const aiResponse = await generatePrompt(`${userInput} regarding ${conversation}`); // Ensure you await the promise
+        
+            // Ensure the response is a string before updating the messages
+            setMasterPrompt(aiResponse);
+            setInputDisabled(true); // Disable the input field once the AI responds
+
             setMessages((prevMessages) => [
                 ...prevMessages,
                 { text: aiResponse, isUser: false },
             ]);
         } catch (error) {
             console.error("Error fetching AI response:", error);
-            // Optionally, you can handle the error by showing a fallback message
             setMessages((prevMessages) => [
                 ...prevMessages,
                 { text: "Sorry, I couldn't fetch a response. Please try again.", isUser: false },
@@ -82,33 +88,55 @@ const ConversationPage = ({ params }) => {
 
                 {/* Input section */}
                 <div className="flex items-center w-full">
-                    <input
-                        type="text"
-                        value={userInput}
-                        onChange={(e) => setUserInput(e.target.value)}
-                        onKeyPress={handleKeyPress} // Capture Enter key press
-                        placeholder="Type your message..."
-                        className="flex-1 py-3 px-4 rounded-full bg-gray-800 text-white text-lg focus:outline-none focus:ring-4 focus:ring-cyan-400 placeholder-gray-500"
-                    />
+                    {/* Conditionally render either input or "Thanks..." message */}
+                    {inputDisabled ? (
+                        <div className="flex-1 py-3 px-4 rounded-full bg-gradient-to-r from-pink-500 to-purple-600 text-white text-lg text-center">
+                        {planGenerated ? (
+                            <>
+                                <p className="text-lg">Here's a plan ready for you</p>
+                            </>
+                        ) : (
+                            <>
+                                <p className="text-lg">We are Cooking... This may take a few seconds.</p>
+                            </>
+                        )}
+                        </div>
+                    ) : (
+                        <input
+                            type="text"
+                            value={userInput}
+                            onChange={(e) => setUserInput(e.target.value)}
+                            onKeyPress={handleKeyPress} // Capture Enter key press
+                            placeholder="Type your message..."
+                            className="flex-1 py-3 px-4 rounded-full bg-gray-800 text-white text-lg focus:outline-none focus:ring-4 focus:ring-cyan-400 placeholder-gray-500"
+                        />
+                    )}
                     <button
-                        onClick={handleSendMessage}
-                        className="ml-4 p-3 bg-cyan-500 rounded-full shadow-lg hover:bg-cyan-400"
-                    >
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            strokeWidth="2"
-                            stroke="currentColor"
-                            className="w-6 h-6 text-white"
-                        >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                d="M21 10.5l-6.5-6.5m0 0l-6.5 6.5M14.5 4v16m0-16v0"
-                            />
-                        </svg>
-                    </button>
+  onClick={handleSendMessage}
+  className={`ml-4 p-3 rounded-full shadow-lg ${!masterPrompt ? 'bg-gray-500 hover:bg-gray-400' : planGenerated ? 'bg-pink-600 hover:bg-pink-500' : 'bg-gradient-to-r from-purple-500 to-purple-300 hover:bg-gradient-to-r'}`}
+>
+  {!masterPrompt ? (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth="2"
+      stroke="currentColor"
+      className="w-6 h-6 text-white"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M21 10.5l-6.5-6.5m0 0l-6.5 6.5M14.5 4v16m0-16v0"
+      />
+    </svg>
+  ) : planGenerated ? (
+    <span className="text-white text-lg">Wollah</span>
+  ) : (
+    <div className="animate-spin w-6 h-6 border-4 border-t-4 border-t-white border-gray-600 rounded-full"></div>
+  )}
+</button>
+
                 </div>
             </div>
         </div>
