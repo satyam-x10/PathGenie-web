@@ -1,11 +1,12 @@
 'use client';
 import React, { useState, useEffect, useRef } from "react";
+import { askFromGemini } from "@/blackbox/gemini";  // Make sure this is properly imported
 
 const ConversationPage = ({ params }) => {
     const conversation = params?.conversation;
 
     const [messages, setMessages] = useState([
-        { text: "Hello! How can I assist you today?", isUser: false },
+        { text: "Hello! How can you elaborate what you want to learn, so that we have a good idea?", isUser: false },
     ]);
     const [userInput, setUserInput] = useState("");
     const messageEndRef = useRef(null);
@@ -16,7 +17,7 @@ const ConversationPage = ({ params }) => {
     }, [messages]);
 
     // Function to handle user input submission
-    const handleSendMessage = () => {
+    const handleSendMessage = async () => {
         if (userInput.trim() === "") return;
 
         // Add user's message to chat
@@ -24,25 +25,23 @@ const ConversationPage = ({ params }) => {
         setMessages(newMessages);
         setUserInput(""); // Reset input field
 
-        // Mock AI response after a delay
-        setTimeout(() => {
-            const aiResponse = generateMockResponse();
+        try {
+            // Call the Gemini API for AI response
+            const aiResponse = await askFromGemini(userInput); // Make sure askFromGemini returns a response
+            console.log("AI response:", aiResponse);
+            
             setMessages((prevMessages) => [
                 ...prevMessages,
                 { text: aiResponse, isUser: false },
             ]);
-        }, 1000);
-    };
-
-    // Function to mock AI response
-    const generateMockResponse = () => {
-        const mockResponses = [
-            "I'm here to help you!",
-            "That sounds interesting.",
-            "Let's dive deeper into that.",
-            "Can you clarify that for me?",
-        ];
-        return mockResponses[Math.floor(Math.random() * mockResponses.length)];
+        } catch (error) {
+            console.error("Error fetching AI response:", error);
+            // Optionally, you can handle the error by showing a fallback message
+            setMessages((prevMessages) => [
+                ...prevMessages,
+                { text: "Sorry, I couldn't fetch a response. Please try again.", isUser: false },
+            ]);
+        }
     };
 
     // Handle 'Enter' key press to send message
@@ -56,19 +55,22 @@ const ConversationPage = ({ params }) => {
         <div className="flex flex-col items-center justify-center h-screen w-full bg-gradient-to-r from-gray-900 via-black to-gray-900 text-white">
             {/* Chat container */}
             <div className="w-full h-full flex flex-col p-4 space-y-4">
-                <h1 className="text-4xl font-bold mb-4">
+                <h1 className="text-4xl font-bold">
+                    Let's clarify what exactly you want to learn about?
+                </h1>
+                <h1 className="text-l font-bold text-gray-400 text-right mr-10">
                     {decodeURIComponent(conversation).slice(0, 70)}
-                </h1>        <div className="flex-1 overflow-y-auto bg-gray-800 p-6 rounded-lg shadow-lg space-y-4 hide-scrollbar">
+                </h1>
+                <div className="flex-1 overflow-y-auto bg-gray-800 p-6 rounded-lg shadow-lg space-y-4 hide-scrollbar">
                     {messages.map((message, index) => (
                         <div
                             key={index}
-                            className={`flex ${message.isUser ? "justify-end" : "justify-start"
-                                }`}
+                            className={`flex ${message.isUser ? "justify-end" : "justify-start"}`}
                         >
                             <div
-                                className={`p-3 rounded-lg max-w-xs ${message.isUser
-                                        ? "bg-cyan-500 text-white"
-                                        : "bg-gray-700 text-gray-200"
+                                className={`p-3 rounded-lg max-w-m ${message.isUser
+                                    ? "bg-cyan-500 text-white"
+                                    : "bg-gray-700 text-gray-200"
                                     }`}
                             >
                                 {message.text}
