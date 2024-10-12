@@ -9,23 +9,35 @@ const SignedInDiv = () => {
   const [userData, setUserData] = useState(null);
   const [topics, setTopics] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchUserData = async () => {
       if (user) {
-        const fetchedUser = await getUser(user.emailAddresses[0].emailAddress);
-        setUserData(fetchedUser);
+        try {
+          const fetchedUser = await getUser(user.emailAddresses[0].emailAddress);
+          setUserData(fetchedUser);
 
-        if (fetchedUser?.rootTopics) {
-          const topicsData = await Promise.all(
-            fetchedUser.rootTopics.map(async (topicId) => {
-              const topic = await getTopicById(topicId);
-              return topic;
-            })
-          );
-          setTopics(topicsData);
+          if (fetchedUser?.rootTopics) {
+            const topicsData = await Promise.all(
+              fetchedUser.rootTopics.map(async (topicId) => {
+                try {
+                  const topic = await getTopicById(topicId);
+                  return topic;
+                } catch (err) {
+                  console.error(`Failed to fetch topic with id ${topicId}`, err);
+                  return null;
+                }
+              })
+            );
+            setTopics(topicsData.filter((topic) => topic !== null));
+          }
+        } catch (err) {
+          console.error("Error fetching user data:", err);
+          setError("Failed to load user data. Please try again later.");
+        } finally {
+          setLoading(false);
         }
-        setLoading(false);
       }
     };
 
@@ -39,6 +51,29 @@ const SignedInDiv = () => {
       </div>
     );
   }
+
+  if (error) {
+    return (
+      <div className="flex flex-col justify-center items-center w-full h-screen bg-gray-900 space-y-6">
+        <div className="flex items-center space-x-4">
+          <UserButton
+            appearance={{
+              elements: {
+                userButtonAvatarBox: "w-10 h-10",
+              },
+            }}
+          />
+          {user && (
+            <span className="text-sm font-medium text-white">
+              {user.firstName}
+            </span>
+          )}
+        </div>
+        <p className="text-red-500 text-lg">{error}</p>
+      </div>
+    );
+  }
+  
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-900">
@@ -69,7 +104,8 @@ const SignedInDiv = () => {
             {topics.map((topic, index) => (
               <div
                 key={index}
-                className="bg-gray-800 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
+                onClick={() => window.location.replace(`/minimap/${topic._id}`)}
+                className="bg-gray-800 rounded-lg shadow-lg overflow-hidden hover:shadow-xl cursor-pointer transition-shadow duration-300"
               >
                 <div className="p-6">
                   <h3 className="text-xl font-semibold text-white mb-2">

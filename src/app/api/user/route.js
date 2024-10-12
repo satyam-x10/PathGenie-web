@@ -30,16 +30,36 @@ export async function GET(req) {
 }
 
 export async function POST(req) {
-  await connectDB();
-  const body = await req.json();
-  const { email, rootTopics } = body;
+  await connectDB(); // Ensure the database is connected
 
-  const newUser = await createUser(email, rootTopics);
-  return new Response(JSON.stringify({ message: "User created", newUser }), {
-    status: 201,
-    headers: { 'Content-Type': 'application/json' },
-  });
+  try {
+    const body = await req.json();
+    const { email } = body;
+    
+    // Check if the user already exists in the database
+    const existingUser = await getUserByEmail(email); 
+    
+    if (existingUser) {
+      return new Response(
+        JSON.stringify({ message: "User already exists", user: existingUser }),
+        { status: 200, headers: { "Content-Type": "application/json" } }
+      );
+    }
+    
+    // If no existing user, create a new one
+    const newUser = await createUser(email);
+    return new Response(
+      JSON.stringify({ message: "User created", newUser }),
+      { status: 201, headers: { "Content-Type": "application/json" } }
+    );
+  } catch (error) {
+    return new Response(
+      JSON.stringify({ message: "Error processing request", error: error.message }),
+      { status: 500, headers: { "Content-Type": "application/json" } }
+    );
+  }
 }
+
 
 export async function PUT(req) {
   await connectDB();
