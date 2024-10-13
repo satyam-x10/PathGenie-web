@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { generatePrompt } from "@/blackbox/prompt";
 import { getNestedTopics } from "@/blackbox/resource";
+import { saveExtractedTopics } from "@/utils/actions/topicAction";
 
 const ConversationPage = ({ params }) => {
   const conversation = params?.conversation;
@@ -50,7 +51,9 @@ const ConversationPage = ({ params }) => {
 
       // Generate the hierarchical tasks
       const hierarchicalTasks = await getNestedTopics(aiResponse);
-      console.log("Hierarchical tasks:", hierarchicalTasks);
+      
+      await saveExtractedTopics(hierarchicalTasks);
+            
       
       setPlanGenerated(true);
     } catch (error) {

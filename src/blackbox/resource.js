@@ -23,15 +23,15 @@ async function generateHierarchicalTasksPrompt(basePrompt) {
             "Algorithms": [
               {
                 "Regression": [
-                  "Linear Regression",
-                  "Logistic Regression"
+                  { "Linear Regression": [] },
+                  { "Logistic Regression": [] }
                 ]
               },
               {
                 "Classification": [
-                  "Decision Trees",
-                  "Random Forest",
-                  "Support Vector Machine"
+                  { "Decision Trees": [] },
+                  { "Random Forest": [] },
+                  { "Support Vector Machine": [] }
                 ]
               }
             ]
@@ -44,14 +44,14 @@ async function generateHierarchicalTasksPrompt(basePrompt) {
             "Algorithms": [
               {
                 "Clustering": [
-                  "K-Means",
-                  "Hierarchical Clustering"
+                  { "K-Means": [] },
+                  { "Hierarchical Clustering": [] }
                 ]
               },
               {
                 "Dimensionality Reduction": [
-                  "PCA (Principal Component Analysis)",
-                  "t-SNE"
+                  { "PCA (Principal Component Analysis)": [] },
+                  { "t-SNE": [] }
                 ]
               }
             ]
@@ -62,16 +62,16 @@ async function generateHierarchicalTasksPrompt(basePrompt) {
         "Reinforcement Learning": [
           {
             "Concepts": [
-              "Agent",
-              "Environment",
-              "Rewards",
-              "Policy"
+              { "Agent": [] },
+              { "Environment": [] },
+              { "Rewards": [] },
+              { "Policy": [] }
             ]
           },
           {
             "Algorithms": [
-              "Q-Learning",
-              "Deep Q-Network (DQN)"
+              { "Q-Learning": [] },
+              { "Deep Q-Network (DQN)": [] }
             ]
           }
         ]
@@ -79,6 +79,7 @@ async function generateHierarchicalTasksPrompt(basePrompt) {
     ]
   }
 ]
+
 
   Please make sure to adhere to this JSON format strictly, with each topic and subtopic clearly nested under the appropriate parent categories. The structure should allow for easy extraction and processing for project use.
 `;

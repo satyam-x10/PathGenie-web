@@ -53,3 +53,18 @@ export const deleteTopic = async (topicId) => {
         throw error;
     }
 };
+
+export const saveExtractedTopics = async (hierarchicalTasks) => {
+       
+    try {
+        console.log('Saving hierarchical tasks:', hierarchicalTasks);
+        
+        // Send the hierarchical tasks as the request body
+        const response = await axios.post('/api/tree', {
+            data: hierarchicalTasks, // Send hierarchicalTasks inside a "data" object
+        });
+            } catch (error) {
+        console.error("Error saving topics:", error);
+        throw error;
+    }
+};

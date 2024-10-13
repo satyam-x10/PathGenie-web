@@ -1,63 +1,105 @@
 [
   {
-    "Machine Learning": [
+    "Cybersecurity Fundamentals": [
       {
-        "Supervised Learning": [
-          {
-            "Algorithms": [
-              {
-                "Regression": [
-                  "Linear Regression",
-                  "Logistic Regression"
-                ]
-              },
-              {
-                "Classification": [
-                  "Decision Trees",
-                  "Random Forest",
-                  "Support Vector Machine"
-                ]
-              }
-            ]
-          }
+        "Essential Security Principles": [
+          { "Confidentiality": [] },
+          { "Integrity": [] },
+          { "Availability": [] },
+          { "Non-repudiation": [] },
+          { "Accountability": [] }
         ]
       },
       {
-        "Unsupervised Learning": [
-          {
-            "Algorithms": [
-              {
-                "Clustering": [
-                  "K-Means",
-                  "Hierarchical Clustering"
-                ]
-              },
-              {
-                "Dimensionality Reduction": [
-                  "PCA (Principal Component Analysis)",
-                  "t-SNE"
-                ]
-              }
-            ]
-          }
+        "Best Practices": [
+          { "Least Privilege": [] },
+          { "Defense in Depth": [] },
+          { "Patch Management": [] },
+          { "Security Monitoring": [] },
+          { "Incident Response": [] }
         ]
       },
       {
-        "Reinforcement Learning": [
-          {
-            "Concepts": [
-              "Agent",
-              "Environment",
-              "Rewards",
-              "Policy"
-            ]
-          },
-          {
-            "Algorithms": [
-              "Q-Learning",
-              "Deep Q-Network (DQN)"
-            ]
-          }
+        "Terminology and Concepts": [
+          { "Vulnerability": [] },
+          { "Threat": [] },
+          { "Risk": [] },
+          { "Malware": [] },
+          { "Exploit": [] }
+        ]
+      },
+      {
+        "Networking Fundamentals": [
+          { "OSI Model": [] },
+          { "TCP/IP": [] },
+          { "Firewalls": [] },
+          { "Routers": [] },
+          { "Network Segmentation": [] }
+        ]
+      },
+      {
+        "Operating System Security": [
+          { "User Permissions": [] },
+          { "File System Security": [] },
+          { "Process Management": [] },
+          { "Hardening": [] },
+          { "Virtualization": [] }
+        ]
+      },
+      {
+        "Application Security": [
+          { "Input Validation": [] },
+          { "Output Encoding": [] },
+          { "Secure Coding Practices": [] },
+          { "Vulnerability Assessment": [] }
+        ]
+      }
+    ]
+  },
+  {
+    "Advanced Cybersecurity Concepts": [
+      {
+        "Cryptography": [
+          { "Symmetric Encryption": [] },
+          { "Asymmetric Encryption": [] },
+          { "Hashing": [] },
+          { "Digital Signatures": [] }
+        ]
+      },
+      {
+        "Network Security": [
+          { "Intrusion Detection Systems (IDS)": [] },
+          { "Intrusion Prevention Systems (IPS)": [] },
+          { "Virtual Private Networks (VPNs)": [] },
+          { "Web Application Firewalls (WAFs)": [] }
+        ]
+      },
+      {
+        "Cloud Security": [
+          { "Cloud Security Models": [] },
+          { "Cloud Security Best Practices": [] },
+          { "Cloud Security Assessments": [] }
+        ]
+      },
+      {
+        "Incident Handling and Forensics": [
+          { "Incident Response Plans": [] },
+          { "Forensics Analysis": [] },
+          { "Evidence Collection": [] }
+        ]
+      },
+      {
+        "Threat Intelligence and Hunting": [
+          { "Threat Intelligence Sources": [] },
+          { "Threat Hunting Techniques": [] },
+          { "Cyber Threat Intelligence Platforms": [] }
+        ]
+      },
+      {
+        "Security Standards and Compliance": [
+          { "ISO 27001/27002": [] },
+          { "NIST Cybersecurity Framework": [] },
+          { "GDPR/HIPAA/PCI DSS": [] }
         ]
       }
     ]
