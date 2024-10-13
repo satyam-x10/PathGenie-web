@@ -156,7 +156,7 @@ const ConversationPage = ({ params }) => {
                   setPlanGenerated(false);
                   // wait 1 second before redirecting
                   setTimeout(() => {
-                    window.location.href = "/minimap/670a209f0a1f";
+                    // window.location.href = `/minimap/${}`;
                   }, 1000);
                 }}
               >

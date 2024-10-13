@@ -101,7 +101,7 @@ const generateFlowchartData = (taskId) => {
   return { nodes, edges };
 };
 
-const FlowchartViewer = () => {
+const FlowchartViewer = ({minimapId}) => {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {

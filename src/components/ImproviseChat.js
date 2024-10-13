@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { askFromGemini } from "../blackbox/gemini";
 import { ArrowRight, Loader } from "lucide-react";
 import { getNestedTopics } from "../blackbox/resource";
-const ImproviseChat = ({ taskId }) => {
+const ImproviseChat = ({ minimapId }) => {
   const [topicName, setTopicName] = useState("Picking and Strumming ");
   const [miniDescription, setMiniDescription] = useState("");
   const [userQuery, setUserQuery] = useState("");

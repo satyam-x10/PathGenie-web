@@ -76,7 +76,7 @@ const SignedInDiv = () => {
   
 
   return (
-    <div className="flex flex-col min-h-screen bg-gray-900">
+    <div className="flex flex-col min-h-screen w-full bg-gray-900">
       <header className="bg-gray-800 p-4 shadow-md">
         <div className="container mx-auto flex justify-between items-center">
           <h1 className="text-xl font-bold text-white">Your Record History</h1>
@@ -104,7 +104,7 @@ const SignedInDiv = () => {
             {topics.map((topic, index) => (
               <div
                 key={index}
-                onClick={() => window.location.replace(`/minimap/${topic._id}`)}
+                onClick={() => window.location.replace(`/minimap/${topic.taskID}`)}
                 className="bg-gray-800 rounded-lg shadow-lg overflow-hidden hover:shadow-xl cursor-pointer transition-shadow duration-300"
               >
                 <div className="p-6">

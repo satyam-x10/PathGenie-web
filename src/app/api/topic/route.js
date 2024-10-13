@@ -5,7 +5,8 @@ import {
     getAllTopics, 
     getTopicById, 
     updateTopic, 
-    deleteTopic 
+    deleteTopic ,
+    getSubtopicChainById
   } from '@/utils/mongo';
   
   export async function GET(req) {
@@ -13,8 +14,9 @@ import {
       await connectDB();
       const { searchParams } = new URL(req.url);
       const topicID = searchParams.get('topicID');
-      // console.log(topicID);
-      
+      const chainId = searchParams.get('chainId'); // Updated variable name for clarity
+  
+      // If topicID is provided, fetch the topic by ID
       if (topicID) {
         const topic = await getTopicById(topicID);
         if (!topic) {
@@ -27,8 +29,23 @@ import {
           status: 200,
           headers: { 'Content-Type': 'application/json' },
         });
-      
       }
+  
+      // If topicID is missing and chainId is present, fetch subtopic chain
+      if (chainId) {
+        const subtopicChain = await getSubtopicChainById(chainId);
+        return new Response(JSON.stringify({ subtopicChain }), {
+          status: 200,
+          headers: { 'Content-Type': 'application/json' },
+        });
+      }
+  
+      // If neither topicID nor chainId is provided
+      return new Response(JSON.stringify({ message: "Please provide a topicID or chainId." }), {
+        status: 400,
+        headers: { 'Content-Type': 'application/json' },
+      });
+  
     } catch (error) {
       console.error('GET /api/topic error:', error);
       return new Response(JSON.stringify({ message: "Internal Server Error" }), {

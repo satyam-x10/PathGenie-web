@@ -17,7 +17,7 @@ export const getAllTopics = async () => {
 export const getTopicById = async (topicId) => {
     try {
         const response = await axios.get(`${BASE_URL}/?topicID=${topicId}`);
-        return response.data.topic[0];
+        return response.data.topic;
     } catch (error) {
         console.error("Error fetching topic by ID:", error);
         throw error;

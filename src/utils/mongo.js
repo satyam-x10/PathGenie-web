@@ -76,7 +76,59 @@ const getAllTopics = async () => {
 };
 
 const getTopicById = async (id) => {
-  return await Topic.find({ taskID: id });
+  const topic =await Topic.find({ taskID: id });
+  return topic[0]; ;
+};
+// get all children and their children of a topic by id
+const getSubtopicChainById = async (id) => {
+  // Helper function to fetch subtopics recursively
+  const fetchSubtopics = async (subtopicIds) => {
+    const subtopics = [];
+
+    for (const subtopicId of subtopicIds) {
+      const subtopic = await getTopicById(subtopicId);
+      if (subtopic) {
+        // Create a subtopic object
+        const subtopicObj = {
+          id: subtopic._id,
+          taskID: subtopic.taskID,
+          title: subtopic.title,
+          subTask: []
+        };
+
+        // Recursively fetch children of the current subtopic
+        const children = await fetchSubtopics(subtopic.subtopics);
+        
+        // Add children to the current subtopic's subTask
+        subtopicObj.subTask = children;
+
+        // Add the subtopic object to the array
+        subtopics.push(subtopicObj);
+      }
+    }
+
+    return subtopics;
+  };
+
+  // Find the main topic by ID
+  const topic = await getTopicById(id);
+  if (!topic) {
+    return {}; // Return an empty object if the topic is not found
+  }
+  
+  // Start fetching the subtopics from the main topic
+  const subtopicChain = await fetchSubtopics(topic.subtopics);
+  
+  // Structure the final object to return
+  const result = {
+    id: topic._id,
+    taskID: topic.taskID,
+    title: topic.title,
+    description: topic.description,
+    subTask: subtopicChain // Include the fetched subtopics
+  };
+  
+  return result;
 };
 
 const updateTopic = async (id, updatedData) => {
@@ -127,4 +179,5 @@ module.exports = {
   getResourceById,
   updateResource,
   deleteResource,
+  getSubtopicChainById
 };
