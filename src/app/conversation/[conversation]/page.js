@@ -16,6 +16,7 @@ const ConversationPage = ({ params }) => {
   ]);
   const [userInput, setUserInput] = useState("");
   const [inputDisabled, setInputDisabled] = useState(false); // Track input disabled state
+  const [hierarchicalTasks, setHierarchicalTasks] = useState(null); // Use useState for hierarchicalTasks
   const messageEndRef = useRef(null);
 
   // Scroll to the bottom of the chat whenever a new message is added
@@ -34,10 +35,8 @@ const ConversationPage = ({ params }) => {
 
     try {
       // Call the Gemini API for AI response and await the result
-      // console.log("User input:", userInput); // Log the user input
-
       const aiResponse = await generatePrompt(
-        `${userInput} regarding ${conversation}`,
+        `${userInput} regarding ${conversation}`
       ); // Ensure you await the promise
 
       // Ensure the response is a string before updating the messages
@@ -50,11 +49,11 @@ const ConversationPage = ({ params }) => {
       ]);
 
       // Generate the hierarchical tasks
-      const hierarchicalTasks = await getNestedTopics(aiResponse);
-      
-      await saveExtractedTopics(hierarchicalTasks);
-            
-      
+      const tasks = await getNestedTopics(aiResponse);
+      setHierarchicalTasks(tasks); // Set the hierarchical tasks using useState
+
+      await saveExtractedTopics(tasks); // Save the tasks
+
       setPlanGenerated(true);
     } catch (error) {
       console.error("Error fetching AI response:", error);
@@ -115,7 +114,7 @@ const ConversationPage = ({ params }) => {
             <div className="flex-1 py-3 px-4 rounded-full bg-gradient-to-r from-pink-500 to-purple-600 text-white text-lg text-center">
               {planGenerated ? (
                 <>
-                  <p className="text-lg">The plans ready for you.</p>
+                  <p className="text-lg">The plan's ready for you.</p>
                 </>
               ) : (
                 <>
@@ -137,7 +136,13 @@ const ConversationPage = ({ params }) => {
           )}
           <button
             onClick={handleSendMessage}
-            className={`ml-4 p-3 rounded-full shadow-lg ${!masterPrompt ? "bg-gray-500 hover:bg-gray-400" : planGenerated ? "bg-pink-600 hover:bg-pink-500" : "bg-gradient-to-r from-purple-500 to-purple-300 hover:bg-gradient-to-r"}`}
+            className={`ml-4 p-3 rounded-full shadow-lg ${
+              !masterPrompt
+                ? "bg-gray-500 hover:bg-gray-400"
+                : planGenerated
+                ? "bg-pink-600 hover:bg-pink-500"
+                : "bg-gradient-to-r from-purple-500 to-purple-300 hover:bg-gradient-to-r"
+            }`}
           >
             {!masterPrompt ? (
               <svg
@@ -157,11 +162,11 @@ const ConversationPage = ({ params }) => {
             ) : planGenerated ? (
               <div
                 onClick={() => {
-                  setPlanGenerated(false);
-                  // wait 1 second before redirecting
-                  setTimeout(() => {
-                    window.location.href = `/profile`;
-                  }, 1000);
+                  // setPlanGenerated(false);
+                  // setTimeout(() => {
+                  //   window.location.href = `/profile`;
+                  // }, 1000);
+                  saveExtractedTopics(hierarchicalTasks);
                 }}
               >
                 Lets Dive In
