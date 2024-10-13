@@ -6,7 +6,7 @@ require('dotenv').config();
 // Connect to your development database
 const connectDB = async () => {
   try {
-    await mongoose.connect(process.env.NEXT_PUBLIC_MONGO_URI, {
+    await mongoose.connect(`${process.env.NEXT_PUBLIC_MONGO_URI}/dev`, {
     });
     console.log('MongoDB connected...');
   } catch (error) {
