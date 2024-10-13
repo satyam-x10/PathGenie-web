@@ -33,7 +33,7 @@ const ConversationPage = ({ params }) => {
 
     try {
       // Call the Gemini API for AI response and await the result
-      console.log("User input:", userInput); // Log the user input
+      // console.log("User input:", userInput); // Log the user input
 
       const aiResponse = await generatePrompt(
         `${userInput} regarding ${conversation}`,

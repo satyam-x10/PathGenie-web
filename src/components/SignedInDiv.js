@@ -1,53 +1,91 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { UserButton, useUser } from "@clerk/nextjs";
+import { getUser } from "@/utils/actions/userAction";
+import { getTopicById } from "@/utils/actions/topicAction";
+import { Loader2 } from "lucide-react";
 
 const SignedInDiv = () => {
-  const { user } = useUser(); // Get the user data
-  
+  const { user } = useUser();
+  const [userData, setUserData] = useState(null);
+  const [topics, setTopics] = useState([]);
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
-    const fetchUserByEmail = async () => {
+    const fetchUserData = async () => {
       if (user) {
-        try {
-          const response = await fetch(`/api/user?email=${user.emailAddresses[0].emailAddress}`);
-          if (!response.ok) {
-            throw new Error('Network response was not ok');
-          }
-          const userData = await response.json();
-          console.log("User data:", userData); // Log the user data
-        } catch (error) {
-          console.error("Error fetching user by email:", error);
+        const fetchedUser = await getUser(user.emailAddresses[0].emailAddress);
+        setUserData(fetchedUser);
+
+        if (fetchedUser?.rootTopics) {
+          const topicsData = await Promise.all(
+            fetchedUser.rootTopics.map(async (topicId) => {
+              const topic = await getTopicById(topicId);
+              return topic;
+            })
+          );
+          setTopics(topicsData);
         }
+        setLoading(false);
       }
     };
 
-    fetchUserByEmail();
-  }, [user]); // Dependency array includes user to run effect when user changes
+    fetchUserData();
+  }, [user]);
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center w-full h-screen bg-gray-900">
+        <Loader2 className="w-8 h-8 text-blue-500 animate-spin" />
+      </div>
+    );
+  }
 
   return (
-    <div className="flex flex-col h-screen w-full bg-[#111827]">
-      <div className="flex items-center mx-4 my-2 justify-end">
-        <div className="flex items-center">
-          <>Let's see your record history</>
+    <div className="flex flex-col min-h-screen bg-gray-900">
+      <header className="bg-gray-800 p-4 shadow-md">
+        <div className="container mx-auto flex justify-between items-center">
+          <h1 className="text-xl font-bold text-white">Your Record History</h1>
+          <div className="flex items-center space-x-4">
+            <UserButton
+              appearance={{
+                elements: {
+                  userButtonAvatarBox: "w-10 h-10",
+                },
+              }}
+            />
+            {user && (
+              <span className="text-sm font-medium text-white">
+                {user.firstName}
+              </span>
+            )}
+          </div>
         </div>
-        <UserButton
-          appearance={{
-            elements: {
-              userButtonAvatarBox: "w-10 h-10",
-            },
-          }}
-        />
-        {user && (
-          <span className="ml-2 text-m font-semibold text-white">
-            {user.firstName}
-          </span>
+      </header>
+
+      <main className="flex-grow container mx-auto px-4 py-8">
+        <h2 className="text-2xl font-bold text-white mb-6">Your Topics</h2>
+        {topics.length > 0 ? (
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {topics.map((topic, index) => (
+              <div
+                key={index}
+                className="bg-gray-800 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
+              >
+                <div className="p-6">
+                  <h3 className="text-xl font-semibold text-white mb-2">
+                    {topic.title}
+                  </h3>
+                  <p className="text-gray-400">{topic.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="text-center py-12">
+            <p className="text-gray-500 text-lg">No topics found.</p>
+          </div>
         )}
-      </div>
-      <div className="flex-1 bg-transparent p-4">
-        {/* Placeholder Box */}
-        <div className="h-full border-2 border-dashed border-gray-400 flex items-center justify-center bg-[#111827] bg-opacity-50">
-          <span className="text-gray-500">Your content goes here.</span>
-        </div>
-      </div>
+      </main>
     </div>
   );
 };

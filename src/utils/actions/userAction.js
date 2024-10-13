@@ -6,8 +6,8 @@ const BASE_URL = '/api/user';
 
 export const getUser = async (userId) => {
     try {
-        const response = await axios.get(`${BASE_URL}/${userId}`);
-        return response.data;
+        const response = await axios.get(`${BASE_URL}/?email=${userId}`);
+        return response.data.user;
     } catch (error) {
         console.error("Error fetching user:", error);
         throw error;

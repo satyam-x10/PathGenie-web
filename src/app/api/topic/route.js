@@ -12,11 +12,11 @@ import {
     try {
       await connectDB();
       const { searchParams } = new URL(req.url);
-      const id = searchParams.get('id');
-      const taskID = searchParams.get('taskID');
-  
-      if (id) {
-        const topic = await getTopicById(id);
+      const topicID = searchParams.get('topicID');
+      // console.log(topicID);
+      
+      if (topicID) {
+        const topic = await getTopicById(topicID);
         if (!topic) {
           return new Response(JSON.stringify({ message: "Topic not found" }), {
             status: 404,
@@ -27,18 +27,7 @@ import {
           status: 200,
           headers: { 'Content-Type': 'application/json' },
         });
-      } else if (taskID) {
-        const topics = await Topic.find({ taskID });
-        return new Response(JSON.stringify({ topics }), {
-          status: 200,
-          headers: { 'Content-Type': 'application/json' },
-        });
-      } else {
-        const topics = await getAllTopics();
-        return new Response(JSON.stringify({ topics }), {
-          status: 200,
-          headers: { 'Content-Type': 'application/json' },
-        });
+      
       }
     } catch (error) {
       console.error('GET /api/topic error:', error);

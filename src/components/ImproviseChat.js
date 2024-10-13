@@ -38,7 +38,7 @@ const ImproviseChat = ({ taskId }) => {
     setImproviseCommands(improviseCommand + userQuery);
     const response = await getNestedTopics(improviseCommand);
     setImprovisingData(response);
-    console.log(response);
+    // console.log(response);
   };
 
   return (

@@ -6,7 +6,7 @@ export async function GET(req) {
   const { searchParams } = new URL(req.url);
   const email = searchParams.get('email');
   
-  console.log('email:', email);
+  // console.log('email:', email);
 
   if (email) {
     const user = await getUserByEmail(email);

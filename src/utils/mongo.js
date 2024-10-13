@@ -8,7 +8,7 @@ const connectDB = async () => {
   try {
     await mongoose.connect(`${process.env.NEXT_PUBLIC_MONGO_URI}/dev`, {
     });
-    console.log('MongoDB connected...');
+    // console.log('MongoDB connected...');
   } catch (error) {
     console.error('MongoDB connection error:', error);
     process.exit(1); // Exit process with failure
@@ -76,7 +76,7 @@ const getAllTopics = async () => {
 };
 
 const getTopicById = async (id) => {
-  return await Topic.findById(id);
+  return await Topic.find({ taskID: id });
 };
 
 const updateTopic = async (id, updatedData) => {
