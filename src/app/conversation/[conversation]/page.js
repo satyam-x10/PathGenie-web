@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 import { generatePrompt } from "@/blackbox/prompt";
-import { generateHierarchicalTasksMock } from "@/blackbox/resource";
+import { getNestedTopics } from "@/blackbox/resource";
 
 const ConversationPage = ({ params }) => {
   const conversation = params?.conversation;
@@ -49,8 +49,9 @@ const ConversationPage = ({ params }) => {
       ]);
 
       // Generate the hierarchical tasks
-      const hierarchicalTasks = await generateHierarchicalTasksMock();
+      const hierarchicalTasks = await getNestedTopics(aiResponse);
       console.log("Hierarchical tasks:", hierarchicalTasks);
+      
       setPlanGenerated(true);
     } catch (error) {
       console.error("Error fetching AI response:", error);
@@ -156,7 +157,7 @@ const ConversationPage = ({ params }) => {
                   setPlanGenerated(false);
                   // wait 1 second before redirecting
                   setTimeout(() => {
-                    // window.location.href = `/minimap/${}`;
+                    window.location.href = `/profile`;
                   }, 1000);
                 }}
               >

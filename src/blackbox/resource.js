@@ -8,12 +8,13 @@ async function gatherLearningPreferences() {
   return { experience };
 }
 
-async function generateHierarchicalTasks(basePrompt) {
+async function generateHierarchicalTasksPrompt(basePrompt) {
   const masterPrompt = `
   ${basePrompt}.
   Based on the provided prompt, return a detailed hierarchical breakdown of all topics and subtopics in a strictly nested JSON format. Ensure that the structure is clear and follows this format precisely.
-    For example, if the prompt was about "Machine Learning," the output should be:
+  For example, if the prompt was about "Machine Learning," the output should be:
 
+[
   {
     "Machine Learning": [
       {
@@ -77,6 +78,7 @@ async function generateHierarchicalTasks(basePrompt) {
       }
     ]
   }
+]
 
   Please make sure to adhere to this JSON format strictly, with each topic and subtopic clearly nested under the appropriate parent categories. The structure should allow for easy extraction and processing for project use.
 `;
@@ -89,9 +91,8 @@ export async function getNestedTopics(basePrompt) {
   // const basePrompt = await getUserInput("Please enter the topic you want to learn about: ");
 
   try {
-    const masterPrompt = await generateHierarchicalTasks(basePrompt);
-    // console.log("\nGenerated Master Prompt:");
-
+    const masterPrompt = await generateHierarchicalTasksPrompt(basePrompt);
+    
     const response = await askFromGemini(masterPrompt);
 
     // Call the text() method to get the actual response text
@@ -104,7 +105,7 @@ export async function getNestedTopics(basePrompt) {
 
 // make a mock function to generaet the hierarchical tasks
 
-export async function generateHierarchicalTasksMock() {
+ async function generateHierarchicalTasksMock() {
   const mockData = {
     "Machine Learning": [
       {
