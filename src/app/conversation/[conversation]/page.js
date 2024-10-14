@@ -3,8 +3,10 @@ import React, { useState, useEffect, useRef } from "react";
 import { generatePrompt } from "@/blackbox/prompt";
 import { getNestedTopics } from "@/blackbox/resource";
 import { saveExtractedTopics } from "@/utils/actions/topicAction";
+import {useUser} from "@clerk/nextjs";
 
 const ConversationPage = ({ params }) => {
+  const { user } = useUser();
   const conversation = params?.conversation;
   const [masterPrompt, setMasterPrompt] = useState("");
   const [planGenerated, setPlanGenerated] = useState(false);
@@ -52,8 +54,7 @@ const ConversationPage = ({ params }) => {
       const tasks = await getNestedTopics(aiResponse);
       setHierarchicalTasks(tasks); // Set the hierarchical tasks using useState
 
-      await saveExtractedTopics(tasks); // Save the tasks
-
+      await saveExtractedTopics(tasks, user?.emailAddresses[0]?.emailAddress); // Save the tasks
       setPlanGenerated(true);
     } catch (error) {
       console.error("Error fetching AI response:", error);
@@ -162,11 +163,13 @@ const ConversationPage = ({ params }) => {
             ) : planGenerated ? (
               <div
                 onClick={() => {
-                  // setPlanGenerated(false);
-                  // setTimeout(() => {
-                  //   window.location.href = `/profile`;
-                  // }, 1000);
-                  saveExtractedTopics(hierarchicalTasks);
+                  setPlanGenerated(false);
+                  
+                  setTimeout(() => {
+                    window.location.href = `/profile`;
+                  }, 1000);
+                  
+                  // saveExtractedTopics(hierarchicalTasks, user?.emailAddresses[0]?.emailAddress);
                 }}
               >
                 Lets Dive In

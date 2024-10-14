@@ -6,7 +6,8 @@ import {
     getTopicById, 
     updateTopic, 
     deleteTopic ,
-    getSubtopicChainById
+    getSubtopicChainById,
+    getChainById
   } from '@/utils/mongo';
   
   export async function GET(req) {
@@ -14,7 +15,7 @@ import {
       await connectDB();
       const { searchParams } = new URL(req.url);
       const topicID = searchParams.get('topicID');
-      const chainId = searchParams.get('chainId'); // Updated variable name for clarity
+      const chainId = searchParams.get('chainID'); // Updated variable name for clarity
   
       // If topicID is provided, fetch the topic by ID
       if (topicID) {
@@ -33,8 +34,10 @@ import {
   
       // If topicID is missing and chainId is present, fetch subtopic chain
       if (chainId) {
-        const subtopicChain = await getSubtopicChainById(chainId);
-        return new Response(JSON.stringify({ subtopicChain }), {
+        console.log("chainId", chainId);
+        
+        const subtopicChain = await getChainById(chainId);
+        return new Response(JSON.stringify( subtopicChain ), {
           status: 200,
           headers: { 'Content-Type': 'application/json' },
         });

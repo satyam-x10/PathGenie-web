@@ -61,6 +61,11 @@ const updateUser = async (email, updatedData) => {
   return await User.findOneAndUpdate({ email }, updatedData, { new: true });
 };
 
+const addRootTopicToUser = async (email, topicId) => {
+  return await User.findOneAndUpdate
+  ({ email }, { $push: { rootTopics: topicId } }, { new: true });
+}
+
 const deleteUser = async (email) => {
   return await User.findOneAndDelete({ email });
 };
@@ -161,6 +166,35 @@ const deleteResource = async (id) => {
   return await Resource.findByIdAndDelete(id);
 };
 
+// Chain Schema
+const chainSchema = new mongoose.Schema({
+  topic: { type: String, required: true },
+  parent: { type: mongoose.Schema.Types.ObjectId,  default: null }, // reference to parent chain
+  children: [{ type: mongoose.Schema.Types.ObjectId }] // array of child chains
+});
+
+const Chain = mongoose.models.Chain || mongoose.model('Chain', chainSchema);
+
+// Upload chain data to MongoDB
+const uploadChainData = async (chainData) => {
+  // Create a new chain object
+  const chain = new Chain(chainData);
+  await chain.save();
+  return ;
+};
+// get chainByid
+const getChainById = async (id) => {
+  return await Chain.findById(id);
+}
+
+const uploadArrayOfChainData = async (chainDataArray) => {
+  for (const chainData of chainDataArray) {
+    await uploadChainData(chainData);
+  }
+  return ;
+};
+
+
 // Export the functions
 module.exports = {
   connectDB,
@@ -179,5 +213,9 @@ module.exports = {
   getResourceById,
   updateResource,
   deleteResource,
-  getSubtopicChainById
+  getSubtopicChainById,
+  uploadChainData,
+  uploadArrayOfChainData,
+  addRootTopicToUser,
+  getChainById
 };

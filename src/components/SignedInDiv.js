@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { UserButton, useUser } from "@clerk/nextjs";
 import { getUser } from "@/utils/actions/userAction";
-import { getTopicById } from "@/utils/actions/topicAction";
+import { getChainById} from "@/utils/actions/topicAction";
 import { Loader2 } from "lucide-react";
 
 const SignedInDiv = () => {
+  
   const { user } = useUser();
   const [userData, setUserData] = useState(null);
   const [topics, setTopics] = useState([]);
@@ -22,7 +23,7 @@ const SignedInDiv = () => {
             const topicsData = await Promise.all(
               fetchedUser.rootTopics.map(async (topicId) => {
                 try {
-                  const topic = await getTopicById(topicId);
+                  const topic = await getChainById(topicId);
                   return topic;
                 } catch (err) {
                   console.error(`Failed to fetch topic with id ${topicId}`, err);
@@ -30,7 +31,11 @@ const SignedInDiv = () => {
                 }
               })
             );
+
             setTopics(topicsData.filter((topic) => topic !== null));
+            console.log(topicsData);
+            
+            
           }
         } catch (err) {
           console.error("Error fetching user data:", err);
@@ -104,14 +109,14 @@ const SignedInDiv = () => {
             {topics.map((topic, index) => (
               <div
                 key={index}
-                onClick={() => window.location.replace(`/minimap/${topic.taskID}`)}
+                onClick={() => window.location.replace(`/minimap/${topic._id}`)}
                 className="bg-gray-800 rounded-lg shadow-lg overflow-hidden hover:shadow-xl cursor-pointer transition-shadow duration-300"
               >
                 <div className="p-6">
                   <h3 className="text-xl font-semibold text-white mb-2">
-                    {topic.title}
+                    {topic?.topic}
                   </h3>
-                  <p className="text-gray-400">{topic.description}</p>
+                  <p className="text-gray-400">{topic?.description}</p>
                 </div>
               </div>
             ))}

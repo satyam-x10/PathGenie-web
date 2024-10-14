@@ -17,7 +17,19 @@ export const getAllTopics = async () => {
 export const getTopicById = async (topicId) => {
     try {
         const response = await axios.get(`${BASE_URL}/?topicID=${topicId}`);
-        return response.data.topic;
+        return response.data;
+    } catch (error) {
+        console.error("Error fetching topic by ID:", error);
+        throw error;
+    }
+}
+
+export const getChainById = async (topicId) => {
+    try {
+        const response = await axios.get(`${BASE_URL}/?chainID=${topicId}`);
+        console.log('Response:', response.data);
+        
+        return response.data;
     } catch (error) {
         console.error("Error fetching topic by ID:", error);
         throw error;
@@ -54,17 +66,30 @@ export const deleteTopic = async (topicId) => {
     }
 };
 
-export const saveExtractedTopics = async (hierarchicalTasks) => {
-       
+export const saveExtractedTopics = async (hierarchicalTasks, email) => {
     try {
         console.log('Saving hierarchical tasks:', hierarchicalTasks);
-        
-        // Send the hierarchical tasks as the request body
-        const response = await axios.post('/api/tree', {
-            data: hierarchicalTasks, // Send hierarchicalTasks inside a "data" object
-        });
-            } catch (error) {
+
+        // Create the payload for the request body
+        const payload = {
+            data: hierarchicalTasks
+        };
+
+        // If email is provided, add it to the payload
+        if (email) {
+            console.log('Email provided:', email);
+            
+            payload.email = email;
+        }
+
+        // Send the payload as the request body
+        const response = await axios.post('/api/tree', payload);
+
+        return response.status;
+
+    } catch (error) {
         console.error("Error saving topics:", error);
         throw error;
     }
 };
+

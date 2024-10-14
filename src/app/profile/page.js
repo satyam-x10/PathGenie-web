@@ -33,25 +33,6 @@ const ProfilePage = () => {
       <SignedIn>
         <SignedInComponent handleSignedIn={handleSignedIn} />
       </SignedIn>
-      <button onClick={()=>{saveExtractedTopics([
-  {
-    "Blockchain": [
-      {
-        "Fundamentals": [
-          {
-            "Decentralized Nature": []
-          },
-          {
-            "Consensus Mechanisms": []
-          }
-        ]
-      },
-      {
-        "Potential Applications": []
-      }
-    ]
-  }
-])}}>clikc</button>
       <SignedOut>
         <SignedOutDiv />
       </SignedOut>

@@ -1,7 +1,7 @@
 const { ObjectId } = require('mongodb'); // Import ObjectId from mongodb
 const fs = require('fs'); // Import fs module to write to a file
 // Function to extract topics
-
+const {  uploadChainData, uploadArrayOfChainData, addRootTopicToUser } = require('./mongo');
 
 function extractTopics(data) {
   let topics = [];
@@ -14,7 +14,7 @@ function extractTopics(data) {
         // Create a topic object with a unique MongoDB ObjectId and parent ID
         const topicId = new ObjectId(); // Generate a MongoDB ObjectId for the topic
         const topic = {
-          id: topicId.toString(), // Convert ObjectId to string for easier JSON serialization
+          _id: topicId.toString(), // Convert ObjectId to string for easier JSON serialization
           topic: key,
           parent: parentId, // Store the parent ID
           children: []
@@ -34,12 +34,12 @@ function extractTopics(data) {
               childNames.forEach(childName => {
                 // Add child name and generate ObjectId for it
                 const childId = new ObjectId();
-                topic.children.push({ id: childId.toString(), name: childName });
+                topic.children.push({ _id: childId.toString(), name: childName });
               });
             } else if (typeof child === 'string') {
               // If it's a string (leaf node), add it directly
               const childId = new ObjectId(); // Generate a MongoDB ObjectId for the leaf node
-              topic.children.push({ id: childId.toString(), name: child });
+              topic.children.push({ _id: childId.toString(), name: child });
             }
           });
         }
@@ -56,7 +56,7 @@ function extractTopics(data) {
   return topics;
 }
 
-function saveTopicsFromLocalStorage(data) {
+function saveTopicsFromLocalStorage(data,email) {
   // Parse the string into JSON
   const parsedData = JSON.parse(data);
 
@@ -68,7 +68,16 @@ function saveTopicsFromLocalStorage(data) {
   
   // Extract topics
   const topics = extractTopics(parsedData);
+  fs.writeFileSync('topics.json', JSON.stringify(topics, null, 2));
+  uploadArrayOfChainData(topics);
+  if(email){
+    console.log('first topic id:', topics[0]._id);
 
+    // print id of first topic
+    console.log('email gg :', email);
+    addRootTopicToUser(email, topics[0]._id);
+  }
+  console.log('uploaed to mongo');
   
 
   return topics; // Return topics
@@ -76,4 +85,3 @@ function saveTopicsFromLocalStorage(data) {
 
 
 module.exports = { saveTopicsFromLocalStorage };
-
