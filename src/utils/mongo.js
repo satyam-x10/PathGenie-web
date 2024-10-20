@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 const dotenv = require('dotenv');
+const { type } = require('os');
 require('dotenv').config();
 
 // Connect to your development database
@@ -168,24 +169,42 @@ const deleteResource = async (id) => {
 
 // Chain Schema
 const chainSchema = new mongoose.Schema({
-  topic: { type: String, required: true },
-  parent: { type: mongoose.Schema.Types.ObjectId,  default: null }, // reference to parent chain
-  children: [{ type: mongoose.Schema.Types.ObjectId }] // array of child chains
-});
+  data: {
+    type: mongoose.Schema.Types.Mixed, // This allows any type of data (array, object, string, number, etc.)
+    required: true
+  }
+})
 
 const Chain = mongoose.models.Chain || mongoose.model('Chain', chainSchema);
 
 // Upload chain data to MongoDB
 const uploadChainData = async (chainData) => {
   // Create a new chain object
-  const chain = new Chain(chainData);
-  await chain.save();
-  return ;
+  console.log('chainData:', chainData);
+
+  const chain = new Chain({ data: chainData }); // Fixed object syntax
+  const savedChain = await chain.save(); // Save the document to the database
+  
+  // Return the ID of the saved document
+  return savedChain._id; 
 };
+
 // get chainByid
 const getChainById = async (id) => {
-  return await Chain.findById(id);
-}
+  const chain = await Chain.findById(id);
+  
+  if (!chain || !chain.data || chain.data.length === 0) {
+    return null; // Handle case if chain or data is not available
+  }
+
+  // Assuming we want to return the first object key and the chain _id
+  const firstArray = Object.keys(chain.data[0])[0]; // Get the first array's name
+  return {
+    id: chain._id,
+    name: firstArray
+  };
+};
+
 
 const uploadArrayOfChainData = async (chainDataArray) => {
   for (const chainData of chainDataArray) {

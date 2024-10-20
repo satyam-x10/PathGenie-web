@@ -170,6 +170,7 @@ const ConversationPage = ({ params }) => {
                   }, 1000);
                   
                   // saveExtractedTopics(hierarchicalTasks, user?.emailAddresses[0]?.emailAddress);
+                  setPlanGenerated(false);
                 }}
               >
                 Lets Dive In

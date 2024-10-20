@@ -3,8 +3,10 @@ import React, { useState } from "react";
 import { askFromGemini } from "../blackbox/gemini";
 import { ArrowRight, Loader } from "lucide-react";
 import { getNestedTopics } from "../blackbox/resource";
-const ImproviseChat = ({ minimapId }) => {
-  const [topicName, setTopicName] = useState("Picking and Strumming ");
+const ImproviseChat = ({ node }) => {
+  console.log("ImproviseChat node:", node);
+  
+  const [topicName, setTopicName] = useState(node.data.label);
   const [miniDescription, setMiniDescription] = useState("");
   const [userQuery, setUserQuery] = useState("");
   const [isLoading, setIsLoading] = useState(false);

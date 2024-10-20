@@ -83,7 +83,7 @@ function extractTopics(data) {
   return topics;
 }
 
-function saveChainTopicToMongo(data,email) {
+async function saveChainTopicToMongo(data,email) {
   // Parse the string into JSON
   const parsedData = JSON.parse(data);
 
@@ -96,13 +96,13 @@ function saveChainTopicToMongo(data,email) {
   // Extract topics
   const topics = extractTopics(parsedData);
   fs.writeFileSync('topics.json', JSON.stringify(topics, null, 2));
-  uploadArrayOfChainData(topics);
+  const history_id= await uploadChainData(parsedData);
   if(email){
     console.log('first topic id:', topics[0]._id);
 
     // print id of first topic
     console.log('email gg :', email);
-    addRootTopicToUser(email, topics[0]._id);
+    addRootTopicToUser(email, history_id);
   }
   console.log('uploaed to mongo');
   
