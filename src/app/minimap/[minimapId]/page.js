@@ -1,42 +1,9 @@
-'use client'
-import FlowchartViewer from "../../../components/FlowChart";
-import React, { useEffect } from "react";
-import ImproviseChat from "../../../components/ImproviseChat";
+import React from 'react'
 
-const Topics = ({ params }) => {
-  const minimapId = params?.minimapId;
-  console.log("minimapId:", minimapId);
-
-  // Use a specific ID for the improvisation chat
-  const improviseminimapId = "2";
-
-  useEffect(() => {
-    const fetchTopicData = async () => {
-      if (minimapId) {
-        try {
-          const response = await fetch(`/api/topic?chainId=${minimapId}`);
-          if (!response.ok) {
-            throw new Error("Network response was not ok");
-          }
-          const data = await response.json();
-          console.log("API Response:", data);
-        } catch (error) {
-          console.error("Error fetching data:", error);
-        }
-      }
-    };
-
-    fetchTopicData();
-  }, [minimapId]); // Dependency array includes minimapId
-
+const page = () => {
   return (
-    <div className="flex h-screen bg-gray-900">
-      <div className="w-3/5 p-4">
-        <FlowchartViewer minimapId={minimapId || "1"} />
-      </div>
-      <ImproviseChat minimapId={improviseminimapId} />
-    </div>
-  );
-};
+    <div>page</div>
+  )
+}
 
-export default Topics;
+export default page

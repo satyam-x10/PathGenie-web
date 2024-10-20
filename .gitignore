@@ -38,3 +38,7 @@ next-env.d.ts
 yarn.lock
 
 .rough/*
+
+*.json
+
+!package.json
