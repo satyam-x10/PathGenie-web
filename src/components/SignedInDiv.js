@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { UserButton, useUser } from "@clerk/nextjs";
 import { getUser } from "@/utils/actions/userAction";
-import { getChainById} from "@/utils/actions/topicAction";
+import { getChainById } from "@/utils/actions/topicAction";
 import { Loader2 } from "lucide-react";
 
 const SignedInDiv = () => {
-  
+
   const { user } = useUser();
   const [userData, setUserData] = useState(null);
   const [topics, setTopics] = useState([]);
@@ -34,8 +34,8 @@ const SignedInDiv = () => {
 
             setTopics(topicsData.filter((topic) => topic !== null));
             console.log(topicsData);
-            
-            
+
+
           }
         } catch (err) {
           console.error("Error fetching user data:", err);
@@ -78,14 +78,21 @@ const SignedInDiv = () => {
       </div>
     );
   }
-  
+
 
   return (
     <div className="flex flex-col min-h-screen w-full bg-gray-900">
       <header className="bg-gray-800 p-4 shadow-md">
         <div className="container mx-auto flex justify-between items-center">
-          <h1 className="text-xl font-bold text-white">Your Record History</h1>
+          <h1 className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-pink-500">
+            Your Record History
+          </h1>
+
           <div className="flex items-center space-x-4">
+            {/* add  a premium status button */}
+            <div className="bg-gray-700 text-white px-2 py-1 rounded-full text-xs font-semibold bg-gradient-to-r from-blue-500 to-pink-500">
+              You are currently on Premium Version
+            </div>
             <UserButton
               appearance={{
                 elements: {
@@ -102,18 +109,18 @@ const SignedInDiv = () => {
         </div>
       </header>
 
-      <main className="flex-grow container mx-auto px-4 py-8">
-        <h2 className="text-2xl font-bold text-white mb-6">Your Topics</h2>
+      <main className="flex-grow container mx-auto px-4 py-8 ">
+
         {topics.length > 0 ? (
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4  ">
             {topics.map((topic, index) => (
               <div
                 key={index}
-                onClick={() => window.location.replace(`/minimap/${topic.id}`)}
+                onClick={() => window.location.replace(`/minimap/${topic._id}`)}
                 className="bg-gray-800 rounded-lg shadow-lg overflow-hidden hover:shadow-xl cursor-pointer transition-shadow duration-300"
               >
-                <div className="p-6">
-                  <h3 className="text-xl font-semibold text-white mb-2">
+                <div className="p-4 hover:bg-gradient-to-r from-blue-500 to-blue-800">
+                  <h3 className="text-xl font-semibold text-white">
                     {topic?.name}
                   </h3>
                   <p className="text-gray-400">{topic?.description}</p>
