@@ -48,9 +48,9 @@ const ImproviseChat = ({ node }) => {
       {/* button at top right corner */}
       <button
         className="absolute top-20 right-4 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out flex items-center"
-        onClick={() => {window.location.href = `/explore/${topicName}`}}
+        // onClick={() => {window.location.href = `/explore/${topicName}`}}
       >
-       Explore in Detail
+       Get Premium to explore more
       </button>      
       <div className="w-full max-w-md space-y-8 text-center text-white">
         <div className="flex items-center justify-center space-x-2 mb-6">

@@ -91,7 +91,7 @@ const SignedInDiv = () => {
           <div className="flex items-center space-x-4">
             {/* add  a premium status button */}
             <div className="bg-gray-700 text-white px-2 py-1 rounded-full text-xs font-semibold bg-gradient-to-r from-blue-500 to-pink-500">
-              You are currently on Premium Version
+              You are currently on Free Version
             </div>
             <UserButton
               appearance={{
