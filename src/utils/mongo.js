@@ -217,5 +217,6 @@ module.exports = {
   uploadChainData,
   uploadArrayOfChainData,
   addRootTopicToUser,
-  getChainById
+  getChainById,
+  Chain
 };
