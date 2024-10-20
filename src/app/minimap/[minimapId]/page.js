@@ -123,7 +123,7 @@ const Page = ({ params }) => {
                 nodeTypes={nodeTypes}
                 fitView
                 minZoom={0.8}
-                maxZoom={1.5}
+                maxZoom={2}
                 nodesDraggable={false}
                 onInit={onInit}
               >

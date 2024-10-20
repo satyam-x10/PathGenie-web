@@ -116,7 +116,7 @@ const SignedInDiv = () => {
             {topics.map((topic, index) => (
               <div
                 key={index}
-                onClick={() => window.location.replace(`/minimap/${topic._id}`)}
+                onClick={() => window.location.replace(`/minimap/${topic.id}`)}
                 className="bg-gray-800 rounded-lg shadow-lg overflow-hidden hover:shadow-xl cursor-pointer transition-shadow duration-300"
               >
                 <div className="p-4 hover:bg-gradient-to-r from-blue-500 to-blue-800">
