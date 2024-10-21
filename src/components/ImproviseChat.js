@@ -19,7 +19,7 @@ const ImproviseChat = ({ node }) => {
     setIsLoading(true);
     try {
       const res = await askFromGemini(
-        `Tell me a brief idea in less than 100 words on: ${topicName}`,
+        `Tell me a brief idea in less than 70 words on: ${topicName}`,
       );
       setMiniDescription(
         res?.response?.text() || "Failed to fetch description.",
@@ -44,62 +44,100 @@ const ImproviseChat = ({ node }) => {
   };
 
   return (
-    <div className="w-full md:w-2/5 p-4 flex justify-center items-center border-l border-gray-700 bg-gradient-to-br from-gray-900 to-gray-800 min-h-screen">
-      {/* button at top right corner */}
+
+    <div className="relative min-h-screen  w-full md:w-2/5 p-4 md:p-6 flex justify-center items-center border-l border-gray-700 bg-gradient-to-br from-gray-900 to-gray-800 min-h-[100dvh]">
+      {/* Premium Button - Responsive positioning and sizing */}
       <button
-        className="absolute top-20 right-4 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out flex items-center"
-        // onClick={() => {window.location.href = `/explore/${topicName}`}}
+        className="fixed absolute top-4 md:absolute top-4 md:top-6 right-4 md:right-6 
+          bg-gradient-to-r from-blue-500 to-purple-600 
+          hover:from-blue-600 hover:to-purple-700 
+          text-white text-sm md:text-base font-semibold
+          py-2 px-3 md:py-2.5 md:px-4 rounded-lg 
+          transition duration-300 ease-in-out 
+          flex items-center gap-2 shadow-lg
+          hover:shadow-xl transform hover:-translate-y-0.5"
       >
         Get Premium to explore more
       </button>
-      <div className="w-full max-w-md space-y-8 text-center text-white">
-        <div className="flex items-center justify-center space-x-2 mb-6">
-          <h2 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
+
+      <div className="w-full max-w-sm md:max-w-md space-y-6 md:space-y-8 text-center text-white mt-16 md:mt-0">
+        {/* Topic Title - Responsive text size */}
+        <div className="flex items-center justify-center space-x-2 mb-4 md:mb-6">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500 px-4">
             {topicName}
           </h2>
         </div>
 
+        {/* Loading State or Description */}
         {isLoading ? (
-          <div className="flex justify-center items-center">
-            <Loader className="w-8 h-8 animate-spin text-blue-400" />
+          <div className="flex justify-center items-center p-4">
+            <Loader className="w-6 h-6 md:w-8 md:h-8 animate-spin text-blue-400" />
           </div>
         ) : (
           miniDescription && (
-            <p className="text-lg mb-8 p-4 bg-gray-800 rounded-lg shadow-inner">
+            <p className="text-sm md:text-lg mb-6 md:mb-8 p-4 bg-gray-800/50 
+              backdrop-blur-sm rounded-lg shadow-inner
+              border border-gray-700/50">
               {miniDescription}
             </p>
           )
         )}
 
+        {/* Fetch Description Button - Responsive sizing */}
         <button
           onClick={fetchDescription}
-          className={`w-full ${
-            isFetched
-              ? "bg-gradient-to-r from-green-500 to-teal-600"
-              : "bg-gradient-to-r from-blue-500 to-purple-600"
-          } hover:from-blue-600 hover:to-purple-700 text-white font-bold py-3 px-6 rounded-lg transition duration-300 ease-in-out flex items-center justify-center space-x-2`}
+          className={`w-full ${isFetched
+            ? "bg-gradient-to-r from-green-500 to-teal-600"
+            : "bg-gradient-to-r from-blue-500 to-purple-600"
+            } hover:from-blue-600 hover:to-purple-700 
+          text-white font-semibold
+          text-sm md:text-base
+          py-2.5 md:py-3 px-4 md:px-6 
+          rounded-lg transition duration-300 ease-in-out 
+          flex items-center justify-center gap-2
+          shadow-lg hover:shadow-xl transform hover:-translate-y-0.5`}
         >
           <span>{isFetched ? "Fetch Again" : "Fetch Brief Description"}</span>
         </button>
 
-        <div className="flex items-center space-x-2 mt-4">
-          <input
-            type="text"
-            value={userQuery}
-            onChange={handleUserQuery}
-            placeholder={`Learn more on ${topicName}? Explain How?`}
-            className="w-full p-3 bg-gray-800 text-white border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent transition duration-300 ease-in-out"
-          />
+        {/* Query Input Section - Responsive layout */}
+        <div className="flex items-center gap-2 mt-4 md:mt-6">
+          <div className="relative flex-1">
+            <input
+              type="text"
+              value={userQuery}
+              onChange={handleUserQuery}
+              placeholder={`Learn more on ${topicName}? Explain How?`}
+              className="w-full p-2.5 md:p-3 
+                bg-gray-800/50 text-white 
+                text-sm md:text-base
+                border border-gray-600 rounded-lg 
+                placeholder-gray-400
+                focus:ring-2 focus:ring-blue-400 focus:border-transparent 
+                transition duration-300 ease-in-out
+                backdrop-blur-sm"
+            />
+          </div>
+
           <button
             onClick={handleLearnMore}
-            className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out flex items-center"
+            className="bg-gradient-to-r from-blue-500 to-purple-600 
+              hover:from-blue-600 hover:to-purple-700 
+              text-white font-bold
+              p-2.5 md:p-3
+              rounded-lg transition duration-300 ease-in-out 
+              flex items-center justify-center
+              shadow-lg hover:shadow-xl 
+              transform hover:-translate-y-0.5"
+            aria-label="Learn More"
           >
-            <ArrowRight className="w-5 h-5" />
+            <ArrowRight className="w-4 h-4 md:w-5 md:h-5" />
           </button>
         </div>
       </div>
     </div>
   );
 };
+
 
 export default ImproviseChat;

@@ -76,26 +76,28 @@ const ConversationPage = ({ params }) => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen w-full bg-gradient-to-r from-gray-900 via-black to-gray-900 text-white">
+    <div className="flex flex-col items-center justify-center min-h-screen w-full bg-gradient-to-r from-gray-900 via-black to-gray-900 text-white">
       {/* Chat container */}
       <div className="w-full h-full flex flex-col p-4 space-y-4">
-        <div className="flex justify-between items-center">
-          <h1 className="w-1/2 text-2xl font-bold mr-4">
+        <div className="flex flex-col sm:flex-row justify-between items-center space-y-2 sm:space-y-0">
+          <h1 className="text-xl sm:text-2xl font-bold mr-4 text-center sm:text-left">
             Let's clarify what exactly you want to learn about?
           </h1>
-          <h1 className="max-w-1/2 border p-1 px-2 bg-gradient-to-r from-blue-400 to-pink-400 rounded-xl font-bold text-gray-800t">
+          <h1 className="w-full sm:max-w-1/2 border p-1 px-2 bg-gradient-to-r from-blue-400 to-pink-400 rounded-xl font-bold text-gray-800 text-center sm:text-left">
             {decodeURIComponent(conversation).slice(0, 70)}
           </h1>
         </div>
 
-        <div className="flex-1 overflow-y-auto bg-gray-800 p-6 rounded-lg shadow-lg space-y-4 hide-scrollbar">
+        <div className="flex-1 min-h-[70vh] overflow-y-auto bg-gray-800 p-4 sm:p-2 rounded-lg shadow-lg space-y-4 hide-scrollbar">
           {messages.map((message, index) => (
             <div
               key={index}
-              className={`flex ${message.isUser ? "justify-end" : "justify-start"}`}
+              className={`flex ${
+                message.isUser ? "justify-end" : "justify-start"
+              }`}
             >
               <div
-                className={`p-3 rounded-lg max-w-m ${
+                className={`p-3 rounded-lg max-w-full sm:max-w-md ${
                   message.isUser
                     ? "bg-cyan-500 text-white"
                     : "bg-gray-700 text-gray-200"
@@ -109,20 +111,16 @@ const ConversationPage = ({ params }) => {
         </div>
 
         {/* Input section */}
-        <div className="flex items-center w-full">
-          {/* Conditionally render either input or "Thanks..." message */}
+        <div className="flex items-center w-full px-2 sm:px-4">
+          {/* Conditional Input or Plan Message */}
           {inputDisabled ? (
-            <div className="flex-1 py-3 px-4 rounded-full bg-gradient-to-r from-pink-500 to-purple-600 text-white text-lg text-center">
+            <div className="flex-1 py-3 px-2 sm:px-4 rounded-full bg-gradient-to-r from-pink-500 to-purple-600 text-white text-center">
               {planGenerated ? (
-                <>
-                  <p className="text-lg">The plan's ready for you.</p>
-                </>
+                <p className="text-sm sm:text-lg">The plan's ready for you.</p>
               ) : (
-                <>
-                  <p className="text-lg">
-                    We are Cooking... This may take a few seconds.
-                  </p>
-                </>
+                <p className="text-sm sm:text-lg">
+                  We are Cooking... This may take a few seconds.
+                </p>
               )}
             </div>
           ) : (
@@ -130,14 +128,16 @@ const ConversationPage = ({ params }) => {
               type="text"
               value={userInput}
               onChange={(e) => setUserInput(e.target.value)}
-              onKeyPress={handleKeyPress} // Capture Enter key press
+              onKeyPress={handleKeyPress}
               placeholder="Type your message..."
-              className="flex-1 py-3 px-4 rounded-full bg-gray-800 text-white text-lg focus:outline-none focus:ring-4 focus:ring-cyan-400 placeholder-gray-500"
+              className="flex-1 py-3 px-2 sm:px-4 rounded-full bg-gray-800 text-white text-sm sm:text-lg focus:outline-none focus:ring-4 focus:ring-cyan-400 placeholder-gray-500"
             />
           )}
+
+          {/* Button for Sending Messages */}
           <button
             onClick={handleSendMessage}
-            className={`ml-4 p-3 rounded-full shadow-lg ${
+            className={`ml-2 sm:ml-4 p-3 rounded-full shadow-lg ${
               !masterPrompt
                 ? "bg-gray-500 hover:bg-gray-400"
                 : planGenerated
@@ -145,6 +145,7 @@ const ConversationPage = ({ params }) => {
                   : "bg-gradient-to-r from-purple-500 to-purple-300 hover:bg-gradient-to-r"
             }`}
           >
+            {/* Button Content Conditional Based on State */}
             {!masterPrompt ? (
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -152,7 +153,7 @@ const ConversationPage = ({ params }) => {
                 viewBox="0 0 24 24"
                 strokeWidth="2"
                 stroke="currentColor"
-                className="w-6 h-6 text-white"
+                className="w-5 h-5 sm:w-6 sm:h-6 text-white"
               >
                 <path
                   strokeLinecap="round"
@@ -169,14 +170,13 @@ const ConversationPage = ({ params }) => {
                     window.location.href = `/profile`;
                   }, 1000);
 
-                  // saveExtractedTopics(hierarchicalTasks, user?.emailAddresses[0]?.emailAddress);
                   setPlanGenerated(false);
                 }}
               >
                 Lets Dive In
               </div>
             ) : (
-              <div className="animate-spin w-6 h-6 border-4 border-t-4 border-t-white border-gray-600 rounded-full"></div>
+              <div className="animate-spin w-5 h-5 sm:w-6 sm:h-6 border-4 border-t-4 border-t-white border-gray-600 rounded-full"></div>
             )}
           </button>
         </div>

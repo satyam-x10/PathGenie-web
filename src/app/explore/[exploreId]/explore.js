@@ -119,6 +119,9 @@ const mockResponse = {
   ],
   topicName: "Right Hand Technique Picking and Strumming Guitar",
 };
+// import React, { useState } from 'react';
+// import { ExternalLink, Globe, Search, Youtube } from 'lucide-react';
+
 const AIFuturisticSearchResults = ({ data }) => {
   const {
     organicResults,
@@ -132,7 +135,7 @@ const AIFuturisticSearchResults = ({ data }) => {
   const TabButton = ({ value, label }) => (
     <button
       onClick={() => setActiveTab(value)}
-      className={`py-2 px-4 font-semibold rounded-t-lg ${
+      className={`py-1 px-2 text-xs sm:text-sm md:text-base sm:py-2 sm:px-4 font-semibold rounded-t-lg ${
         activeTab === value
           ? "bg-gray-600 text-white"
           : "bg-gray-800 text-gray-300 hover:bg-gray-700"
@@ -143,27 +146,27 @@ const AIFuturisticSearchResults = ({ data }) => {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-800 to-gray-900 text-white p-4 sm:p-8">
-      <h1 className="text-3xl sm:text-4xl font-bold mb-8 text-center">
+    <div className="min-h-screen bg-gradient-to-br from-gray-800 to-gray-900 text-white p-2 sm:p-4 md:p-8">
+      <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-4 sm:mb-6 md:mb-8 text-center">
         {topicName}
       </h1>
 
-      <div className="mb-4 flex flex-wrap gap-2 justify-center">
-        <TabButton value="organic" label="Organic Results" />
-        <TabButton value="related" label="Related Questions" />
-        <TabButton value="searches" label="Related Searches" />
+      <div className="mb-2 sm:mb-4 flex flex-wrap gap-1 sm:gap-2 justify-center">
+        <TabButton value="organic" label="Organic" />
+        <TabButton value="related" label="Related" />
+        <TabButton value="searches" label="Searches" />
         <TabButton value="videos" label="Videos" />
       </div>
 
-      <div className="bg-gray-700 rounded-lg p-4 overflow-auto max-h-[70vh]">
+      <div className="bg-gray-700 rounded-lg p-2 sm:p-4 overflow-auto max-h-[70vh]">
         {activeTab === "organic" && (
-          <div className="space-y-4">
+          <div className="space-y-2 sm:space-y-4">
             {organicResults.map((result, index) => (
               <div
                 key={index}
-                className="border border-gray-500 rounded-lg p-4 hover:border-gray-400 transition-colors"
+                className="border border-gray-500 rounded-lg p-2 sm:p-4 hover:border-gray-400 transition-colors"
               >
-                <h2 className="text-xl font-semibold text-blue-200 mb-2">
+                <h2 className="text-base sm:text-lg md:text-xl font-semibold text-blue-200 mb-1 sm:mb-2">
                   <a
                     href={result.link}
                     target="_blank"
@@ -171,17 +174,19 @@ const AIFuturisticSearchResults = ({ data }) => {
                     className="hover:underline flex items-center"
                   >
                     {result.title}
-                    <ExternalLink className="ml-2" size={16} />
+                    <ExternalLink className="ml-1 sm:ml-2" size={14} />
                   </a>
                 </h2>
-                <p className="text-gray-300 mb-2">{result.snippet}</p>
+                <p className="text-xs sm:text-sm md:text-base text-gray-300 mb-1 sm:mb-2">
+                  {result.snippet}
+                </p>
                 <a
                   href={result.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-blue-400 hover:underline inline-flex items-center"
+                  className="text-xs sm:text-sm text-blue-400 hover:underline inline-flex items-center"
                 >
-                  <Globe className="mr-1" size={16} />
+                  <Globe className="mr-1" size={12} />
                   Visit site
                 </a>
               </div>
@@ -190,17 +195,19 @@ const AIFuturisticSearchResults = ({ data }) => {
         )}
 
         {activeTab === "related" && (
-          <div className="space-y-4">
+          <div className="space-y-2 sm:space-y-4">
             {relatedQuestions.map((question, index) => (
               <div
                 key={index}
-                className="border border-gray-500 rounded-lg p-4"
+                className="border border-gray-500 rounded-lg p-2 sm:p-4"
               >
-                <h2 className="text-xl font-semibold text-blue-200 mb-2">
+                <h2 className="text-base sm:text-lg md:text-xl font-semibold text-blue-200 mb-1 sm:mb-2">
                   {question.question}
                 </h2>
                 {question.snippet && (
-                  <p className="text-gray-300">{question.snippet}</p>
+                  <p className="text-xs sm:text-sm md:text-base text-gray-300">
+                    {question.snippet}
+                  </p>
                 )}
               </div>
             ))}
@@ -208,30 +215,32 @@ const AIFuturisticSearchResults = ({ data }) => {
         )}
 
         {activeTab === "searches" && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4">
             {relatedSearches.map((search, index) => (
               <a
                 key={index}
                 href={search.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-gray-600 p-4 rounded-lg hover:bg-gray-500 transition-colors flex items-center justify-between"
+                className="bg-gray-600 p-2 sm:p-4 rounded-lg hover:bg-gray-500 transition-colors flex items-center justify-between"
               >
-                <span className="text-blue-300">{search.query}</span>
-                <Search className="text-gray-300" size={20} />
+                <span className="text-xs sm:text-sm md:text-base text-blue-300">
+                  {search.query}
+                </span>
+                <Search className="text-gray-300" size={16} />
               </a>
             ))}
           </div>
         )}
 
         {activeTab === "videos" && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-4">
             {videos.map((video, index) => (
               <div
                 key={index}
-                className="border border-gray-500 rounded-lg p-4 hover:border-gray-400 transition-colors"
+                className="border border-gray-500 rounded-lg p-2 sm:p-4 hover:border-gray-400 transition-colors"
               >
-                <h2 className="text-xl font-semibold text-blue-200 mb-2">
+                <h2 className="text-base sm:text-lg md:text-xl font-semibold text-blue-200 mb-1 sm:mb-2">
                   <a
                     href={video.link}
                     target="_blank"
@@ -239,19 +248,19 @@ const AIFuturisticSearchResults = ({ data }) => {
                     className="hover:underline flex items-center"
                   >
                     {video.title}
-                    <ExternalLink className="ml-2" size={16} />
+                    <ExternalLink className="ml-1 sm:ml-2" size={14} />
                   </a>
                 </h2>
-                <span className="inline-block bg-gray-600 text-gray-300 px-2 py-1 rounded-full text-sm mb-2">
+                <span className="inline-block bg-gray-600 text-gray-300 px-1 sm:px-2 py-0.5 sm:py-1 rounded-full text-xs sm:text-sm mb-1 sm:mb-2">
                   {video.duration}
                 </span>
                 <a
                   href={video.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-red-300 hover:underline mt-2 inline-flex items-center"
+                  className="text-xs sm:text-sm text-red-300 hover:underline mt-1 sm:mt-2 inline-flex items-center"
                 >
-                  <Youtube className="mr-1" size={16} />
+                  <Youtube className="mr-1" size={12} />
                   Watch on YouTube
                 </a>
               </div>
@@ -262,6 +271,8 @@ const AIFuturisticSearchResults = ({ data }) => {
     </div>
   );
 };
+
+// export default AIFuturisticSearchResults;
 
 const Page = ({ params }) => {
   const topic = decodeURIComponent(params?.exploreId);

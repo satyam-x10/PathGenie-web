@@ -83,26 +83,25 @@ const SignedInDiv = () => {
 
   return (
     <div className="flex flex-col min-h-screen w-full bg-gray-900">
-      <header className="bg-gray-800 p-4 shadow-md">
-        <div className="container mx-auto flex justify-between items-center">
-          <h1 className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-pink-500">
+      <header className="bg-gray-800 p-3 sm:p-4 shadow-md">
+        <div className="container mx-auto flex flex-col sm:flex-row justify-between items-center">
+          <h1 className="text-xl sm:text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-pink-500 mb-3 sm:mb-0">
             Your Record History
           </h1>
 
-          <div className="flex items-center space-x-4">
-            {/* add  a premium status button */}
-            <div className="bg-gray-700 text-white px-2 py-1 rounded-full text-xs font-semibold bg-gradient-to-r from-blue-500 to-pink-500">
-              You are currently on Free Version
+          <div className="flex items-center space-x-2 sm:space-x-4">
+            <div className="bg-gradient-to-r from-blue-500 to-pink-500 text-white px-2 py-1 rounded-full text-xs font-semibold">
+              Free Version
             </div>
             <UserButton
               appearance={{
                 elements: {
-                  userButtonAvatarBox: "w-10 h-10",
+                  userButtonAvatarBox: "w-8 h-8",
                 },
               }}
             />
             {user && (
-              <span className="text-sm font-medium text-white">
+              <span className="text-sm font-medium text-white hidden sm:inline-block">
                 {user.firstName}
               </span>
             )}
@@ -110,27 +109,28 @@ const SignedInDiv = () => {
         </div>
       </header>
 
-      <main className="flex-grow container mx-auto px-4 py-8 ">
+      <main className="container mx-auto px-2 sm:px-4 py-4 sm:py-8 flex-grow">
         {topics.length > 0 ? (
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4  ">
+          <div className="grid gap-3 sm:gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {topics.map((topic, index) => (
               <div
                 key={index}
                 onClick={() => window.location.replace(`/minimap/${topic.id}`)}
-                className="bg-gray-800 rounded-lg shadow-lg overflow-hidden hover:shadow-xl cursor-pointer transition-shadow duration-300"
+                className="bg-gray-800 rounded-lg shadow-md overflow-hidden hover:shadow-lg cursor-pointer transition-all duration-300 transform hover:-translate-y-1"
               >
-                <div className="p-4 hover:bg-gradient-to-r from-blue-500 to-blue-800">
-                  <h3 className="text-xl font-semibold text-white">
+                <div className="p-1 px-2 sm:p-2 hover:bg-gradient-to-r from-blue-600 to-blue-800">
+                  <h3 className="text-base sm:text-lg font-semibold text-white mb-1">
                     {topic?.name}
                   </h3>
-                  <p className="text-gray-400">{topic?.description}</p>
                 </div>
               </div>
             ))}
           </div>
         ) : (
-          <div className="text-center py-12">
-            <p className="text-gray-500 text-lg">No topics found.</p>
+          <div className="text-center py-8 sm:py-12">
+            <p className="text-gray-500 text-base sm:text-lg">
+              No topics found.
+            </p>
           </div>
         )}
       </main>

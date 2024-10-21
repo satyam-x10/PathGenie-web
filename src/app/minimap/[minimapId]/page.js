@@ -93,7 +93,7 @@ const Page = ({ params }) => {
     <ReactFlowProvider>
       <div className="flex h-screen w-full">
         {showList && !showImproviseChat && (
-          <div className="w-1/4 bg-gray-800 text-white p-4 overflow-auto scrollbar-hidden">
+          <div className="max-w-1/4 bg-gray-800 text-white p-4 overflow-auto scrollbar-hidden">
             <ul>
               {nodes.map((node) => (
                 <li
@@ -121,6 +121,14 @@ const Page = ({ params }) => {
             className="mb-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
           >
             Show/Hide Topics
+          </button>
+          <button
+            onClick={() => {
+              
+            }}
+            className="mb-4 mx-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+          >
+            Download
           </button>
           {nodes.length > 0 ? (
             <div
