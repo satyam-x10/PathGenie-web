@@ -93,7 +93,7 @@ export async function getNestedTopics(basePrompt) {
 
   try {
     const masterPrompt = await generateHierarchicalTasksPrompt(basePrompt);
-    
+
     const response = await askFromGemini(masterPrompt);
 
     // Call the text() method to get the actual response text
@@ -106,7 +106,7 @@ export async function getNestedTopics(basePrompt) {
 
 // make a mock function to generaet the hierarchical tasks
 
- async function generateHierarchicalTasksMock() {
+async function generateHierarchicalTasksMock() {
   const mockData = {
     "Machine Learning": [
       {

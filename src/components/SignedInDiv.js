@@ -5,7 +5,6 @@ import { getChainById } from "@/utils/actions/topicAction";
 import { Loader2 } from "lucide-react";
 
 const SignedInDiv = () => {
-
   const { user } = useUser();
   const [userData, setUserData] = useState(null);
   const [topics, setTopics] = useState([]);
@@ -16,7 +15,9 @@ const SignedInDiv = () => {
     const fetchUserData = async () => {
       if (user) {
         try {
-          const fetchedUser = await getUser(user.emailAddresses[0].emailAddress);
+          const fetchedUser = await getUser(
+            user.emailAddresses[0].emailAddress,
+          );
           setUserData(fetchedUser);
 
           if (fetchedUser?.rootTopics) {
@@ -26,16 +27,17 @@ const SignedInDiv = () => {
                   const topic = await getChainById(topicId);
                   return topic;
                 } catch (err) {
-                  console.error(`Failed to fetch topic with id ${topicId}`, err);
+                  console.error(
+                    `Failed to fetch topic with id ${topicId}`,
+                    err,
+                  );
                   return null;
                 }
-              })
+              }),
             );
 
             setTopics(topicsData.filter((topic) => topic !== null));
             console.log(topicsData);
-
-
           }
         } catch (err) {
           console.error("Error fetching user data:", err);
@@ -79,7 +81,6 @@ const SignedInDiv = () => {
     );
   }
 
-
   return (
     <div className="flex flex-col min-h-screen w-full bg-gray-900">
       <header className="bg-gray-800 p-4 shadow-md">
@@ -110,7 +111,6 @@ const SignedInDiv = () => {
       </header>
 
       <main className="flex-grow container mx-auto px-4 py-8 ">
-
         {topics.length > 0 ? (
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4  ">
             {topics.map((topic, index) => (

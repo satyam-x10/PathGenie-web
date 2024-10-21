@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { generatePrompt } from "@/blackbox/prompt";
 import { getNestedTopics } from "@/blackbox/resource";
 import { saveExtractedTopics } from "@/utils/actions/topicAction";
-import {useUser} from "@clerk/nextjs";
+import { useUser } from "@clerk/nextjs";
 
 const ConversationPage = ({ params }) => {
   const { user } = useUser();
@@ -38,7 +38,7 @@ const ConversationPage = ({ params }) => {
     try {
       // Call the Gemini API for AI response and await the result
       const aiResponse = await generatePrompt(
-        `${userInput} regarding ${conversation}`
+        `${userInput} regarding ${conversation}`,
       ); // Ensure you await the promise
 
       // Ensure the response is a string before updating the messages
@@ -141,8 +141,8 @@ const ConversationPage = ({ params }) => {
               !masterPrompt
                 ? "bg-gray-500 hover:bg-gray-400"
                 : planGenerated
-                ? "bg-pink-600 hover:bg-pink-500"
-                : "bg-gradient-to-r from-purple-500 to-purple-300 hover:bg-gradient-to-r"
+                  ? "bg-pink-600 hover:bg-pink-500"
+                  : "bg-gradient-to-r from-purple-500 to-purple-300 hover:bg-gradient-to-r"
             }`}
           >
             {!masterPrompt ? (
@@ -164,11 +164,11 @@ const ConversationPage = ({ params }) => {
               <div
                 onClick={() => {
                   setPlanGenerated(false);
-                  
+
                   setTimeout(() => {
                     window.location.href = `/profile`;
                   }, 1000);
-                  
+
                   // saveExtractedTopics(hierarchicalTasks, user?.emailAddresses[0]?.emailAddress);
                   setPlanGenerated(false);
                 }}

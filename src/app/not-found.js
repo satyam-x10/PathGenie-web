@@ -7,7 +7,7 @@ const NotFoundPage = () => {
       <div className="text-center">
         <h1 className="text-6xl font-bold mb-4">404</h1>
         <p className="text-2xl mb-8">
-        Oops! The page you&apos;re looking for can&apos;t be found.
+          Oops! The page you&apos;re looking for can&apos;t be found.
         </p>
         <button
           onClick={() => (window.location.href = "/")}

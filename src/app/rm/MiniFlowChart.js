@@ -37,8 +37,7 @@ const generateFlowchartData = (tree) => {
   return { nodes, edges };
 };
 
-
-const MiniFlowChart = ({tree}) => {
+const MiniFlowChart = ({ tree }) => {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {

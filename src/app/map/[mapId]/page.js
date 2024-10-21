@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import FlowchartViewer from "../../../components/FlowChart";
 import React, { useEffect } from "react";
 import ImproviseChat from "../../../components/ImproviseChat";

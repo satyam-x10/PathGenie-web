@@ -14,8 +14,7 @@ const ProfilePage = () => {
       // console.log(localStorage.getItem("Treedata"));
     }, 5000);
     return () => clearInterval(interval);
-  }
-  , []);
+  }, []);
   const handleSignedIn = () => {
     try {
       if (user?.emailAddresses[0]?.emailAddress) {

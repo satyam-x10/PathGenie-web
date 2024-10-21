@@ -24,22 +24,10 @@ const Navbar = () => {
         {/* Navigation Links */}
         <div className="space-x-6">
           <button
-            onClick={() => handleNavigation("/rm")}
-            className="text-lg font-semibold hover:text-cyan-400 transition duration-300"
-          >
-            Map
-          </button>
-          <button
             onClick={() => handleNavigation("/profile")}
             className="text-lg font-semibold hover:text-cyan-400 transition duration-300"
           >
             Profile
-          </button>
-          <button
-            onClick={() => handleNavigation("/chat")}
-            className="text-lg font-semibold hover:text-cyan-400 transition duration-300"
-          >
-            Chat
           </button>
         </div>
       </div>

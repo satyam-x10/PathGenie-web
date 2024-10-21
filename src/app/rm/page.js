@@ -1,12 +1,24 @@
-'use client';
+"use client";
 
-import React, { useEffect, useState, useCallback } from 'react';
-import dynamic from 'next/dynamic';
-import { MiniMap, Controls, Background, ReactFlowProvider, useNodesState, useEdgesState, Handle, Position } from 'reactflow';
-import 'reactflow/dist/style.css';
+import React, { useEffect, useState, useCallback } from "react";
+import dynamic from "next/dynamic";
+import {
+  MiniMap,
+  Controls,
+  Background,
+  ReactFlowProvider,
+  useNodesState,
+  useEdgesState,
+  Handle,
+  Position,
+} from "reactflow";
+import "reactflow/dist/style.css";
 
-const ReactFlow = dynamic(() => import('reactflow').then((mod) => mod.ReactFlow), { ssr: false });
-const data = require('../../../res');
+const ReactFlow = dynamic(
+  () => import("reactflow").then((mod) => mod.ReactFlow),
+  { ssr: false },
+);
+const data = require("../../../res");
 
 const CustomNode = ({ data }) => {
   return (
@@ -33,7 +45,7 @@ const createNodes = (tree) => {
   const NODE_HEIGHT = 50;
 
   const calculateTreeDimensions = (node) => {
-    if (typeof node !== 'object' || node === null) {
+    if (typeof node !== "object" || node === null) {
       return { width: NODE_WIDTH, height: NODE_HEIGHT, count: 1 };
     }
 
@@ -45,16 +57,23 @@ const createNodes = (tree) => {
     }
 
     const childDimensions = children.map(calculateTreeDimensions);
-    const totalWidth = Math.max(NODE_WIDTH, childDimensions.reduce((sum, dim) => sum + dim.width, 0) + (HORIZONTAL_SPACING * (childDimensions.length - 1)));
-    const maxChildHeight = Math.max(...childDimensions.map(dim => dim.height));
+    const totalWidth = Math.max(
+      NODE_WIDTH,
+      childDimensions.reduce((sum, dim) => sum + dim.width, 0) +
+        HORIZONTAL_SPACING * (childDimensions.length - 1),
+    );
+    const maxChildHeight = Math.max(
+      ...childDimensions.map((dim) => dim.height),
+    );
     const totalHeight = NODE_HEIGHT + VERTICAL_SPACING + maxChildHeight;
-    const totalCount = childDimensions.reduce((sum, dim) => sum + dim.count, 0) + 1;
+    const totalCount =
+      childDimensions.reduce((sum, dim) => sum + dim.count, 0) + 1;
 
     return { width: totalWidth, height: totalHeight, count: totalCount };
   };
 
   const positionNodes = (node, x, y, availableWidth, parentId = null) => {
-    if (typeof node !== 'object' || node === null) return;
+    if (typeof node !== "object" || node === null) return;
 
     const label = Object.keys(node)[0];
     const children = node[label];
@@ -64,7 +83,7 @@ const createNodes = (tree) => {
 
     nodes.push({
       id: nodeId,
-      type: 'custom',
+      type: "custom",
       data: { label },
       position: { x: nodeX, y },
       draggable: false,
@@ -75,9 +94,9 @@ const createNodes = (tree) => {
         id: `edge_${parentId}_${nodeId}`,
         source: parentId,
         target: nodeId,
-        sourceHandle: 'bottom',
-        targetHandle: 'top',
-        type: 'smoothstep',
+        sourceHandle: "bottom",
+        targetHandle: "top",
+        type: "smoothstep",
       });
     }
 
@@ -85,14 +104,22 @@ const createNodes = (tree) => {
       let childX = x;
       children.forEach((child) => {
         const childDim = calculateTreeDimensions(child);
-        positionNodes(child, childX, y + NODE_HEIGHT + VERTICAL_SPACING, childDim.width, nodeId);
+        positionNodes(
+          child,
+          childX,
+          y + NODE_HEIGHT + VERTICAL_SPACING,
+          childDim.width,
+          nodeId,
+        );
         childX += childDim.width + HORIZONTAL_SPACING;
       });
     }
   };
 
   const rootDimensions = tree.map(calculateTreeDimensions);
-  const totalWidth = rootDimensions.reduce((sum, dim) => sum + dim.width, 0) + (HORIZONTAL_SPACING * (tree.length - 1));
+  const totalWidth =
+    rootDimensions.reduce((sum, dim) => sum + dim.width, 0) +
+    HORIZONTAL_SPACING * (tree.length - 1);
   let currentX = 0;
 
   tree.forEach((node) => {
@@ -140,7 +167,7 @@ const Page = () => {
           Reset Layout
         </button>
         {nodes.length > 0 ? (
-          <div style={{ height: 'calc(100vh - 120px)', width: '100%' }}>
+          <div style={{ height: "calc(100vh - 120px)", width: "100%" }}>
             <ReactFlow
               nodes={nodes}
               edges={edges}

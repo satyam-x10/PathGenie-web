@@ -1,26 +1,24 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-const dotenv = require('dotenv');
-const { type } = require('os');
-require('dotenv').config();
+const dotenv = require("dotenv");
+const { type } = require("os");
+require("dotenv").config();
 
 // Connect to your development database
 const connectDB = async () => {
   try {
-    await mongoose.connect(`${process.env.NEXT_PUBLIC_MONGO_URI}/dev`, {
-    });
+    await mongoose.connect(`${process.env.NEXT_PUBLIC_MONGO_URI}/dev`, {});
     // console.log('MongoDB connected...');
   } catch (error) {
-    console.error('MongoDB connection error:', error);
+    console.error("MongoDB connection error:", error);
     process.exit(1); // Exit process with failure
   }
 };
 
-
 // User Schema
 const userSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true },
-  rootTopics: [{ type: String }]
+  rootTopics: [{ type: String }],
 });
 
 // Topic Schema
@@ -30,7 +28,7 @@ const topicSchema = new mongoose.Schema({
   resourceId: { type: String, required: true },
   description: { type: String },
   subtopics: [{ type: String }],
-  parentTopic: [{ type: String }]
+  parentTopic: [{ type: String }],
 });
 
 // Resource Schema
@@ -40,9 +38,10 @@ const resourceSchema = new mongoose.Schema({
 });
 
 // Models
-const User = mongoose.models.User || mongoose.model('User', userSchema);
-const Topic = mongoose.models.Topic || mongoose.model('Topic', topicSchema);
-const Resource = mongoose.models.Resource || mongoose.model('Resource', resourceSchema);
+const User = mongoose.models.User || mongoose.model("User", userSchema);
+const Topic = mongoose.models.Topic || mongoose.model("Topic", topicSchema);
+const Resource =
+  mongoose.models.Resource || mongoose.model("Resource", resourceSchema);
 
 // CRUD Operations for Users
 const createUser = async (email, rootTopics) => {
@@ -63,17 +62,34 @@ const updateUser = async (email, updatedData) => {
 };
 
 const addRootTopicToUser = async (email, topicId) => {
-  return await User.findOneAndUpdate
-  ({ email }, { $push: { rootTopics: topicId } }, { new: true });
-}
+  return await User.findOneAndUpdate(
+    { email },
+    { $push: { rootTopics: topicId } },
+    { new: true },
+  );
+};
 
 const deleteUser = async (email) => {
   return await User.findOneAndDelete({ email });
 };
 
 // CRUD Operations for Topics
-const createTopic = async (taskID, title, resourceId, description, subtopics, parentTopic) => {
-  const topic = new Topic({ taskID, title, resourceId, description, subtopics, parentTopic });
+const createTopic = async (
+  taskID,
+  title,
+  resourceId,
+  description,
+  subtopics,
+  parentTopic,
+) => {
+  const topic = new Topic({
+    taskID,
+    title,
+    resourceId,
+    description,
+    subtopics,
+    parentTopic,
+  });
   return await topic.save();
 };
 
@@ -82,8 +98,8 @@ const getAllTopics = async () => {
 };
 
 const getTopicById = async (id) => {
-  const topic =await Topic.find({ taskID: id });
-  return topic[0]; ;
+  const topic = await Topic.find({ taskID: id });
+  return topic[0];
 };
 // get all children and their children of a topic by id
 const getSubtopicChainById = async (id) => {
@@ -99,12 +115,12 @@ const getSubtopicChainById = async (id) => {
           id: subtopic._id,
           taskID: subtopic.taskID,
           title: subtopic.title,
-          subTask: []
+          subTask: [],
         };
 
         // Recursively fetch children of the current subtopic
         const children = await fetchSubtopics(subtopic.subtopics);
-        
+
         // Add children to the current subtopic's subTask
         subtopicObj.subTask = children;
 
@@ -121,19 +137,19 @@ const getSubtopicChainById = async (id) => {
   if (!topic) {
     return {}; // Return an empty object if the topic is not found
   }
-  
+
   // Start fetching the subtopics from the main topic
   const subtopicChain = await fetchSubtopics(topic.subtopics);
-  
+
   // Structure the final object to return
   const result = {
     id: topic._id,
     taskID: topic.taskID,
     title: topic.title,
     description: topic.description,
-    subTask: subtopicChain // Include the fetched subtopics
+    subTask: subtopicChain, // Include the fetched subtopics
   };
-  
+
   return result;
 };
 
@@ -171,28 +187,28 @@ const deleteResource = async (id) => {
 const chainSchema = new mongoose.Schema({
   data: {
     type: mongoose.Schema.Types.Mixed, // This allows any type of data (array, object, string, number, etc.)
-    required: true
-  }
-})
+    required: true,
+  },
+});
 
-const Chain = mongoose.models.Chain || mongoose.model('Chain', chainSchema);
+const Chain = mongoose.models.Chain || mongoose.model("Chain", chainSchema);
 
 // Upload chain data to MongoDB
 const uploadChainData = async (chainData) => {
   // Create a new chain object
-  console.log('chainData:', chainData);
+  console.log("chainData:", chainData);
 
   const chain = new Chain({ data: chainData }); // Fixed object syntax
   const savedChain = await chain.save(); // Save the document to the database
-  
+
   // Return the ID of the saved document
-  return savedChain._id; 
+  return savedChain._id;
 };
 
 // get chainByid
 const getChainById = async (id) => {
   const chain = await Chain.findById(id);
-  
+
   if (!chain || !chain.data || chain.data.length === 0) {
     return null; // Handle case if chain or data is not available
   }
@@ -201,18 +217,16 @@ const getChainById = async (id) => {
   const firstArray = Object.keys(chain.data[0])[0]; // Get the first array's name
   return {
     id: chain._id,
-    name: firstArray
+    name: firstArray,
   };
 };
-
 
 const uploadArrayOfChainData = async (chainDataArray) => {
   for (const chainData of chainDataArray) {
     await uploadChainData(chainData);
   }
-  return ;
+  return;
 };
-
 
 // Export the functions
 module.exports = {
@@ -237,5 +251,5 @@ module.exports = {
   uploadArrayOfChainData,
   addRootTopicToUser,
   getChainById,
-  Chain
+  Chain,
 };
