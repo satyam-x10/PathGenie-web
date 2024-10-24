@@ -69,7 +69,7 @@ export const createNodes = (tree) => {
 
   const positionNodes = (node, x, y, availableWidth, parentId = null) => {
     if (typeof node !== "object" || node === null) return;
-    // console.log('Node:', node);
+    // //console.log('Node:', node);
 
     const label = Object.keys(node)[0];
     const children = node[label];

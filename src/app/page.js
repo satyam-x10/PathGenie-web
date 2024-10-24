@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import React, { useEffect } from "react";
 import HomePage from "../components/Homepage.js";
 import { useUser } from "@clerk/nextjs";
@@ -14,12 +14,12 @@ const Page = () => {
           try {
             await createUser({ email: user?.emailAddresses[0].emailAddress });
 
-            console.log(user); // Logs user details when they are loaded and signed in
+            //console.log(user); // Logs user details when they are loaded and signed in
           } catch (error) {
             console.error("Error creating user:", error);
           }
         } else {
-          console.log("User is not signed in.");
+          //console.log("User is not signed in.");
         }
       }
     };

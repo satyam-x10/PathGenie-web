@@ -1,7 +1,5 @@
-
 const mongoose = require("mongoose");
 require("dotenv").config();
-
 
 // User Schema
 const userSchema = new mongoose.Schema({
@@ -9,22 +7,20 @@ const userSchema = new mongoose.Schema({
   rootTopics: [{ type: String }],
 });
 
-
-
 // Models
 const User = mongoose.models.User || mongoose.model("User", userSchema);
 
 // CRUD Operations for Users
 const createUser = async (email, rootTopics) => {
-  console.log("Creating user with email:", email);
-  
+  //console.log("Creating user with email:", email);
+
   const user = new User({ email, rootTopics });
   return await user.save();
 };
 
 const getUserByEmail = async (email) => {
-  console.log('retunrin g user by email:', email);
-  
+  //console.log("retunrin g user by email:", email);
+
   return await User.findOne({ email });
 };
 
@@ -50,4 +46,4 @@ module.exports = {
   updateUser,
   deleteUser,
   addRootTopicToUser,
-}
+};

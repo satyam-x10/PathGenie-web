@@ -18,10 +18,9 @@ const SignedInDiv = () => {
           const fetchedUser = await getUser(
             user.emailAddresses[0].emailAddress,
           );
-          console.log("fetchedUser:", fetchedUser);
-          
-          setUserData(fetchedUser);
+          //console.log("fetchedUser:", fetchedUser);
 
+          setUserData(fetchedUser);
         } catch (err) {
           console.error("Error fetching user data:", err);
           setError("Failed to load user data. Please try again later.");

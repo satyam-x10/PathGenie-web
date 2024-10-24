@@ -68,7 +68,7 @@ const Page = ({ params }) => {
 
   const focusNode = useCallback(
     (nodeId) => {
-      console.log("Focus node:", nodeId);
+      //console.log("Focus node:", nodeId);
 
       const node = nodes.find((n) => n.id === nodeId);
       if (node && reactFlowInstance) {

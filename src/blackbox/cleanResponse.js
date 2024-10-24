@@ -6,7 +6,7 @@ export async function cleanResponse(response) {
   } catch (error) {
     // If the response is not valid JSON, clean redundant text here
     // This can be customized based on your response structure
-    console.log("Invalid JSON. Cleaning redundant text...");
+    //console.log("Invalid JSON. Cleaning redundant text...");
     const cleanedResponse = response.replace(/Some redundant text/g, "");
 
     // Try parsing again after cleaning

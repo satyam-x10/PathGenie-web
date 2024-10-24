@@ -8,7 +8,7 @@ async function generateLearningPrompt(inputString) {
   // Check if the topic is specific enough
 
   // Log statement for debugging purposes (can be commented out in production)
-  console.log(`Generating a learning prompt for: "${initialInput}"`);
+  //console.log(`Generating a learning prompt for: "${initialInput}"`);
 
   const evaluationString = `
       Evaluate the following learning interest: "${initialInput}". 
@@ -22,7 +22,7 @@ async function generateLearningPrompt(inputString) {
   isSpecific = checkResult.includes("SPECIFIC: true");
 
   if (!isSpecific) {
-    console.log("\nPlease be more specific about what you want to learn.");
+    //console.log("\nPlease be more specific about what you want to learn.");
     // Adjust this to handle cases where you might want to prompt the user again
     // But since we are passing a string, we skip that here
   }

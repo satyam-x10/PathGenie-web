@@ -7,9 +7,9 @@ export async function POST(req) {
 
   try {
     const payload = await req.json(); // Parse the JSON body
-    console.log("hierarchicalTasks type:", typeof payload);
+    //console.log("hierarchicalTasks type:", typeof payload);
     await saveTreeToMongo(payload.data, payload.email);
-    console.log("email:", payload.email);
+    //console.log("email:", payload.email);
 
     return NextResponse.json(
       { message: "Topics saved successfully", data: payload },

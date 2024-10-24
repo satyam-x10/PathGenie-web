@@ -12,7 +12,7 @@ export async function GET(req) {
   const { searchParams } = new URL(req.url);
   const email = searchParams.get("email");
 
-  // console.log('email:', email);
+  // //console.log('email:', email);
 
   if (email) {
     const user = await getUserByEmail(email);
@@ -41,25 +41,24 @@ export async function POST(req) {
   try {
     const body = await req.json();
     const { email } = body;
-    console.log("email:", email);
-    
+    //console.log("email:", email);
 
     // Check if the user already exists in the database
     const existingUser = await getUserByEmail(email);
-    // console.log("existingUser:", existingUser);
-    
+    // //console.log("existingUser:", existingUser);
+
     if (existingUser) {
       return new Response(
         JSON.stringify({ message: "User already exists", user: existingUser }),
         { status: 200, headers: { "Content-Type": "application/json" } },
       );
     }
-    console.log('creating:', email);
-    
+    //console.log("creating:", email);
+
     // If no existing user, create a new one
     const newUser = await createUser(email);
-    console.log("newUser:", newUser);
-    
+    //console.log("newUser:", newUser);
+
     return new Response(JSON.stringify({ message: "User created", newUser }), {
       status: 201,
       headers: { "Content-Type": "application/json" },

@@ -11,7 +11,7 @@ const ProfilePage = () => {
   // after every 5 seconf print hello
   useEffect(() => {
     const interval = setInterval(() => {
-      // console.log(localStorage.getItem("Treedata"));
+      // //console.log(localStorage.getItem("Treedata"));
     }, 5000);
     return () => clearInterval(interval);
   }, []);
@@ -20,7 +20,7 @@ const ProfilePage = () => {
       if (user?.emailAddresses[0]?.emailAddress) {
         createUser({ email: user?.emailAddresses[0]?.emailAddress });
       } else {
-        console.log("User email not found.");
+        //console.log("User email not found.");
       }
     } catch (error) {
       console.error("Error creating user:", error);

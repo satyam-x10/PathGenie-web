@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const { addRootTopicToUser } = require('./mongo');
+const mongoose = require("mongoose");
+const { addRootTopicToUser } = require("./mongo");
 
 const treeSchema = new mongoose.Schema({
   _id: {
@@ -17,22 +17,22 @@ const treeSchema = new mongoose.Schema({
   children: {
     type: [String], // Array of strings (children's IDs and names)
     default: [], // Default to an empty array
-  }
+  },
 });
 
-const Tree = mongoose.models.Tree || mongoose.model('Tree', treeSchema);
+const Tree = mongoose.models.Tree || mongoose.model("Tree", treeSchema);
 
-const { ObjectId } = require('mongodb'); // Importing to generate MongoDB-like ObjectId
+const { ObjectId } = require("mongodb"); // Importing to generate MongoDB-like ObjectId
 
 const convertToTasks = async (data, parentIds = []) => {
   let tasks = [];
-  
+
   // Helper function to generate a unique MongoDB-like ObjectId
   const generateId = () => new ObjectId().toString();
 
   // Recursive function to process each node
   const processNode = (node, parentIds) => {
-    const current = generateId()+" "+Object.keys(node)[0];
+    const current = generateId() + " " + Object.keys(node)[0];
     const task = {
       name: current,
       parents: parentIds,
@@ -65,23 +65,23 @@ const convertToTasks = async (data, parentIds = []) => {
 };
 
 const makeTreefromData = async (data) => {
-  const tasks =await  convertToTasks(data);
+  const tasks = await convertToTasks(data);
   return tasks;
-}
+};
 
 const saveTreeToMongo = async (data, email) => {
   // Parse the string into JSON
   const parsedData = JSON.parse(data);
 
-  console.log("type of parsed data:", typeof parsedData);
+  //console.log("type of parsed data:", typeof parsedData);
 
   // Extract topics
   const topics = await makeTreefromData(parsedData);
-  console.log("topics from the tree:", topics);
+  //console.log("topics from the tree:", topics);
   await uploadTree(topics);
   const history_id = topics[0].name.split(" ")[0];
-  console.log("history_id", history_id);
-  
+  //console.log("history_id", history_id);
+
   if (email) {
     // print id of first topic
     addRootTopicToUser(email, history_id);
@@ -104,5 +104,5 @@ module.exports = {
   Tree,
   saveTreeToMongo,
   uploadTree,
-  uploadTreeNode
+  uploadTreeNode,
 };
