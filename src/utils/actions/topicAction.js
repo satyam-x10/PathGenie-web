@@ -66,7 +66,7 @@ export const deleteTopic = async (topicId) => {
   }
 };
 
-export const saveExtractedTopics = async (hierarchicalTasks, email) => {
+export const saveExtractedTopicsInTree = async (hierarchicalTasks, email) => {
   try {
     console.log("Saving hierarchical tasks:", hierarchicalTasks);
 

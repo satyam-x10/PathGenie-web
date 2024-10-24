@@ -4,7 +4,7 @@ import { SignedIn, SignedOut, useUser } from "@clerk/nextjs";
 import SignedOutDiv from "@/components/SignedOutDiv";
 import SignedInDiv from "@/components/SignedInDiv";
 import { createUser } from "@/utils/actions/userAction";
-import { saveExtractedTopics } from "@/utils/actions/topicAction";
+import { saveExtractedTopicsInTree } from "@/utils/actions/topicAction";
 
 const ProfilePage = () => {
   const { user } = useUser();

@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { generatePrompt } from "@/blackbox/prompt";
 import { getNestedTopics } from "@/blackbox/resource";
-import { saveExtractedTopics } from "@/utils/actions/topicAction";
+import { saveExtractedTopicsInTree } from "@/utils/actions/topicAction";
 import { useUser } from "@clerk/nextjs";
 
 const ConversationPage = ({ params }) => {
@@ -54,7 +54,7 @@ const ConversationPage = ({ params }) => {
       const tasks = await getNestedTopics(aiResponse);
       setHierarchicalTasks(tasks); // Set the hierarchical tasks using useState
 
-      await saveExtractedTopics(tasks, user?.emailAddresses[0]?.emailAddress); // Save the tasks
+      await saveExtractedTopicsInTree(tasks, user?.emailAddresses[0]?.emailAddress); // Save the tasks
       setPlanGenerated(true);
     } catch (error) {
       console.error("Error fetching AI response:", error);
@@ -163,12 +163,14 @@ const ConversationPage = ({ params }) => {
               </svg>
             ) : planGenerated ? (
               <div
-                onClick={() => {
+                onClick={async () => {
                   setPlanGenerated(false);
 
                   setTimeout(() => {
-                    window.location.href = `/profile`;
+                    setPlanGenerated(true);
+                    // window.location.href = `/profile`;
                   }, 1000);
+                  await saveExtractedTopicsInTree(hierarchicalTasks, user?.emailAddresses[0]?.emailAddress); // Save the tasks
 
                   setPlanGenerated(false);
                 }}

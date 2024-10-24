@@ -18,27 +18,10 @@ const SignedInDiv = () => {
           const fetchedUser = await getUser(
             user.emailAddresses[0].emailAddress,
           );
+          console.log("fetchedUser:", fetchedUser);
+          
           setUserData(fetchedUser);
 
-          if (fetchedUser?.rootTopics) {
-            const topicsData = await Promise.all(
-              fetchedUser.rootTopics.map(async (topicId) => {
-                try {
-                  const topic = await getChainById(topicId);
-                  return topic;
-                } catch (err) {
-                  console.error(
-                    `Failed to fetch topic with id ${topicId}`,
-                    err,
-                  );
-                  return null;
-                }
-              }),
-            );
-
-            setTopics(topicsData.filter((topic) => topic !== null));
-            console.log(topicsData);
-          }
         } catch (err) {
           console.error("Error fetching user data:", err);
           setError("Failed to load user data. Please try again later.");

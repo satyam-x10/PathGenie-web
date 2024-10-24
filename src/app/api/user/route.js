@@ -1,12 +1,11 @@
 // src/app/api/user/route.js
+import { connectDB } from "@/utils/db/mongo";
 import {
-  connectDB,
   createUser,
-  getAllUsers,
   getUserByEmail,
   updateUser,
   deleteUser,
-} from "@/utils/mongo";
+} from "@/utils/db/user.js";
 
 export async function GET(req) {
   await connectDB();
@@ -42,19 +41,25 @@ export async function POST(req) {
   try {
     const body = await req.json();
     const { email } = body;
+    console.log("email:", email);
+    
 
     // Check if the user already exists in the database
     const existingUser = await getUserByEmail(email);
-
+    // console.log("existingUser:", existingUser);
+    
     if (existingUser) {
       return new Response(
         JSON.stringify({ message: "User already exists", user: existingUser }),
         { status: 200, headers: { "Content-Type": "application/json" } },
       );
     }
-
+    console.log('creating:', email);
+    
     // If no existing user, create a new one
     const newUser = await createUser(email);
+    console.log("newUser:", newUser);
+    
     return new Response(JSON.stringify({ message: "User created", newUser }), {
       status: 201,
       headers: { "Content-Type": "application/json" },
