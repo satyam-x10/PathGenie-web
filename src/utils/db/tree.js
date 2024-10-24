@@ -1,30 +1,38 @@
+const { ObjectId } = require("mongodb"); // Importing to generate MongoDB-like ObjectId
 const mongoose = require("mongoose");
-const { addRootTopicToUser } = require("./mongo");
 
 const treeSchema = new mongoose.Schema({
   _id: {
-    type: mongoose.Schema.Types.ObjectId, // MongoDB ObjectId
-    auto: true, // Auto-generates _id if not provided
+    type: String, // Use String for _id to match the name field
   },
   name: {
     type: String,
-    required: true, // 'name' is required
+    required: true,
+    unique: true, // Ensure the name is unique so that the _id doesn't conflict
   },
   parents: {
-    type: [String], // Array of strings (parents' IDs and names)
-    default: [], // Default to an empty array
+    type: [String],
+    default: [],
   },
   children: {
-    type: [String], // Array of strings (children's IDs and names)
-    default: [], // Default to an empty array
+    type: [String],
+    default: [],
   },
+});
+
+// Pre-save middleware to set _id to be the same as name
+treeSchema.pre('save', function (next) {
+  if (!this._id) {
+    this._id = this.name.split(" ")[0];
+  }
+  next();
 });
 
 const Tree = mongoose.models.Tree || mongoose.model("Tree", treeSchema);
 
-const { ObjectId } = require("mongodb"); // Importing to generate MongoDB-like ObjectId
+const { addRootTopicToUser } = require("./user");
 
-const convertToTasks = async (data, parentIds = []) => {
+const convertToNodes = async (data, parentIds = []) => {
   let tasks = [];
 
   // Helper function to generate a unique MongoDB-like ObjectId
@@ -65,7 +73,7 @@ const convertToTasks = async (data, parentIds = []) => {
 };
 
 const makeTreefromData = async (data) => {
-  const tasks = await convertToTasks(data);
+  const tasks = await convertToNodes(data);
   return tasks;
 };
 
@@ -99,10 +107,14 @@ const uploadTreeNode = async (treeNode) => {
   await Tree.create(treeNode);
 };
 
+const getTree = async (id) => {
+  return await Tree.findById(id);
+}
+
 // Export all functions using module.exports
 module.exports = {
-  Tree,
   saveTreeToMongo,
   uploadTree,
   uploadTreeNode,
+  getTree,
 };

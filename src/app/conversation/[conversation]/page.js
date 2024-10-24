@@ -1,8 +1,8 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
-import { generatePrompt } from "@/blackbox/prompt";
+import { generatePrompt, getRootDataFromGemini } from "@/blackbox/prompt";
 import { getNestedTopics } from "@/blackbox/resource";
-import { saveExtractedTopicsInTree } from "@/utils/actions/topicAction";
+import { saveExtractedTopicsInTreeAndRoots } from "@/utils/actions/topicAction";
 import { useUser } from "@clerk/nextjs";
 
 const ConversationPage = ({ params }) => {
@@ -52,13 +52,19 @@ const ConversationPage = ({ params }) => {
 
       // Generate the hierarchical tasks
       const tasks = await getNestedTopics(aiResponse);
-      setHierarchicalTasks(tasks); // Set the hierarchical tasks using useState
+      // console.log('tasks:', tasks);
 
-      await saveExtractedTopicsInTree(
+      setHierarchicalTasks(tasks); // Set the hierarchical tasks using useState
+      const rootData= await getRootDataFromGemini(decodeURIComponent(conversation).slice(0, 70));
+      console.log('rootData:', rootData);
+      
+      await saveExtractedTopicsInTreeAndRoots(
         tasks,
         user?.emailAddresses[0]?.emailAddress,
-      ); // Save the tasks
-      setPlanGenerated(true);
+        rootData,
+        rootData.name
+      ); 
+      // setPlanGenerated(true);
     } catch (error) {
       console.error("Error fetching AI response:", error);
       setMessages((prevMessages) => [
@@ -95,16 +101,14 @@ const ConversationPage = ({ params }) => {
           {messages.map((message, index) => (
             <div
               key={index}
-              className={`flex ${
-                message.isUser ? "justify-end" : "justify-start"
-              }`}
+              className={`flex ${message.isUser ? "justify-end" : "justify-start"
+                }`}
             >
               <div
-                className={`p-3 rounded-lg max-w-full sm:max-w-md ${
-                  message.isUser
+                className={`p-3 rounded-lg max-w-full sm:max-w-md ${message.isUser
                     ? "bg-cyan-500 text-white"
                     : "bg-gray-700 text-gray-200"
-                }`}
+                  }`}
               >
                 {message.text}
               </div>
@@ -140,13 +144,12 @@ const ConversationPage = ({ params }) => {
           {/* Button for Sending Messages */}
           <button
             onClick={handleSendMessage}
-            className={`ml-2 sm:ml-4 p-3 rounded-full shadow-lg ${
-              !masterPrompt
+            className={`ml-2 sm:ml-4 p-3 rounded-full shadow-lg ${!masterPrompt
                 ? "bg-gray-500 hover:bg-gray-400"
                 : planGenerated
                   ? "bg-pink-600 hover:bg-pink-500"
                   : "bg-gradient-to-r from-purple-500 to-purple-300 hover:bg-gradient-to-r"
-            }`}
+              }`}
           >
             {/* Button Content Conditional Based on State */}
             {!masterPrompt ? (
@@ -171,12 +174,14 @@ const ConversationPage = ({ params }) => {
 
                   setTimeout(() => {
                     setPlanGenerated(true);
-                    // window.location.href = `/profile`;
+                    window.location.href = `/profile`;
                   }, 1000);
-                  await saveExtractedTopicsInTree(
-                    hierarchicalTasks,
-                    user?.emailAddresses[0]?.emailAddress,
-                  ); // Save the tasks
+                  
+                  // await saveExtractedTopicsInTreeAndRoots(
+                  //   tasks,
+                  //   user?.emailAddresses[0]?.emailAddress,
+                  //   rootData
+                  // ); 
 
                   setPlanGenerated(false);
                 }}

@@ -52,3 +52,32 @@ export async function generatePrompt(inputString) {
     console.error("An error occurred:", error);
   }
 }
+
+export async function getRootDataFromGemini(inputString) {
+  const rootDataString = `Generate a JSON object that includes a name, five tags related to the name, and a few possible names (alternative terms for the name). The JSON should be strictly structured as follows (machine learnign is example name):
+
+{
+  "name": "Machine Learning",
+  "tags": [
+    "Artificial Intelligence",
+    "Data Science",
+    "Deep Learning",
+    "Neural Networks",
+    "Predictive Analytics"
+  ],
+  "possibleNames": [
+    "ML",
+    "Statistical Learning",
+    "Computational Learning",
+    "Pattern Recognition",
+    "Automated Learning"
+  ]
+}
+
+Fill in the tags with terms closely associated with the name, and for possibleNames, include alternative terms that are used interchangeably or refer to the same concept. The topic name on which you have to give data is : "${inputString}".
+
+  `;
+
+  const rootData = await askFromGemini(rootDataString);
+  return rootData.response.text();
+}

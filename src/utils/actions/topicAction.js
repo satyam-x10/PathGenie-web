@@ -66,13 +66,15 @@ export const deleteTopic = async (topicId) => {
   }
 };
 
-export const saveExtractedTopicsInTree = async (hierarchicalTasks, email) => {
+export const saveExtractedTopicsInTreeAndRoots = async (hierarchicalTasks, email,rootData,rootName) => {
   try {
     //console.log("Saving hierarchical tasks:", hierarchicalTasks);
 
     // Create the payload for the request body
     const payload = {
       data: hierarchicalTasks,
+      rootData: rootData,
+      rootName: rootName
     };
 
     // If email is provided, add it to the payload
@@ -81,8 +83,11 @@ export const saveExtractedTopicsInTree = async (hierarchicalTasks, email) => {
 
       payload.email = email;
     }
-
+    console.log("payload:", payload);
+    
     // Send the payload as the request body
+    console.log('saving....');
+    
     const response = await axios.post("/api/tree", payload);
 
     return response.status;
