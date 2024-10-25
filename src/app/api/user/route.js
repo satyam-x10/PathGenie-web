@@ -1,5 +1,6 @@
 // src/app/api/user/route.js
 import { connectDB } from "@/utils/db/mongo";
+import { getTree } from "@/utils/db/tree";
 import {
   createUser,
   getUserByEmail,
@@ -16,6 +17,7 @@ export async function GET(req) {
 
   if (email) {
     const user = await getUserByEmail(email);
+
     if (!user) {
       return new Response(JSON.stringify({ message: "User not found" }), {
         status: 404,

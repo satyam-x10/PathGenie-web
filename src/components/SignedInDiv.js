@@ -18,8 +18,8 @@ const SignedInDiv = () => {
           const fetchedUser = await getUser(
             user.emailAddresses[0].emailAddress,
           );
-          //console.log("fetchedUser:", fetchedUser);
-
+          console.log("fetchedUser:", fetchedUser);
+          setTopics(fetchedUser.rootTopics);
           setUserData(fetchedUser);
         } catch (err) {
           console.error("Error fetching user data:", err);
@@ -94,19 +94,27 @@ const SignedInDiv = () => {
       <main className="container mx-auto px-2 sm:px-4 py-4 sm:py-8 flex-grow">
         {topics.length > 0 ? (
           <div className="grid gap-3 sm:gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {topics.map((topic, index) => (
-              <div
-                key={index}
-                onClick={() => window.location.replace(`/minimap/${topic.id}`)}
-                className="bg-gray-800 rounded-lg shadow-md overflow-hidden hover:shadow-lg cursor-pointer transition-all duration-300 transform hover:-translate-y-1"
-              >
-                <div className="p-1 px-2 sm:p-2 hover:bg-gradient-to-r from-blue-600 to-blue-800">
-                  <h3 className="text-base sm:text-lg font-semibold text-white mb-1">
-                    {topic?.name}
-                  </h3>
+            {topics.map((topic, index) => {
+              const firstSpaceIndex = topic.indexOf(" ");
+              const firstPart = topic.slice(0, firstSpaceIndex); // ID or first part
+              const secondPart = topic.slice(firstSpaceIndex + 1); // Everything after the first space
+
+              return (
+                <div
+                  key={index}
+                  onClick={() =>
+                    window.location.replace(`/minimap/${firstPart}`)
+                  }
+                  className="bg-gray-800 rounded-lg shadow-md overflow-hidden hover:shadow-lg cursor-pointer transition-all duration-300 transform hover:-translate-y-1"
+                >
+                  <div className="p-1 px-2 sm:p-2 hover:bg-gradient-to-r from-blue-600 to-blue-800">
+                    <h3 className="text-base sm:text-lg font-semibold text-white mb-1">
+                      {secondPart}
+                    </h3>
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         ) : (
           <div className="text-center py-8 sm:py-12">

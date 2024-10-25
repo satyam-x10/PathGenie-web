@@ -1,4 +1,4 @@
-const { ObjectId } = require("mongodb"); 
+const { ObjectId } = require("mongodb");
 const mongoose = require("mongoose");
 
 const treeSchema = new mongoose.Schema({
@@ -75,9 +75,9 @@ const saveTreeToMongo = async (data, email) => {
   const parsedData = JSON.parse(data);
   const topics = await makeTreefromData(parsedData);
   await uploadTree(topics);
-  const history_id = topics[topics.length-1]._id; // Use _id for history_id
+  const history_id = topics[topics.length - 1]._id; // Use _id for history_id
   if (email) {
-    addRootTopicToUser(email, history_id);
+    addRootTopicToUser(email, topics[topics.length - 1].name);
   }
   return history_id;
 };
@@ -85,12 +85,11 @@ const saveTreeToMongo = async (data, email) => {
 const uploadTree = async (treeData) => {
   console.log("Uploading trees");
   for (const tree of treeData) {
-    await uploadTreeNode(tree);
+    console.log(await uploadTreeNode(tree));
   }
 };
 
 const uploadTreeNode = async (treeNode) => {
-  console.log("Uploading tree node:", treeNode, typeof treeNode);
   return await Tree.create(treeNode);
 };
 
