@@ -63,3 +63,13 @@ export const addPossibleNamesToRoot = async (name, possibleNames) => {
         { new: true } // Return the updated document
     );
 }
+
+export const addTagsToRoot = async (name, tags) => {
+    console.log('Adding tags to root with name:', name, tags);
+    
+    await Root.findOneAndUpdate(
+        { name }, // Find by name
+        { $push: { tags: { $each: tags } } },
+        { new: true } // Return the updated document
+    );
+}

@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { connectDB } from "@/utils/db/mongo";
 import { getTree, saveTreeToMongo } from "@/utils/db/tree";
-import { addPossibleNamesToRoot, addRelationsToRoot, createRoot } from "@/utils/db/root";
+import { addPossibleNamesToRoot, addRelationsToRoot, addTagsToRoot, createRoot } from "@/utils/db/root";
 
 export async function POST(req) {
   await connectDB(); // Ensure the database is connected
@@ -11,14 +11,18 @@ export async function POST(req) {
     console.log("hierarchicalTasks type:", typeof payload);
     console.log('tree uploading');
     
-    await saveTreeToMongo(payload.data, payload.email);
-    console.log('root uploading ',payload.rootData);
-   
-    await createRoot(payload.rootName);
+    const history_id= await saveTreeToMongo(payload.data, payload.email);
+    console.log('root uploading ');
+    const RootData= JSON.parse(payload.rootData);
+    
+    await createRoot(RootData.name);
     console.log('names uploading');
 
-    // await addPossibleNamesToRoot(payload.rootName, [payload.rootData.possibleNames]);
-
+    await addPossibleNamesToRoot(RootData.name, RootData.possibleNames);
+    await addTagsToRoot(RootData.name, RootData.tags);
+    await addRelationsToRoot(RootData.name,[history_id]);
+    console.log('all done');
+    
     return NextResponse.json(
       { message: "Topics saved successfully", data: payload },
       { status: 201 },

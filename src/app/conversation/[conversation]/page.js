@@ -56,15 +56,13 @@ const ConversationPage = ({ params }) => {
 
       setHierarchicalTasks(tasks); // Set the hierarchical tasks using useState
       const rootData= await getRootDataFromGemini(decodeURIComponent(conversation).slice(0, 70));
-      console.log('rootData:', rootData);
       
       await saveExtractedTopicsInTreeAndRoots(
         tasks,
         user?.emailAddresses[0]?.emailAddress,
-        rootData,
-        rootData.name
+        rootData
       ); 
-      // setPlanGenerated(true);
+
     } catch (error) {
       console.error("Error fetching AI response:", error);
       setMessages((prevMessages) => [
@@ -152,7 +150,7 @@ const ConversationPage = ({ params }) => {
               }`}
           >
             {/* Button Content Conditional Based on State */}
-            {!masterPrompt ? (
+            {masterPrompt ? (
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -172,16 +170,18 @@ const ConversationPage = ({ params }) => {
                 onClick={async () => {
                   setPlanGenerated(false);
 
-                  setTimeout(() => {
-                    setPlanGenerated(true);
-                    window.location.href = `/profile`;
-                  }, 1000);
+                  // setTimeout(() => {
+                  //   setPlanGenerated(true);
+                  //   window.location.href = `/profile`;
+                  // }, 1000);
+
+                  await saveExtractedTopicsInTreeAndRoots(
+                    hierarchicalTasks,
+                    user?.emailAddresses[0]?.emailAddress,
+                    rootData
+                  ); 
                   
-                  // await saveExtractedTopicsInTreeAndRoots(
-                  //   tasks,
-                  //   user?.emailAddresses[0]?.emailAddress,
-                  //   rootData
-                  // ); 
+                  
 
                   setPlanGenerated(false);
                 }}

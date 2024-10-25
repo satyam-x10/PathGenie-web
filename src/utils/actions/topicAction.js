@@ -66,7 +66,7 @@ export const deleteTopic = async (topicId) => {
   }
 };
 
-export const saveExtractedTopicsInTreeAndRoots = async (hierarchicalTasks, email,rootData,rootName) => {
+export const saveExtractedTopicsInTreeAndRoots = async (hierarchicalTasks, email,rootData) => {
   try {
     //console.log("Saving hierarchical tasks:", hierarchicalTasks);
 
@@ -74,7 +74,6 @@ export const saveExtractedTopicsInTreeAndRoots = async (hierarchicalTasks, email
     const payload = {
       data: hierarchicalTasks,
       rootData: rootData,
-      rootName: rootName
     };
 
     // If email is provided, add it to the payload
