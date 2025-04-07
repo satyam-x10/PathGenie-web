@@ -29,12 +29,6 @@ const Navbar = () => {
           >
             Profile
           </button>
-          <button
-            onClick={() => handleNavigation("/home")}
-            className="text-lg font-semibold hover:text-cyan-400 transition duration-300"
-          >
-            Home
-          </button>
         </div>
       </div>
     </div>

@@ -4,7 +4,7 @@ import { askFromGemini } from "../blackbox/gemini";
 import { ArrowRight, Loader } from "lucide-react";
 import { getNestedTopics } from "../blackbox/resource";
 const ImproviseChat = ({ node }) => {
-  //console.log("ImproviseChat node:", node);
+  console.log("ImproviseChat node:", node);
 
   const [topicName, setTopicName] = useState(node.data.label);
   const [miniDescription, setMiniDescription] = useState("");
@@ -40,10 +40,11 @@ const ImproviseChat = ({ node }) => {
     setImproviseCommands(improviseCommand + userQuery);
     const response = await getNestedTopics(improviseCommand);
     setImprovisingData(response);
-    // //console.log(response);
+    // console.log(response);
   };
 
   return (
+
     <div className="relative min-h-screen  w-full md:w-2/5 p-4 md:p-6 flex justify-center items-center border-l border-gray-700 bg-gradient-to-br from-gray-900 to-gray-800 min-h-[100dvh]">
       {/* Premium Button - Responsive positioning and sizing */}
       <button
@@ -74,11 +75,9 @@ const ImproviseChat = ({ node }) => {
           </div>
         ) : (
           miniDescription && (
-            <p
-              className="text-sm md:text-lg mb-6 md:mb-8 p-4 bg-gray-800/50 
+            <p className="text-sm md:text-lg mb-6 md:mb-8 p-4 bg-gray-800/50 
               backdrop-blur-sm rounded-lg shadow-inner
-              border border-gray-700/50"
-            >
+              border border-gray-700/50">
               {miniDescription}
             </p>
           )
@@ -87,11 +86,10 @@ const ImproviseChat = ({ node }) => {
         {/* Fetch Description Button - Responsive sizing */}
         <button
           onClick={fetchDescription}
-          className={`w-full ${
-            isFetched
-              ? "bg-gradient-to-r from-green-500 to-teal-600"
-              : "bg-gradient-to-r from-blue-500 to-purple-600"
-          } hover:from-blue-600 hover:to-purple-700 
+          className={`w-full ${isFetched
+            ? "bg-gradient-to-r from-green-500 to-teal-600"
+            : "bg-gradient-to-r from-blue-500 to-purple-600"
+            } hover:from-blue-600 hover:to-purple-700 
           text-white font-semibold
           text-sm md:text-base
           py-2.5 md:py-3 px-4 md:px-6 
@@ -140,5 +138,6 @@ const ImproviseChat = ({ node }) => {
     </div>
   );
 };
+
 
 export default ImproviseChat;
