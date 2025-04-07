@@ -2,11 +2,15 @@
 
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import dotenv from "dotenv";
-dotenv.config();
-const genAI = new GoogleGenerativeAI(process.env.NEXT_PUBLIC_GEMINI_API_KEY);
 
-export async function askFromGemini(prompt) {
-  const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+// const { GoogleGenerativeAI } = require("@google/generative-ai");
+// const dotenv = require("dotenv");
+
+dotenv.config();
+export const genAI = new GoogleGenerativeAI(process.env.NEXT_PUBLIC_GEMINI_API_KEY);
+
+ async function askFromGemini(prompt) {
+  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
   const res = await model.generateContent(prompt);
   // //console.log("Gemini API Response:", res); // Log the full response
 
