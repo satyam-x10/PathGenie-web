@@ -8,7 +8,7 @@ async function generateLearningPrompt(inputString) {
   // Check if the topic is specific enough
 
   // Log statement for debugging purposes (can be commented out in production)
-  console.log(`Generating a learning prompt for: "${initialInput}"`);
+  //console.log(`Generating a learning prompt for: "${initialInput}"`);
 
   const evaluationString = `
       Evaluate the following learning interest: "${initialInput}". 
@@ -22,7 +22,7 @@ async function generateLearningPrompt(inputString) {
   isSpecific = checkResult.includes("SPECIFIC: true");
 
   if (!isSpecific) {
-    console.log("\nPlease be more specific about what you want to learn.");
+    //console.log("\nPlease be more specific about what you want to learn.");
     // Adjust this to handle cases where you might want to prompt the user again
     // But since we are passing a string, we skip that here
   }
@@ -51,4 +51,33 @@ export async function generatePrompt(inputString) {
   } catch (error) {
     console.error("An error occurred:", error);
   }
+}
+
+export async function getRootDataFromGemini(inputString) {
+  const rootDataString = `Generate a JSON object that includes a name, five tags related to the name, and a few possible names (alternative terms for the name). The JSON should be strictly structured as follows (machine learnign is example name):
+
+{
+  "name": "Machine Learning",
+  "tags": [
+    "Artificial Intelligence",
+    "Data Science",
+    "Deep Learning",
+    "Neural Networks",
+    "Predictive Analytics"
+  ],
+  "possibleNames": [
+    "ML",
+    "Statistical Learning",
+    "Computational Learning",
+    "Pattern Recognition",
+    "Automated Learning"
+  ]
+}
+
+Fill in the tags with terms closely associated with the name, and for possibleNames, include alternative terms that are used interchangeably or refer to the same concept. The topic name on which you have to give data is : "${inputString}".
+
+  `;
+
+  const rootData = await askFromGemini(rootDataString);
+  return rootData.response.text();
 }

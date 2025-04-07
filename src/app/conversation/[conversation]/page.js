@@ -1,8 +1,8 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
-import { generatePrompt } from "@/blackbox/prompt";
+import { generatePrompt, getRootDataFromGemini } from "@/blackbox/prompt";
 import { getNestedTopics } from "@/blackbox/resource";
-import { saveExtractedTopics } from "@/utils/actions/topicAction";
+import { saveExtractedTopicsInTreeAndRoots } from "@/utils/actions/topicAction";
 import { useUser } from "@clerk/nextjs";
 
 const ConversationPage = ({ params }) => {
@@ -52,10 +52,18 @@ const ConversationPage = ({ params }) => {
 
       // Generate the hierarchical tasks
       const tasks = await getNestedTopics(aiResponse);
-      setHierarchicalTasks(tasks); // Set the hierarchical tasks using useState
+      // console.log('tasks:', tasks);
 
-      await saveExtractedTopics(tasks, user?.emailAddresses[0]?.emailAddress); // Save the tasks
-      setPlanGenerated(true);
+      setHierarchicalTasks(tasks); // Set the hierarchical tasks using useState
+      const rootData = await getRootDataFromGemini(
+        decodeURIComponent(conversation).slice(0, 70),
+      );
+
+      await saveExtractedTopicsInTreeAndRoots(
+        tasks,
+        user?.emailAddresses[0]?.emailAddress,
+        rootData,
+      );
     } catch (error) {
       console.error("Error fetching AI response:", error);
       setMessages((prevMessages) => [
@@ -146,7 +154,7 @@ const ConversationPage = ({ params }) => {
             }`}
           >
             {/* Button Content Conditional Based on State */}
-            {!masterPrompt ? (
+            {masterPrompt ? (
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -163,12 +171,19 @@ const ConversationPage = ({ params }) => {
               </svg>
             ) : planGenerated ? (
               <div
-                onClick={() => {
+                onClick={async () => {
                   setPlanGenerated(false);
 
-                  setTimeout(() => {
-                    window.location.href = `/profile`;
-                  }, 1000);
+                  // setTimeout(() => {
+                  //   setPlanGenerated(true);
+                  //   window.location.href = `/profile`;
+                  // }, 1000);
+
+                  await saveExtractedTopicsInTreeAndRoots(
+                    hierarchicalTasks,
+                    user?.emailAddresses[0]?.emailAddress,
+                    rootData,
+                  );
 
                   setPlanGenerated(false);
                 }}

@@ -1,33 +1,67 @@
-'use client';
-import React, { useEffect } from "react";
-import HomePage from "../components/Homepage.js";
-import { useUser } from "@clerk/nextjs";
-import { createUser } from "@/utils/actions/userAction.js";
+"use client"; // Required for client-side fetching
 
-const Page = () => {
-  const { isLoaded, isSignedIn, user } = useUser();
+import React, { useState } from "react";
 
-  useEffect(() => {
-    const handleUserCreation = async () => {
-      if (isLoaded) {
-        if (isSignedIn) {
-          try {
-            await createUser({ email: user?.emailAddresses[0].emailAddress });
+export default function SearchPage() {
+  const [query, setQuery] = useState("");
+  const [results, setResults] = useState([]);
 
-            console.log(user); // Logs user details when they are loaded and signed in
-          } catch (error) {
-            console.error("Error creating user:", error);
-          }
-        } else {
-          console.log("User is not signed in.");
-        }
-      }
-    };
+  // Handle form submission
+  const handleSearch = async (e) => {
+    e.preventDefault();
 
-    handleUserCreation();
-  }, [isLoaded, isSignedIn, user]);
+    try {
+      const response = await fetch("/api/search/root", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ query }),
+      });
 
-  return <HomePage />;
-};
+      if (!response.ok) throw new Error("Search failed");
 
-export default Page;
+      const data = await response.json();
+      setResults(data); // Update results with data from the API
+    } catch (error) {
+      console.error(error);
+      alert("Error fetching search results");
+    }
+  };
+
+  return (
+    <div className="search-page p-4">
+      <form onSubmit={handleSearch} className="search-bar mb-4">
+        <input
+          type="text"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="Type your search..."
+          className="border text-gray-500 p-2 w-full rounded"
+        />
+        <button
+          type="submit"
+          className="bg-blue-500 text-white px-4 py-2 rounded mt-2"
+        >
+          Search
+        </button>
+      </form>
+
+      <div className="search-results">
+        {results.length > 0 ? (
+          results.map((root) => (
+            <div
+              onClick={() => {
+                window.location.href = `/root/${root._id}`;
+              }}
+              key={root._id}
+              className="result-item border p-3 rounded mb-2"
+            >
+              <h3 className="text-lg font-bold">{root.name}</h3>
+            </div>
+          ))
+        ) : (
+          <p>No results found.</p>
+        )}
+      </div>
+    </div>
+  );
+}
