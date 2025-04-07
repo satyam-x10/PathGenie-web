@@ -81,7 +81,7 @@ async function generateHierarchicalTasksPrompt(basePrompt) {
 ]
 
 
-  Please make sure to adhere to this JSON format strictly, with each topic having and array and subtopic clearly nested under the appropriate parent categories. The structure should allow for easy extraction and processing for project use.
+  Please make sure to adhere to this JSON format strictly, with each topic and subtopic clearly nested under the appropriate parent categories. The structure should allow for easy extraction and processing for project use.
 `;
 
   return masterPrompt;

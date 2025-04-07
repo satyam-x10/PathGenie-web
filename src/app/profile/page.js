@@ -4,14 +4,14 @@ import { SignedIn, SignedOut, useUser } from "@clerk/nextjs";
 import SignedOutDiv from "@/components/SignedOutDiv";
 import SignedInDiv from "@/components/SignedInDiv";
 import { createUser } from "@/utils/actions/userAction";
-import { saveExtractedTopicsInTreeAndRoots } from "@/utils/actions/topicAction";
+import { saveExtractedTopics } from "@/utils/actions/topicAction";
 
 const ProfilePage = () => {
   const { user } = useUser();
   // after every 5 seconf print hello
   useEffect(() => {
     const interval = setInterval(() => {
-      // //console.log(localStorage.getItem("Treedata"));
+      // console.log(localStorage.getItem("Treedata"));
     }, 5000);
     return () => clearInterval(interval);
   }, []);
@@ -20,7 +20,7 @@ const ProfilePage = () => {
       if (user?.emailAddresses[0]?.emailAddress) {
         createUser({ email: user?.emailAddresses[0]?.emailAddress });
       } else {
-        //console.log("User email not found.");
+        console.log("User email not found.");
       }
     } catch (error) {
       console.error("Error creating user:", error);

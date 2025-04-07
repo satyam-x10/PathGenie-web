@@ -1,0 +1,25 @@
+{
+  "id": 11,
+  "topic_name": "RESTful API Design",
+  "parent_id": 3,
+  "description": "Learn the principles and best practices for designing RESTful APIs.",
+  "subTopics": [7, 12],
+  "resources": {
+    "images": ["https://example.com/images/restful-api-design.png"],
+    "videos": ["https://www.youtube.com/watch?v=example11"],
+    "articles": ["https://www.example.com/articles/restful-api-design-basics"],
+    "books": [
+      "https://www.example.com/books/restful-api-design-best-practices"
+    ],
+    "tutorials": [
+      "https://www.freecodecamp.org/learn/back-end-development-and-apis/"
+    ]
+  },
+  "tags": ["API", "REST", "Backend"],
+  "priority": "high",
+  "categories": ["Programming", "Backend"],
+  "references": [
+    "https://restfulapi.net/",
+    "https://www.oreilly.com/library/view/restful-web-apis/9781492027240/"
+  ]
+}

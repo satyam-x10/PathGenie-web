@@ -1,8 +1,9 @@
 "use client";
 
-import React, { useEffect, useState, useCallback, useRef } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import dynamic from "next/dynamic";
 import {
+  MiniMap,
   Controls,
   Background,
   ReactFlowProvider,
@@ -12,10 +13,14 @@ import {
   Position,
 } from "reactflow";
 import "reactflow/dist/style.css";
-import axios from "axios";
-import { hash } from "crypto";
 
-export const CustomNode = ({ data }) => {
+const ReactFlow = dynamic(
+  () => import("reactflow").then((mod) => mod.ReactFlow),
+  { ssr: false },
+);
+const data = require("../../../res");
+
+const CustomNode = ({ data }) => {
   return (
     <div className="p-3 border border-gray-700 rounded-md bg-black min-w-[150px] text-center">
       <Handle type="target" position={Position.Top} id="top" />
@@ -25,11 +30,11 @@ export const CustomNode = ({ data }) => {
   );
 };
 
-export const nodeTypes = {
+const nodeTypes = {
   custom: CustomNode,
 };
 
-export const createNodes = (tree) => {
+const createNodes = (tree) => {
   const nodes = [];
   const edges = [];
   let id = 0;
@@ -69,7 +74,6 @@ export const createNodes = (tree) => {
 
   const positionNodes = (node, x, y, availableWidth, parentId = null) => {
     if (typeof node !== "object" || node === null) return;
-    // console.log('Node:', node);
 
     const label = Object.keys(node)[0];
     const children = node[label];
@@ -126,3 +130,66 @@ export const createNodes = (tree) => {
 
   return { nodes, edges };
 };
+
+const Page = () => {
+  const [tree, setTree] = useState([]);
+  const [nodes, setNodes, onNodesChange] = useNodesState([]);
+  const [edges, setEdges, onEdgesChange] = useEdgesState([]);
+
+  useEffect(() => {
+    setTree(data.default);
+  }, []);
+
+  useEffect(() => {
+    if (tree.length > 0) {
+      const { nodes: newNodes, edges: newEdges } = createNodes(tree);
+      setNodes(newNodes);
+      setEdges(newEdges);
+    }
+  }, [tree, setNodes, setEdges]);
+
+  const onLayout = useCallback(() => {
+    if (tree.length > 0) {
+      const { nodes: newNodes, edges: newEdges } = createNodes(tree);
+      setNodes(newNodes);
+      setEdges(newEdges);
+    }
+  }, [tree, setNodes, setEdges]);
+
+  return (
+    <ReactFlowProvider>
+      <div className="h-screen w-full">
+        <h1 className="text-2xl font-bold mb-4">Tree Structure</h1>
+        <button
+          onClick={onLayout}
+          className="mb-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+        >
+          Reset Layout
+        </button>
+        {nodes.length > 0 ? (
+          <div style={{ height: "calc(100vh - 120px)", width: "100%" }}>
+            <ReactFlow
+              nodes={nodes}
+              edges={edges}
+              onNodesChange={onNodesChange}
+              onEdgesChange={onEdgesChange}
+              nodeTypes={nodeTypes}
+              fitView
+              minZoom={0.1}
+              maxZoom={1.5}
+              nodesDraggable={false}
+            >
+              <MiniMap />
+              <Controls />
+              <Background />
+            </ReactFlow>
+          </div>
+        ) : (
+          <p>Loading...</p>
+        )}
+      </div>
+    </ReactFlowProvider>
+  );
+};
+
+export default Page;

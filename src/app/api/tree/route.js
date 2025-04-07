@@ -1,12 +1,7 @@
+import { saveChainTopicToMongo } from "@/utils/chain";
 import { NextResponse } from "next/server";
-import { connectDB } from "@/utils/db/mongo";
-import { getTree, saveTreeToMongo } from "@/utils/db/tree";
-import {
-  addPossibleNamesToRoot,
-  addRelationsToRoot,
-  addTagsToRoot,
-  createRoot,
-} from "@/utils/db/root";
+import { getTreeById } from "@/utils/chain";
+import { connectDB } from "@/utils/mongo";
 
 export async function POST(req) {
   await connectDB(); // Ensure the database is connected
@@ -14,19 +9,8 @@ export async function POST(req) {
   try {
     const payload = await req.json(); // Parse the JSON body
     console.log("hierarchicalTasks type:", typeof payload);
-    console.log("tree uploading");
-
-    const history_id = await saveTreeToMongo(payload.data, payload.email);
-    console.log("root uploading ");
-    const RootData = JSON.parse(payload.rootData);
-
-    await createRoot(RootData.name);
-    console.log("names uploading");
-
-    await addPossibleNamesToRoot(RootData.name, RootData.possibleNames);
-    await addTagsToRoot(RootData.name, RootData.tags);
-    await addRelationsToRoot(RootData.name, [history_id]);
-    console.log("all done");
+    await saveChainTopicToMongo(payload.data, payload.email);
+    console.log("email:", payload.email);
 
     return NextResponse.json(
       { message: "Topics saved successfully", data: payload },
@@ -45,14 +29,20 @@ export async function GET(req) {
   await connectDB(); // Ensure the database is connected
 
   try {
-    const { id } = req.query; // Extract the 'id' parameter from the query
-    const tree = await getTree(id); // Get the tree from the database
+    const minimapId = req.nextUrl.searchParams.get("minimapId"); // Get query parameter
+    console.log("minimapId:", minimapId);
 
-    return NextResponse.json({ tree }, { status: 200 });
-  } catch (error) {
-    console.error("Error fetching tree:", error);
+    // You can now use minimapId to fetch topics or do any required processing.
+    const treeData = await getTreeById(minimapId); // Replace with your logic
+
     return NextResponse.json(
-      { message: "Error fetching tree", error: error.message },
+      { message: "Topics fetched successfully", data: treeData },
+      { status: 200 },
+    );
+  } catch (error) {
+    console.error("Error fetching topics:", error);
+    return NextResponse.json(
+      { message: "Error fetching topics", error: error.message },
       { status: 500 },
     );
   }
