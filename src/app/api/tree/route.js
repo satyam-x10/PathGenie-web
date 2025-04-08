@@ -35,7 +35,7 @@ export async function POST(req) {
     console.log("Connected to MongoDB");
     const payload = await req.json(); // Parse the JSON body
     console.log("hierarchicalTasks type:", typeof payload);
-    await saveChainTopicToMongo(payload.data[0], payload.email);
+    await saveChainTopicToMongo(payload.data, payload.email);
     console.log("email:", payload.email);
 
     return NextResponse.json(

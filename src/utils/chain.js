@@ -92,8 +92,14 @@ function extractTopics(data) {
 
 async function saveChainTopicToMongo(data, email) {
   // Parse the string into JSON
-  const parsedData = JSON.parse(data);
-
+  if (typeof data === 'string') {
+    try {
+      data = JSON.parse(data);
+    } catch (err) {
+      console.error("Failed to parse data:", err);
+      throw new Error("Invalid JSON string passed as data");
+    }
+  }
   console.log("type of parsed data:", typeof parsedData);
 
   // Write parsed data to file
