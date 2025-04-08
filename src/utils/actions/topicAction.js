@@ -81,7 +81,8 @@ export const saveExtractedTopics = async (hierarchicalTasks, email) => {
 
       payload.email = email;
     }
-
+    console.log("Payload:", payload);
+    
     // Send the payload as the request body
     const response = await axios.post("/api/tree", payload);
 

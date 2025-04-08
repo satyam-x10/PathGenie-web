@@ -2,10 +2,13 @@ import { saveChainTopicToMongo } from "@/utils/chain";
 import { NextResponse } from "next/server";
 import { getTreeById } from "@/utils/chain";
 import { connectDB } from "@/utils/mongo";
+import { log } from "console";
 
 export async function POST(req) {
+  console.log("POST request received in /api/tree/route.js");
+  
   await connectDB(); // Ensure the database is connected
-
+  console.log("Connected to MongoDB");
   try {
     const payload = await req.json(); // Parse the JSON body
     console.log("hierarchicalTasks type:", typeof payload);
