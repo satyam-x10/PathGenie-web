@@ -4,6 +4,8 @@ import axios from "axios";
 
 const BASE_URL = "/api/topic";
 
+const Tree_URL = "/api/tree";
+
 export const getAllTopics = async () => {
   try {
     const response = await axios.get(BASE_URL);
@@ -84,7 +86,7 @@ export const saveExtractedTopics = async (hierarchicalTasks, email) => {
     console.log("Payload:", payload);
     
     // Send the payload as the request body
-    const response = await axios.post("/api/tree", payload);
+    const response = await axios.post(Tree_URL, payload);
 
     return response.status;
   } catch (error) {
