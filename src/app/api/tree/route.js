@@ -27,8 +27,6 @@ export async function GET(req) {
   }
 }
 
-
-
 export async function POST(req) {
   try {
     console.log("POST request received in /api/tree/route.js");
