@@ -92,16 +92,14 @@ const ConversationPage = ({ params }) => {
           {messages.map((message, index) => (
             <div
               key={index}
-              className={`flex ${
-                message.isUser ? "justify-end" : "justify-start"
-              }`}
+              className={`flex ${message.isUser ? "justify-end" : "justify-start"
+                }`}
             >
               <div
-                className={`p-3 rounded-lg max-w-full sm:max-w-md ${
-                  message.isUser
+                className={`p-3 rounded-lg max-w-full sm:max-w-md ${message.isUser
                     ? "bg-cyan-500 text-white"
                     : "bg-gray-700 text-gray-200"
-                }`}
+                  }`}
               >
                 {message.text}
               </div>
@@ -116,7 +114,9 @@ const ConversationPage = ({ params }) => {
           {inputDisabled ? (
             <div className="flex-1 py-3 px-2 sm:px-4 rounded-full bg-gradient-to-r from-pink-500 to-purple-600 text-white text-center">
               {planGenerated ? (
-                <p className="text-sm sm:text-lg">The plan's ready for you.</p>
+                <p className="text-sm sm:text-lg bg-green-200 text-black px-2 py-1 rounded">
+                  The plan's ready for you.
+                </p>
               ) : (
                 <p className="text-sm sm:text-lg">
                   We are Cooking... This may take a few seconds.
@@ -137,13 +137,12 @@ const ConversationPage = ({ params }) => {
           {/* Button for Sending Messages */}
           <button
             onClick={handleSendMessage}
-            className={`ml-2 sm:ml-4 p-3 rounded-full shadow-lg ${
-              !masterPrompt
+            className={`ml-2 sm:ml-4 p-3 rounded-full shadow-lg ${!masterPrompt
                 ? "bg-gray-500 hover:bg-gray-400"
                 : planGenerated
                   ? "bg-pink-600 hover:bg-pink-500"
                   : "bg-gradient-to-r from-purple-500 to-purple-300 hover:bg-gradient-to-r"
-            }`}
+              }`}
           >
             {/* Button Content Conditional Based on State */}
             {!masterPrompt ? (
