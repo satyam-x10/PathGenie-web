@@ -4,7 +4,7 @@ import axios from "axios";
 
 const BASE_URL = "/api/topic";
 
-const Tree_URL = "/app/api/tree";
+const Tree_URL = "/api/tree";
 
 export const getAllTopics = async () => {
   try {
