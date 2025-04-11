@@ -10,6 +10,15 @@ const ConversationPage = ({ params }) => {
   const conversation = params?.conversation;
   const [masterPrompt, setMasterPrompt] = useState("");
   const [planGenerated, setPlanGenerated] = useState(false);
+
+  useEffect(() => {
+    if (planGenerated) {
+      setTimeout(() => {
+        window.location.href = `/profile`;
+      }, 1000);
+    }
+  }, [planGenerated]);
+
   const [messages, setMessages] = useState([
     {
       text: "Hello! How can you elaborate what you want to learn, so that we have a good idea?",
@@ -115,7 +124,7 @@ const ConversationPage = ({ params }) => {
             <div className="flex-1 py-3 px-2 sm:px-4 rounded-full bg-gradient-to-r from-pink-500 to-purple-600 text-white text-center">
               {planGenerated ? (
                 <p className="text-sm sm:text-lg bg-green-200 text-black px-2 py-1 rounded">
-                  The plan's ready for you.
+                  we will redirect you to your profile in a few seconds. Please open your query
                 </p>
               ) : (
                 <p className="text-sm sm:text-lg">

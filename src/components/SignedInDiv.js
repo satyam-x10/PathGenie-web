@@ -112,11 +112,12 @@ const SignedInDiv = () => {
       <main className="container mx-auto px-2 sm:px-4 py-4 sm:py-8 flex-grow">
         {topics.length > 0 ? (
           <div className="grid gap-3 sm:gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {topics.map((topic, index) => (
+            {[...topics].reverse().map((topic, index) => (
               <div
                 key={index}
                 onClick={() => window.location.replace(`/minimap/${topic.id}`)}
-                className="bg-gray-800 rounded-lg shadow-md overflow-hidden hover:shadow-lg cursor-pointer transition-all duration-300 transform hover:-translate-y-1"
+                className={`rounded-lg shadow-md overflow-hidden hover:shadow-lg cursor-pointer transition-all duration-300 transform hover:-translate-y-1 ${index === 0 ? 'bg-green-600' : 'bg-gray-800'
+                  }`}
               >
                 <div className="p-1 px-2 sm:p-2 hover:bg-gradient-to-r from-blue-600 to-blue-800">
                   <h3 className="text-base sm:text-lg font-semibold text-white mb-1">
@@ -125,6 +126,7 @@ const SignedInDiv = () => {
                 </div>
               </div>
             ))}
+
           </div>
         ) : (
           <div className="text-center py-8 sm:py-12">
