@@ -47,8 +47,9 @@ const ConversationPage = ({ params }) => {
     try {
       // Call the Gemini API for AI response and await the result
       const aiResponse = await generatePrompt(
-        `${userInput} regarding ${conversation}`,
+        `${userInput} regarding ${conversation}`
       ); // Ensure you await the promise
+      console.log({ aiResponse });
 
       // Ensure the response is a string before updating the messages
       setMasterPrompt(aiResponse);
@@ -101,14 +102,16 @@ const ConversationPage = ({ params }) => {
           {messages.map((message, index) => (
             <div
               key={index}
-              className={`flex ${message.isUser ? "justify-end" : "justify-start"
-                }`}
+              className={`flex ${
+                message.isUser ? "justify-end" : "justify-start"
+              }`}
             >
               <div
-                className={`p-3 rounded-lg max-w-full sm:max-w-md ${message.isUser
+                className={`p-3 rounded-lg max-w-full sm:max-w-md ${
+                  message.isUser
                     ? "bg-cyan-500 text-white"
                     : "bg-gray-700 text-gray-200"
-                  }`}
+                }`}
               >
                 {message.text}
               </div>
@@ -124,7 +127,8 @@ const ConversationPage = ({ params }) => {
             <div className="flex-1 py-3 px-2 sm:px-4 rounded-full bg-gradient-to-r from-pink-500 to-purple-600 text-white text-center">
               {planGenerated ? (
                 <p className="text-sm sm:text-lg bg-green-200 text-black px-2 py-1 rounded">
-                  we will redirect you to your profile in a few seconds. Please open your query
+                  we will redirect you to your profile in a few seconds. Please
+                  open your query
                 </p>
               ) : (
                 <p className="text-sm sm:text-lg">
@@ -146,12 +150,13 @@ const ConversationPage = ({ params }) => {
           {/* Button for Sending Messages */}
           <button
             onClick={handleSendMessage}
-            className={`ml-2 sm:ml-4 p-3 rounded-full shadow-lg ${!masterPrompt
-                ? "bg-gray-500 hover:bg-gray-400"
+            className={`ml-2 sm:ml-4 p-3 rounded-full shadow-lg ${
+              !masterPrompt
+                ? "bg-pink-500 hover:bg-pink-400"
                 : planGenerated
-                  ? "bg-pink-600 hover:bg-pink-500"
-                  : "bg-gradient-to-r from-purple-500 to-purple-300 hover:bg-gradient-to-r"
-              }`}
+                ? "bg-pink-600 hover:bg-pink-500"
+                : "bg-gradient-to-r from-purple-500 to-purple-300 hover:bg-gradient-to-r"
+            }`}
           >
             {/* Button Content Conditional Based on State */}
             {!masterPrompt ? (

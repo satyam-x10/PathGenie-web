@@ -5,26 +5,23 @@ async function generateLearningPrompt(inputString) {
   let initialInput = inputString;
   let isSpecific = false;
 
-  // Check if the topic is specific enough
-
-  // Log statement for debugging purposes (can be commented out in production)
   console.log(`Generating a learning prompt for: "${initialInput}"`);
 
   const evaluationString = `
-      Evaluate the following learning interest: "${initialInput}". 
-      Determine if it is a valid and suitable niche for learning. 
-      Respond with:
-      SPECIFIC: true (if the interest is appropriate) or false (if it is not).
-    `;
-  const specificityCheck = await askFromGemini(evaluationString);
+    Evaluate the following learning interest: "${initialInput}". 
+    Determine if it is a valid and suitable niche for learning. 
+    Respond with:
+    SPECIFIC: true (if the interest is appropriate) or false (if it is not).
+  `;
 
-  const checkResult = specificityCheck.response.text();
-  isSpecific = checkResult.includes("SPECIFIC: true");
+  const specificityCheck = await askFromGemini(evaluationString);
+  console.log("SPECIFICITY RESULT:", specificityCheck);
+
+  // ✅ FIX: since askFromGemini already returns TEXT
+  isSpecific = specificityCheck.includes("SPECIFIC: true");
 
   if (!isSpecific) {
     console.log("\nPlease be more specific about what you want to learn.");
-    // Adjust this to handle cases where you might want to prompt the user again
-    // But since we are passing a string, we skip that here
   }
 
   // Generate the learning prompt
@@ -36,9 +33,11 @@ async function generateLearningPrompt(inputString) {
     Do not include any resource suggestions or learning path details.
     Keep it focused and direct.
   `;
+
   const promptGeneration = await askFromGemini(promptGenerationString);
 
-  return promptGeneration.response.text();
+  // ✅ FIX: already text
+  return promptGeneration;
 }
 
 // Export the function to be used in other files
